@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>if文とは？ 条件分岐を最低限だけ理解する｜コードは読めればいい</title>
+  <meta name="description" content="ifは「もし〜なら」。条件が真のときの処理、else、else ifの使い方を、GASで点数に応じたメッセージを表示する例で説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › if文とは？</p>
+
+      <h1>if文とは？ 条件分岐を最低限だけ理解する</h1>
+      <p class="article-lead">ifは「もし〜なら」。条件に合うかどうかで、実行する処理を選ぶための書き方です。</p>
+
+      <p>
+        「もし点数が80点以上なら合格と表示する」のように、状況に応じて作業を変えたいことがあります。
+        コードでこの判断を書くのがif文です。条件によって処理の進み方を分けることを「条件分岐」と呼びます。
+      </p>
+
+      <h2>if：条件が真なら処理を実行する</h2>
+      <p>
+        <code>if</code> の後ろの丸かっこに条件を書き、<code>{</code> と <code>}</code> の間に処理を書きます。
+        条件が成り立つことを「真（true）」、成り立たないことを「偽（false）」といいます。
+        <strong>条件が真なら中の処理を実行し、偽ならその処理を飛ばします。</strong>
+      </p>
+      <h3>条件の読み方</h3>
+      <p>
+        例えば <code>score &gt;= 80</code> は「点数が80以上」という条件です。
+        <code>&gt;=</code> は「以上」を表すので、80点ちょうども含まれます。
+        点数が85なら真、75なら偽になります。
+      </p>
+
+      <aside class="term-note" aria-label="名前の由来：if・else">
+        <strong>名前の由来：if・else</strong>
+        <p><code>if</code> は英語の「もし〜なら」です。「もし条件に合うなら、この処理をする」と読むと、コードの流れをつかめます。</p>
+        <p><code>else</code> は英語で「それ以外に」を表す言葉です。if文では「それ以外なら」と読むと、役割を覚えやすくなります。</p>
+      </aside>
+
+      <h2>else：「それ以外なら」の処理</h2>
+      <p>
+        <code>else</code> は、ifの条件が偽だった場合の処理を書くために使います。
+        「もし80点以上なら合格、それ以外なら復習」のように、2つの道に分けられます。
+        <code>else</code> 自体には条件を書きません。
+      </p>
+      <p>
+        条件に合わないときに何もしなくてよければ、<code>else</code> は省略できます。
+        その場合はifの中を飛ばして、if文の後にある処理へ進みます。
+      </p>
+
+      <h2>else if：判断する条件を追加する</h2>
+      <p>
+        3通り以上に分けたいときは、<code>else if</code> を使います。
+        「前の条件には合わなかったけれど、もし次の条件に合うなら」と読めます。
+        必要に応じて複数の条件を追加できます。
+      </p>
+      <p>
+        条件は上から順番に確認され、<strong>この一続きのif・else if・elseの中では、最初に合った1つの処理だけ</strong>が実行されます。
+        どの条件にも合わなければ、最後の <code>else</code> の処理を実行します。
+      </p>
+
+      <h2>GASの例：点数に応じたメッセージを表示する</h2>
+      <p>
+        Google Apps Script（GAS）で、点数に応じて実行ログにメッセージを表示してみます。
+        80点以上は「合格」、60点以上80点未満は「あと少し」、60点未満は「復習しましょう」と表示する例です。
+      </p>
+
+      <pre><code>function main() {
+  const score = 75;
+
+  if (score &gt;= 80) {
+    Logger.log("合格");
+  } else if (score &gt;= 60) {
+    Logger.log("あと少し");
+  } else {
+    Logger.log("復習しましょう");
+  }
+}</code></pre>
+
+      <p>
+        GASのエディタに貼り付けて保存し、実行する関数として <code>main</code> を選んで実行してください。
+        実行ログ（結果などを確認するための記録）に「あと少し」と表示されます。
+        <code>Logger.log</code> が、丸かっこの中のメッセージをログに表示する処理です。
+      </p>
+      <ol>
+        <li><code>score</code> に75を入れます。</li>
+        <li>75は80以上ではないので、最初のifの条件は偽となり、「合格」の表示を飛ばします。</li>
+        <li>75は60以上なので、else ifの条件は真となり、「あと少し」を表示します。</li>
+        <li>処理が1つ選ばれたため、最後のelseは実行しません。</li>
+      </ol>
+
+      <h3>数字を変えて確認する</h3>
+      <p>
+        コードの <code>75</code> を <code>80</code> に書き換えて再実行すると「合格」、
+        <code>60</code> なら「あと少し」、<code>59</code> なら「復習しましょう」と表示されます。
+        境目の数字で試すと、「以上」にその数字が含まれることを確認できます。
+      </p>
+      <p>
+        条件の順番にも意味があります。先に「60以上」を調べると、80点もその条件に合います。
+        この例では高い点数から確認することで、表示を正しく分けています。
+      </p>
+
+      <h2>AIに条件分岐を頼むときは</h2>
+      <p>
+        「80点以上なら合格、60点以上80点未満ならあと少し、それ以外は復習と表示して」のように、
+        条件と処理をセットで伝えましょう。「80点ちょうどはどちらに入るか」まで決めると、意図が伝わりやすくなります。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>ifは「もし〜なら」で、条件が真のときに処理を実行します。elseは「それ以外なら」、else ifは「別の条件も調べる」と覚えましょう。</p>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="variable.html" rel="prev">変数とは？ const・letを最低限だけ理解する</a></p>
+        <!-- 次の記事を公開したら、ここにrel="next"のリンクを追加します。 -->
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>
