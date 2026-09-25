@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>functionとは？｜コードは読めればいい</title>
+  <meta name="description" content="functionは処理のまとまり。引数、return、呼び出しの意味を、GASで合計金額を計算する簡単な例を使って非エンジニア向けに説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › functionとは？</p>
+
+      <h1>functionとは？</h1>
+      <p class="article-lead">functionは「処理のまとまり」。名前を付けて、必要なときに使えるようにしたものです。</p>
+
+      <p>
+        AIが作ったコードに <code>function</code> と書いてあったら、
+        「ここでひとまとまりの作業を用意しているんだな」と考えてみてください。
+        日本語では「関数」と呼びます。まずは、処理のまとまり、引数、return、呼び出しの4つを押さえましょう。
+      </p>
+
+      <h2>1. functionは「処理のまとまり」</h2>
+      <p>
+        例えば「単価と数量から合計金額を計算する」という作業を、ひとまとめにできます。
+        このまとまりに名前を付けておけば、同じ計算の手順を何度も書かずに使えます。
+      </p>
+      <p>
+        <code>function</code> に続けて関数の名前を書き、
+        <code>{</code> と <code>}</code> の間に処理を書きます。
+        このように関数を用意することを「定義する」といいます。定義しただけでは、中の処理は実行されません。
+      </p>
+
+      <h2>GASの例：合計金額を計算する</h2>
+      <p>
+        Google Apps Script（GAS）は、JavaScriptで処理を書けるGoogleの仕組みです。
+        次の例では、200円の商品を3個買ったときの合計を計算し、実行ログに表示します。
+        実行ログは、処理の結果などを確認するための記録です。
+      </p>
+
+      <pre><code>function calculateTotal(price, quantity) {
+  return price * quantity;
+}
+
+function main() {
+  const total = calculateTotal(200, 3);
+  Logger.log(total);
+}</code></pre>
+
+      <p>
+        これは、計算を担当する <code>calculateTotal</code> と、
+        その計算を使って結果を記録する <code>main</code> の2つを組み合わせた例です。
+        GASのエディタに貼り付けて保存し、実行する関数として <code>main</code> を選んで実行すると、
+        実行ログに <code>600</code> が表示されます。
+      </p>
+
+      <h2>2. 引数：処理に渡す材料</h2>
+      <p>
+        引数は「ひきすう」と読みます。<strong>関数に渡す値</strong>のことです。
+        この例の <code>calculateTotal(200, 3)</code> では、<code>200</code> と <code>3</code> が引数です。
+      </p>
+      <p>
+        関数側では、丸かっこの中の <code>price</code> と <code>quantity</code> が受け取り口になります。
+        書いた順番に対応するので、<code>price</code> が200、<code>quantity</code> が3として扱われます。
+        <code>*</code> は掛け算の記号です。
+      </p>
+      <p>
+        渡す値を変えれば、同じ関数で別の金額も計算できます。
+        例えば <code>calculateTotal(500, 2)</code> なら結果は1000になります。
+        引数がいらない関数は、この例の <code>main()</code> のように丸かっこの中を空にできます。
+      </p>
+
+      <h2>3. return：結果を呼び出し元に返す</h2>
+      <p>
+        <code>return</code> は、その関数の処理をそこで終え、
+        <strong>結果を関数を使った場所へ返す</strong>ためのものです。返した値を「戻り値」と呼びます。
+        この例では、<code>return price * quantity;</code> が計算結果の600を返します。
+      </p>
+      <p>
+        <code>const total = calculateTotal(200, 3);</code> は、
+        返ってきた結果に <code>total</code> という名前を付けて、後で使えるようにする行です。
+        ここでは <code>total</code> に600が入る、と考えれば大丈夫です。
+      </p>
+      <p>
+        <code>return</code> 自体は画面やログに結果を表示しません。
+        この例では、次の行の <code>Logger.log(total)</code> が結果をログに表示します。
+        値を返す必要がない関数では、<code>main</code> のように <code>return</code> を書かないこともあります。
+      </p>
+
+      <h2>4. functionを呼び出す：用意した処理を実行する</h2>
+      <p>
+        関数を「呼び出す」とは、<strong>その処理を実行するよう頼むこと</strong>です。
+        コードでは、関数名の後ろに丸かっこを付けて <code>calculateTotal(200, 3)</code> のように書きます。
+        名前だけの <code>calculateTotal</code> では、計算は実行されません。
+      </p>
+      <p>この例は、次の順番で進みます。</p>
+      <ol>
+        <li>GASで <code>main</code> を実行する。</li>
+        <li><code>main</code> の中から、200と3を渡して <code>calculateTotal</code> を呼び出す。</li>
+        <li><code>calculateTotal</code> が掛け算をして、<code>return</code> で600を返す。</li>
+        <li><code>main</code> に戻り、結果を <code>total</code> に入れて、ログに表示する。</li>
+      </ol>
+
+      <h2>AIが書いた関数を読むときは</h2>
+      <p>
+        まずは「何を受け取り、何をして、何を返すか」を探してみましょう。
+        分からなければ、AIに「この関数の引数、処理、戻り値、呼び出されている場所を説明してください」と頼めます。
+        細かい書き方をすべて覚えなくても、処理の流れを追う助けになります。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>functionは「処理のまとまり」。引数で材料を渡し、呼び出して実行し、returnで結果を受け取ります。</p>
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>

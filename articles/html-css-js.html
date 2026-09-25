@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML・CSS・JavaScriptの違い｜コードは読めればいい</title>
+  <meta name="description" content="HTMLは内容と構造、CSSは見た目、JavaScriptは操作に応じた処理。非エンジニア向けに、身近な例とAIへの頼み方で3つの役割を説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › HTML・CSS・JavaScriptの違い</p>
+
+      <h1>HTML・CSS・JavaScriptの違い</h1>
+      <p class="article-lead">まずは「内容」「見た目」「処理」の役割分担が分かれば大丈夫です。</p>
+
+      <p>
+        Webページのコードを見ると、HTML、CSS、JavaScriptという名前が出てきます。
+        この3つは、ブラウザに別々の指示を伝えるためのものです。
+        全部の書き方を覚える前に、それぞれが何を担当するのかを押さえましょう。
+      </p>
+
+      <h2>HTML：何を載せるかを決める</h2>
+      <p>
+        HTMLは、ページの<strong>内容と構造</strong>を表します。
+        「ここは見出し」「ここは文章」「ここはリンク」という意味を、タグと呼ばれる目印で伝えます。
+      </p>
+      <p>
+        例えば、<code>&lt;h1&gt;今日のおすすめ&lt;/h1&gt;</code> は、
+        「今日のおすすめ」という文字が大きな見出しであることを表します。
+        <code>&lt;p&gt;</code> は段落、<code>&lt;a&gt;</code> はリンクを作るときに使います。
+      </p>
+      <p>
+        このサイトでは、トップページの <code>index.html</code> に、
+        サイト名や紹介文、記事へのリンクが書かれています。文章を変えたいときは、HTMLが主な変更先です。
+      </p>
+
+      <h2>CSS：どう見せるかを決める</h2>
+      <p>
+        CSSは、ページの<strong>見た目</strong>を整えます。
+        文字の色や大きさ、背景、余白、横に並べるか縦に並べるか、といった指定を担当します。
+      </p>
+      <p>
+        例えば、<code>h1 { color: blue; }</code> は、
+        「h1の見出しの文字を青くする」という意味です。同じ文章でも、CSSを変えると印象が変わります。
+      </p>
+      <p>
+        このサイトでは、<code>assets/styles.css</code> を各ページが共通で読み込んでいます。
+        記事の文字や余白がそろっているのは、そのためです。
+        スマートフォンの画面幅に合わせて、カードの並び方を変える設定もCSSにあります。
+      </p>
+
+      <h2>JavaScript：操作に応じて処理する</h2>
+      <p>
+        JavaScriptは、<strong>計算や、操作に応じた内容の更新</strong>などを行うプログラミング言語です。
+        例えば、入力した金額から合計を計算したり、検索欄の文字に合う記事だけを表示したりできます。
+      </p>
+      <p>
+        「ボタンが押されたら、入力値を読み取り、計算して、結果を書き換える」のように、
+        何をきっかけに何をするかを指定します。別のファイルに分ける場合は、通常 <code>.js</code> という拡張子を使います。
+      </p>
+      <p>
+        ただし、すべての動きにJavaScriptが必要なわけではありません。
+        リンクを押して別のページに移動するのはHTMLの機能ですし、マウスを重ねたときの色の変化はCSSで指定できます。
+        現在のこのサイトは、HTMLとCSSだけで表示でき、JavaScriptは使っていません。
+      </p>
+
+      <h2>「料金の計算ページ」なら、どう分担する？</h2>
+      <p>数量を入力して合計金額を表示するページを作るとしたら、次のように役割を分けられます。</p>
+      <ul>
+        <li><strong>HTML：</strong>商品名、数量の入力欄、計算ボタン、結果を表示する場所を用意する。</li>
+        <li><strong>CSS：</strong>入力欄を見やすい幅にし、ボタンの色や余白を整える。</li>
+        <li><strong>JavaScript：</strong>ボタンが押されたら単価と数量を掛けて、合計金額を表示する。</li>
+      </ul>
+      <p>
+        HTMLで用意した部品をCSSで整え、JavaScriptで必要な処理を加える、と考えるとつながりが分かります。
+        記事を読むだけのページなら、このサイトのようにHTMLとCSSだけでも作れます。
+      </p>
+
+      <h2>AIに修正を頼むときの伝え方</h2>
+      <p>役割の違いが分かると、変えたい部分を具体的に伝えやすくなります。</p>
+      <ul>
+        <li><strong>文章を変えたい：</strong>「HTMLの見出しを『今週のおすすめ』に変更してください」</li>
+        <li><strong>見た目を変えたい：</strong>「CSSで記事の文字を少し大きくし、行間を広げてください」</li>
+        <li><strong>処理を加えたい：</strong>「JavaScriptで、入力した数量から合計金額を計算して表示してください」</li>
+      </ul>
+      <p>
+        どの技術を使うか迷ったら、「何をしたときに、どうなってほしいか」を伝えれば大丈夫です。
+        新しい機能では複数のファイルを変更することもあるので、
+        「変更したファイルと、それぞれの役割も説明してください」と添えると理解しやすくなります。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>HTMLは「内容と構造」、CSSは「見た目」、JavaScriptは「計算や操作に応じた処理」。まずは、この役割分担が分かれば十分です。</p>
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>

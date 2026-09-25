@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>変数とは？ const・letを最低限だけ理解する｜コードは読めればいい</title>
+  <meta name="description" content="変数は値に名前を付けて保存するもの。constとletの違いと使い分けを、GASで合計金額を計算する簡単な例で非エンジニア向けに説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › 変数とは？</p>
+
+      <h1>変数とは？ const・letを最低限だけ理解する</h1>
+      <p class="article-lead">変数は「値に名前を付けて保存するもの」。まずは、名前と値の関係が分かれば大丈夫です。</p>
+
+      <p>
+        AIが書いたコードには、<code>const</code> や <code>let</code> がよく出てきます。
+        どちらも変数を用意するための言葉です。
+        難しい決まりを全部覚える前に、「何に名前を付けているか」「後で値を入れ直すか」を見てみましょう。
+      </p>
+
+      <h2>変数：値に名前を付けて保存するもの</h2>
+      <p>
+        例えば、商品の単価が200円なら、<code>const price = 200;</code> と書けます。
+        これは「200という値に、priceという名前を付ける」という意味です。
+        後の処理では、<code>price</code> と書くことで、その値を使えます。
+      </p>
+      <p>
+        <code>=</code> は、ここでは「左右が等しい」という意味ではなく、
+        <strong>右側の値を左側の変数に入れる</strong>記号です。これを「代入」と呼びます。
+        初めて変数を用意することは「宣言」といいます。
+      </p>
+      <p>
+        数字だけでなく、<code>const productName = "ノート";</code> のように文字も扱えます。
+        文字は引用符で囲みます。<code>price</code>（単価）や <code>productName</code>（商品名）のように、
+        中身が分かる名前だと、コードを読むときの助けになります。
+      </p>
+      <p>
+        ここでいう「保存」は、処理の中で後から使えるように覚えておくことです。
+        変数を作っただけで、スプレッドシートやファイルに記録されるわけではありません。
+      </p>
+
+      <h2>const：後から別の値を入れ直さない</h2>
+      <p>
+        <code>const</code> で用意した変数には、後から別の値を代入できません。
+        例えば <code>const price = 200;</code> の後に <code>price = 300;</code> と書いて実行すると、エラーになります。
+        同じ変数に値を入れ直すことを「再代入」といいます。
+      </p>
+      <p>
+        「この名前の値は途中で入れ替えない」と分かるので、処理を追いやすくなります。
+        <code>const</code> は、宣言するときに最初の値も指定します。
+      </p>
+
+      <h2>let：後から値を入れ直せる</h2>
+      <p>
+        <code>let</code> は、途中で再代入する変数に使います。
+        例えば <code>let quantity = 2;</code> と書いた後に、
+        <code>quantity = 3;</code> と書けば、数量を2から3に変更できます。
+        入れ直すときは、<code>let</code> をもう一度書く必要はありません。
+      </p>
+      <p>
+        まずは<strong>基本的にconstを使い、後から値を変更する必要がある場合にletを使う</strong>、
+        という考え方で十分です。「変数」という名前でも、必ず値を変更するわけではありません。
+      </p>
+      <p>
+        なお、<code>const</code> が禁止するのは再代入です。
+        配列（値のリスト）やオブジェクト（名前付きのデータの集まり）では、中身を変更できる場合があります。
+        「constなら中身まで絶対に変わらない」とは限らないことだけ、覚えておきましょう。
+      </p>
+
+      <h2>GASの例：数量を変えて合計金額を計算する</h2>
+      <p>
+        Google Apps Script（GAS）で、200円の商品を2個から3個に増やした場合の合計を計算してみます。
+        単価は入れ直さないので <code>const</code>、数量は途中で変えるので <code>let</code> を使います。
+      </p>
+
+      <pre><code>function main() {
+  const price = 200;
+  let quantity = 2;
+
+  quantity = quantity + 1;
+  const total = price * quantity;
+
+  Logger.log(total);
+}</code></pre>
+
+      <p>
+        GASのエディタに貼り付けて保存し、実行する関数として <code>main</code> を選んで実行すると、
+        実行ログに <code>600</code> が表示されます。実行ログは、処理の結果などを確認するための記録です。
+      </p>
+      <ol>
+        <li><code>price</code> に単価の200、<code>quantity</code> に数量の2を入れます。</li>
+        <li><code>quantity + 1</code> で今の数量に1を足し、結果の3を <code>quantity</code> に入れ直します。</li>
+        <li><code>price * quantity</code> で200と3を掛け、結果の600を <code>total</code> に入れます。</li>
+        <li><code>Logger.log(total)</code> で合計金額をログに表示します。</li>
+      </ol>
+      <p>
+        <code>quantity = quantity + 1;</code> は、右側の計算を先に行うと読むのがポイントです。
+        <code>total</code> は計算結果ですが、その後で値を入れ直さないので <code>const</code> にしています。
+        計算で決まる値にも <code>const</code> を使えます。
+      </p>
+
+      <h2>AIが書いた変数を読むときは</h2>
+      <p>
+        まずは「この名前には何が入るか」を確認し、<code>let</code> があれば「どこで値が変わるか」を探しましょう。
+        分からなければ、AIに「この変数に入る値と、const・letを使い分けている理由を説明してください」と頼めます。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>変数は「値に名前を付けて保存するもの」。基本はconst、後から値を入れ直す必要があるときはletを使います。</p>
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>
