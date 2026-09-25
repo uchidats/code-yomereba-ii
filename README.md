@@ -21,3 +21,53 @@
 `index.html` をブラウザで開くだけでも確認できます。
 
 将来的には GitHub Pages / Cloudflare Pages 等で公開できます。
+
+## 新しい記事を追加する手順
+
+### 用語の覚え方を補足するルール
+
+新しい用語記事では、必要に応じて「名前の由来」欄を入れる。
+
+元の英単語や略語の正式名称が記憶の助けになる場合に、1用語につき1〜3文で説明します。英語を使った覚え方を紹介する場合は「英語から覚える」という見出しにします。由来が不確かな場合は推測せず、公式資料や辞書で確認できることだけを書きます。関連する本文の説明直後など、流れを邪魔しない位置に置いてください。
+
+共通クラス `term-note` を使うと、既存記事と同じ見た目になります。
+
+```html
+<aside class="term-note" aria-label="英語から覚える：用語名">
+  <strong>英語から覚える：用語名</strong>
+  <p>元の英単語や正式名称と、覚える助けになる短い説明。</p>
+</aside>
+```
+
+今回の補足の確認資料：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)、[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)、[JavaScriptとJava](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#javascript_and_java)、[const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)、[function](https://dictionary.cambridge.org/dictionary/english/function)、[let](https://dictionary.cambridge.org/dictionary/english/let)、[Google Apps Script](https://developers.google.com/apps-script/overview)。
+
+### 追加の手順
+
+`articles/_template.html` は記事作成用のひな形です。共通CSSを使うため、既存の記事と同じデザインで作成できます。ひな形自体はトップページの記事一覧に追加しません。
+
+1. `articles/_template.html` をコピーします。元のひな形は残してください。
+2. コピーしたファイル名を、内容が分かる名前（例：`array.html`）に変更し、同じ `articles` フォルダに置きます。
+3. `<title>` を「記事タイトル｜コードは読めればいい」に変更します。ブラウザのタブなどに表示される名前です。
+4. `meta description` の `content` を、その記事の短い説明に変更します。
+5. パンくずの `【記事名】` を変更します。長いタイトルは短縮しても構いません。「トップ」のリンクはそのまま使います。
+6. `h1` と導入文（`class="article-lead"`）を変更します。`h1` は1つ、導入文は結論や学べることを1〜2文で書きます。
+7. 本文を書きます。大きな話題は `h2`、その中の小さな話題は必要に応じて `h3` を使います。短いコードは `code`、複数行は `<pre><code>…</code></pre>` で囲みます。コード例には目的、実行方法、結果、解説を添え、不要な場合は例のまとまりを削除します。最後に「今日覚えること」を1〜2文にまとめ、`【…】` の仮の文章や不要な見本を残さないようにします。
+8. 前後リンクを設定します。ひな形の「前の記事」「次の記事」の段落を、下の例のようなリンクに置き換えます。`href` と記事名は実際の相手に合わせます。順番はトップページの記事一覧とそろえ、前または次の記事がなければその段落を削除します。両方なければ囲んでいる `div` ごと削除します。記事をつなぐときは、隣の記事から新記事へ向かうリンクも更新します。「← トップページへ戻る」はそのまま残します。
+9. `index.html` の記事一覧（`class="article-list"`）に、新しい記事へのリンクを追加します。準備中の同じ記事がある場合は、その行をリンクに置き換えます。
+
+前後リンクの書き方（ファイル名と記事名は置き換えてください）：
+
+```html
+<p>前の記事：<a href="function.html" rel="prev">functionとは？</a></p>
+<p>次の記事：<a href="variable.html" rel="next">変数とは？</a></p>
+```
+
+トップページの記事一覧に追加する例：
+
+```html
+<li><a href="articles/array.html">配列とは？</a></li>
+```
+
+記事同士のリンクは同じフォルダ内なので `variable.html` のように書き、トップページからは `articles/array.html` のようにフォルダ名も付けます。コード例にHTMLの記号を書く場合は、`<` を `&lt;`、`&` を `&amp;` と書くと、タグとして解釈されずに表示できます。
+
+保存後はブラウザでトップページを開き、新記事への移動、前後リンク、トップへ戻るリンクを確認してください。スマートフォン相当の狭い幅でも表示を確認します。ひな形の変更は、すでに作成した記事には自動反映されません。

@@ -201,6 +201,24 @@ blockquote {
   margin-bottom: 0;
 }
 
+.term-note {
+  margin: 24px 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.term-note > strong {
+  color: var(--accent-dark);
+}
+
+.term-note p {
+  margin: 8px 0 0;
+}
+
 .back {
   margin-top: 42px;
 }
