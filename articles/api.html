@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APIとは？ アプリ同士をつなぐ窓口｜コードは読めればいい</title>
+  <meta name="description" content="APIはアプリ同士をつなぐ窓口。レストランの注文にたとえて、決められたルール、Web APIとJSON、認証、GASからGmailを使う簡単な例を説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › APIとは？</p>
+
+      <h1>APIとは？ アプリ同士をつなぐ窓口</h1>
+      <p class="article-lead">APIは「窓口」と「決められた注文方法」。相手の仕組みを全部知らなくても、用意された機能を使えます。</p>
+
+      <p>
+        「カレンダーから予定を取得する」「Gmailの情報を読み取る」。
+        こうした連携では、別のサービスが持つ機能をコードから使います。
+        そのときの窓口とやり取りのルールがAPIです。
+      </p>
+
+      <h2>APIはレストランの注文窓口のようなもの</h2>
+      <blockquote>
+        レストランの厨房に自分で入る必要はありません。<br>
+        メニューを見て、店員に決められた方法で注文すれば料理が出てきます。
+      </blockquote>
+      <p>
+        APIも同じです。相手の内部構造を知らなくても、<strong>決められた方法で依頼すれば、機能を利用して結果を受け取れます。</strong>
+        アプリやサービス同士がやり取りするための「窓口」と考えると分かりやすくなります。
+      </p>
+      <ul>
+        <li><strong>メニュー：</strong>利用できる機能を説明したAPIの資料。</li>
+        <li><strong>注文方法：</strong>依頼先や、渡す情報の名前・形式などのルール。</li>
+        <li><strong>注文と料理：</strong>送る依頼と、受け取る結果。</li>
+      </ul>
+      <p>
+        料理の作り方を知らなくても注文できるように、データの保管方法などを知る必要はありません。
+        ただし、メニューにない料理を注文できないのと同じで、APIが用意している機能とルールを確認する必要があります。
+      </p>
+
+      <aside class="term-note" aria-label="名前の由来：API">
+        <strong>名前の由来：API</strong>
+        <p>APIは<strong>Application Programming Interface</strong>の略です。</p>
+        <ul>
+          <li><strong>Application：</strong>アプリやソフトウェアのこと。</li>
+          <li><strong>Programming：</strong>プログラムを書くこと。</li>
+          <li><strong>Interface：</strong>もの同士が接する部分や、やり取りするための接点。</li>
+        </ul>
+        <p>まとめると「プログラムからアプリの機能を使うための接点」と覚えると、役割がつかめます。</p>
+      </aside>
+
+      <h2>GASでもGoogleサービスの機能を呼び出している</h2>
+      <p>
+        Google Apps Script（GAS）には、Googleサービスをコードから使うための窓口が用意されています。
+        Google Calendarなら <code>CalendarApp</code>、Gmailなら <code>GmailApp</code>、
+        Google Driveなら <code>DriveApp</code> です。
+      </p>
+      <p>
+        これらの組み込みサービスを使うと、予定を取得したり、メールやファイルを扱ったりできます。
+        Googleの内部のプログラムを書き換える必要はなく、用意された呼び出し方に従って機能を使います。
+      </p>
+
+      <h2>GASの例：Gmailの未読スレッド数を調べる</h2>
+      <p>
+        受信トレイにある未読スレッドの数を、実行ログに表示してみましょう。
+        スレッドとは、返信などでつながったメールのまとまりです。この例はメールの送信や削除は行いません。
+      </p>
+
+      <pre><code>function main() {
+  const count = GmailApp.getInboxUnreadCount();
+  Logger.log(count);
+}</code></pre>
+
+      <p>
+        GASのエディタに貼り付けて保存し、実行する関数として <code>main</code> を選んで実行します。
+        初回などにGoogleアカウントへのアクセス許可が求められたら、内容を確認して許可します。
+        実行ログには、自分の受信トレイの未読スレッド数が表示されます。例えば3件なら <code>3</code> です。
+      </p>
+      <ol>
+        <li><code>GmailApp.getInboxUnreadCount()</code> で、Gmailの窓口に未読スレッド数を問い合わせます。</li>
+        <li>返ってきた数を <code>count</code> という変数に入れます。</li>
+        <li><code>Logger.log(count)</code> で、数を実行ログに表示します。</li>
+      </ol>
+      <p>
+        ここで大切なのは、Gmailの内部構造を知らなくても、決められた呼び出し方で情報を取得できることです。
+        呼び出し方と返される値は、<a href="https://developers.google.com/apps-script/reference/gmail/gmail-app#getInboxUnreadCount()">Googleの公式資料</a>で確認できます。
+      </p>
+
+      <h2>Web APIでは、URLに依頼して結果を受け取る</h2>
+      <p>
+        Web APIでは、インターネットなどを通じて、決められたURLに依頼を送ります。
+        この依頼を「リクエスト」、返ってくる応答を「レスポンス」と呼びます。
+        URLは注文先の住所、リクエストは注文、レスポンスは返ってくる結果に当たります。
+      </p>
+      <p>
+        結果はJSON形式で返されることが多くあります。
+        JSONは、<code>{"count": 3}</code> のように、項目名と値を決まった書き方で表すデータ形式です。
+        この例なら「countという項目の値が3」と読めれば十分です。
+      </p>
+      <p>
+        先ほどのGASの例は、組み込みサービスがやり取りを扱うため、自分でURLやJSONを書く必要はありません。
+        APIにはいろいろな使い方があり、すべてがURLへの依頼やJSONの受け取りになるわけではありません。
+      </p>
+
+      <h2>APIキーや認証が必要な場合もある</h2>
+      <p>
+        APIによっては、利用するアプリなどを識別する「APIキー」という文字列が必要です。
+        また、個人のメールや予定を扱う場合などには、誰が使うかを確認する認証や、アクセスの許可が必要になります。
+        レストランで会員証や本人確認を求められる場面をイメージすると分かりやすくなります。
+      </p>
+      <p>
+        GASの例で出てくるGoogleの許可画面も、そのための仕組みです。この例では自分でAPIキーを用意する必要はありません。
+        必要な手続きはAPIごとに違うので、まずは「利用前に鍵や許可が必要な窓口もある」と覚えておきましょう。
+      </p>
+
+      <h2>AIにAPIの利用を頼むときは</h2>
+      <p>
+        「Gmailから未読スレッド数を取得したい」のように、使うサービスと目的を伝えます。
+        「どの窓口を使い、何を渡し、何が返るか。必要な認証も説明して」と添えると、コードの意味を理解しやすくなります。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>APIは、アプリ同士をつなぐ「窓口」と「決められた注文方法」。相手の内部構造を知らなくても、ルールに従って依頼すれば機能を使えます。</p>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="if.html" rel="prev">if文とは？ 条件分岐を最低限だけ理解する</a></p>
+        <!-- 次の記事を公開したら、ここにrel="next"のリンクを追加します。 -->
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>
