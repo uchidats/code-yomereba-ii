@@ -30,6 +30,7 @@
         <a href="#json">JSON関連</a>
         <a href="#gas">GASでよく見るもの</a>
         <a href="#html-css">HTML / CSSでよく見るもの</a>
+        <a href="#git">Gitのコマンド</a>
       </nav>
 <p>カテゴリから選ぶか、ブラウザの「ページ内検索」で見かけた言葉を探せます。関連記事は、その言葉の背景となる基本を読むための入口です。</p>
 <section aria-labelledby="javascript">
@@ -153,6 +154,18 @@
 <div id="html-css-6"><dt><code>id</code></dt><dd><p>HTML要素を識別する名前。「このページ内の特定の要素を指す目印」と読みます。CSSやページ内リンクでは#名前で指定します。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
 <div id="html-css-7"><dt><code>href</code></dt><dd><p>リンク先などの場所を表す属性。a要素なら「押したときの移動先」、link要素なら「関連ファイルの場所」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
 <div id="html-css-8"><dt><code>src</code></dt><dd><p>画像など、読み込むものの場所を表す属性。「この場所のファイルを読み込む」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+</dl>
+</section>
+
+<section aria-labelledby="git">
+<h2 id="git">Gitのコマンド</h2>
+<ul class="index-quick-links" aria-label="Gitのコマンドの項目">
+<li><a href="#git-1"><code>git commit --amend</code></a></li>
+<li><a href="#git-2"><code>git push --force-with-lease</code></a></li>
+</ul>
+<dl class="index-entries">
+<div id="git-1"><dt><code>git commit --amend</code></dt><dd><p>直前のcommitを作り直すコマンド。「最後の記録を修正する」と読みますが、別のcommitになるため、送信済みなら接続先との履歴の違いに注意します。</p><p class="index-related">関連記事：<a href="../articles/build-site-in-one-day.html#troubles">1日でこのサイトを公開するまで</a></p></dd></div>
+<div id="git-2"><dt><code>git push --force-with-lease</code></dt><dd><p>接続先の履歴が想定した状態かを確認して、履歴の強制更新を試みる指定。「相手側が想定どおりなら、作り直した履歴を送る」と読みます。通常のpushとは異なり履歴を書き換えるため、同期の問題すべてに使うコマンドではありません。</p><p class="index-related">関連記事：<a href="../articles/build-site-in-one-day.html#troubles">1日でこのサイトを公開するまで</a></p></dd></div>
 </dl>
 </section>
 
