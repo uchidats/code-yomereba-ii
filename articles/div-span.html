@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 初回公開時に published: YYYY-MM-DDTHH:mm:ss+09:00 の形式で実際の公開日時を記録する。 -->
+  <title>divとspanの違い｜HTMLの「まとまり」と「一部分」｜コードは読めればいい</title>
+  <meta name="description" content="divはまとまりを作る箱、spanは一部分を囲う目印。実際のヘッダーとスマホ用の表示切り替えから、要素・class・ブロックとインラインの違いを読み解きます。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › divとspanの違い</p>
+      <h1>divとspanの違い｜HTMLの「まとまり」と「一部分」</h1>
+      <p class="article-lead"><code>div</code>はひとかたまりを囲う「箱」、<code>span</code>は文章などの一部分を囲う「部分的なマーカー」です。このサイトのヘッダーを例に、何をまとめているのか読んでみましょう。</p>
+
+      <h2>まず結論：まとまりを囲うdiv、一部分を囲うspan</h2>
+      <p>次は、タイトルと本文をまとめる説明用の例です。</p>
+      <pre><code>&lt;div class="card"&gt;
+  &lt;h2&gt;タイトル&lt;/h2&gt;
+  &lt;p&gt;本文です。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p><code>&lt;div&gt;</code>から<code>&lt;/div&gt;</code>までで、タイトルと本文を1つのカードとして囲っています。一方、文章の一部だけに目印を付けるなら、次のように読めます。</p>
+      <pre><code>&lt;p&gt;これは&lt;span class="important"&gt;重要&lt;/span&gt;です。&lt;/p&gt;</code></pre>
+      <p>囲っているのは「重要」の2文字だけです。この例の<code>important</code>は説明用のclass名で、spanを付けただけでは色や太さは変わりません。見た目を変えるには、対応するCSSなどの指定が必要です。</p>
+
+      <h2 id="english">英語から覚える：divisionとspan</h2>
+      <aside class="term-note" aria-label="英語から覚える：divとspan">
+        <strong>divはdivision、spanは範囲</strong>
+        <p><code>div</code>はdivisionに由来し、divisionには「区分」「分割された部分」という意味があります。「ページの一区画」と結び付けると覚えやすくなります。</p>
+        <p>spanには「範囲」「広がり」、動詞では「一定の範囲を覆う」といった意味があります。「この範囲だけを囲う」という読み方の手がかりにしましょう。</p>
+      </aside>
+
+      <h2>divは複数の要素をひとまとめにする</h2>
+      <p>このサイトの記事ページには、次の構造があります。画像のサイズ・class指定を省略し、サイト名と紹介文の中身は<code>...</code>で短くしています。</p>
+      <pre><code>&lt;div class="site-brand"&gt;
+  &lt;img src="../assets/koi.png" alt=""&gt;
+  &lt;div class="site-brand-text"&gt;
+    &lt;a class="site-title" href="../index.html"&gt;...&lt;/a&gt;
+    &lt;p class="tagline"&gt;...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <p>外側の<code>site-brand</code>は、<strong>錦鯉画像とサイト名・紹介文をまとめたひとかたまり</strong>です。内側の<code>site-brand-text</code>は、そのうち文字の部分をまとめています。</p>
+      <p>「大きな箱の中に、画像と文字用の箱がある」と読むと構造が見えてきます。divの中にdivを入れても構いません。閉じる<code>&lt;/div&gt;</code>まで追うと、それぞれの箱の範囲が分かります。</p>
+
+      <h2 id="tagline">spanは文章の一部分に目印を付ける</h2>
+      <p>このサイトの紹介文には、実際に次のspanがあります。読みやすく改行して示しています。</p>
+      <pre><code>&lt;p class="tagline"&gt;
+  &lt;span class="tagline-extra"&gt;あとはAIに。&lt;/span&gt;
+  非エンジニアのためのAI開発・GAS・Codex入門
+&lt;/p&gt;</code></pre>
+      <p><code>p</code>が紹介文全体を囲み、その中の「あとはAIに。」だけをspanで囲っています。<code>tagline-extra</code>というclassを目印に、この部分だけをCSSから指定できます。</p>
+      <p>現在の共通CSSでは、<strong>画面幅600px未満でこの部分だけを非表示</strong>にしています。紹介文の残りはそのまま表示します。関連する指定だけを抜き出すと、次の形です。</p>
+      <pre><code>@media (width &lt; 600px) {
+  .tagline-extra {
+    display: none;
+  }
+}</code></pre>
+      <p>「幅が600px未満なら、tagline-extraを表示しない」と読めます。span自体がスマホを判断するのではなく、spanに付けたclassをCSSが指定している、という関係です。</p>
+
+      <h2 id="comparison">divとspanを並べて比べる</h2>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>div：まとまりを作る箱</h3>
+          <p>用途：複数の要素をまとめる<br>基本の表示：新しい行から始まる<br>よく使う場面：レイアウト、カード、グループ</p>
+        </div>
+        <div class="card">
+          <h3>span：一部分を囲う目印</h3>
+          <p>用途：文章などの一部分を囲う<br>基本の表示：文中に続く<br>よく使う場面：文章の一部、装飾や操作の対象</p>
+        </div>
+      </div>
+      <p>これは通常の表示をもとにした比較です。実際の並び方は、CSSの指定によって変わります。</p>
+
+      <h2 id="display">ブロックとインラインは、基本の並び方</h2>
+      <p>divは「ブロック要素」、spanは「インライン要素」と説明されます。ここでは、標準の表示がブロックかインラインか、という感覚で読めれば十分です。</p>
+      <p>divは、基本的には親の横幅いっぱいを使う箱になり、新しい行から始まります。特別なCSSがなければ、次のAとBは縦に並びます。</p>
+      <pre><code>&lt;div&gt;A&lt;/div&gt;
+&lt;div&gt;B&lt;/div&gt;</code></pre>
+      <p>spanは文章の流れの中に入り、囲った部分に沿って表示されます。次のAとBは、幅に余裕があれば同じ行に続きます。</p>
+      <pre><code>&lt;span&gt;A&lt;/span&gt;
+&lt;span&gt;B&lt;/span&gt;</code></pre>
+      <p>ただし、<strong>divなら必ず縦、spanなら必ず横、とは限りません。</strong>CSSの<code>display</code>などで表示方法を変えられます。このサイトの<code>site-brand</code>も、CSSで中の画像と文字を横に並べています。</p>
+
+      <h2>要素とclassを分けて読む</h2>
+      <p><a href="class-id.html">「classとidの違い」</a>では、classをグループ名として読みました。タグの種類と、そのタグに付けた名前を分けると、さらに読みやすくなります。</p>
+      <pre><code>&lt;div class="card"&gt;</code></pre>
+      <ul>
+        <li><code>div</code>：まとまりを作るHTML要素。</li>
+        <li><code>class="card"</code>：そのまとまりに付けたグループ名。</li>
+      </ul>
+      <pre><code>&lt;span class="tagline-extra"&gt;</code></pre>
+      <ul>
+        <li><code>span</code>：一部分を囲うHTML要素。</li>
+        <li><code>class="tagline-extra"</code>：その部分に付けたグループ名。</li>
+      </ul>
+      <p>divやspanは「どんな要素か」、classという属性は「どのグループか」を表します。名前だけを眺めるより、役割を分けて読む方が、CSSとのつながりも追いやすくなります。</p>
+
+      <h2>divは意味を持たない？</h2>
+      <p>divとspanは、特定の意味を持たない汎用的な要素です。「役に立たない」ということではなく、タグ自体は内容の役割まで説明しない、という意味です。</p>
+      <ul>
+        <li><code>header</code>：ページや区画のヘッダー。</li>
+        <li><code>nav</code>：ナビゲーション。</li>
+        <li><code>article</code>：記事など、独立した内容。</li>
+        <li><code>div</code>：特別な意味を持たない、汎用的なまとまり。</li>
+      </ul>
+      <p>内容に合う意味のあるタグが適切なら、そちらを使います。特に適切なタグがないとき、ひとまとめにするためにdivがよく使われます。spanも、文章内の範囲を汎用的に囲う役割です。</p>
+
+      <h2>spanは、どんなときに使う？</h2>
+      <p>文章の一部だけを対象に、次のようなことをしたい場面で使われることがあります。</p>
+      <ul>
+        <li>CSSで色を変えたり、太字にしたりする。</li>
+        <li>スマホのときだけ非表示にする。</li>
+        <li>JavaScriptで一部分の内容を変える。</li>
+      </ul>
+      <p>見た目を変えるたびに必ずspanが必要なわけではありません。既にある要素にCSSを指定できる場合もありますし、内容の重要性を示すなら<code>strong</code>のような意味のあるタグが適切な場合もあります。</p>
+
+      <h2>よくある勘違いは、この3つ</h2>
+      <ul>
+        <li><strong>「divとspanは大きさだけが違う」：</strong>基本の表示や、囲う内容の種類が違います。文字が少ないから必ずspan、という選び方ではありません。</li>
+        <li><strong>「divの中にdivを入れてはいけない」：</strong>入れて構いません。site-brandのように、大きなまとまりの中をさらにまとめられます。</li>
+        <li><strong>「spanの中には何でも入れられる」：</strong>divや見出しなどを何でも入れられるわけではありません。基本的に文章などの小さな範囲に使う、と考えてください。</li>
+      </ul>
+
+      <h2>コードを読むときは、囲っている範囲を見る</h2>
+      <pre><code>&lt;div class="site-brand"&gt;
+&lt;span class="tagline-extra"&gt;</code></pre>
+      <p>それぞれの開始タグを、「site-brandという名前のまとまりが始まる」「tagline-extraという名前を付けた一部分が始まる」と読んでみましょう。</p>
+      <p>次に閉じるタグまで追い、何が中に入っているかを見ます。画像と文字なのか、短いひと言なのか。それが分かれば、なぜここを囲っているのかも見えてきます。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>divはまとまりを作る箱で基本はブロック、spanは一部分を囲う目印で基本はインラインですが、表示はCSSでも変わります。</p>
+        <p>classはその要素に付けるグループ名なので、コードでは「要素の種類」と「classの名前」を分けて読みましょう。</p>
+      </div>
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="class-id.html" rel="prev">classとidの違い｜HTMLの「グループ名」と「固有名」</a></p>
+        <p>次の記事：<a href="function.html" rel="next">functionとは？</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
