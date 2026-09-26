@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 初回公開時に published: YYYY-MM-DDTHH:mm:ss+09:00 の形式で実際の公開日時を記録する。 -->
+  <title>classとidの違い｜HTMLの「グループ名」と「固有名」｜コードは読めればいい</title>
+  <meta name="description" content="classは共有できるグループ名、idはページ内の固有名。実際のサイトのHTMLとCSSを見ながら、複数class、.と#、ページ内リンクの読み方を整理します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › classとidの違い</p>
+      <h1>classとidの違い｜HTMLの「グループ名」と「固有名」</h1>
+      <p class="article-lead"><code>class</code>は複数の要素で共有できる「グループ名」、<code>id</code>はページ内の特定の1か所を指す「固有名」です。HTMLの名前とCSSの記号をつなげて、どの部分を指定しているか読んでみましょう。</p>
+
+      <h2>まず結論：グループ名と、特定の場所の名前</h2>
+      <p>次は説明用のHTMLです。2つの段落には、同じ<code>note</code>というclassが付いています。</p>
+      <pre><code>&lt;p class="note"&gt;注意1&lt;/p&gt;
+&lt;p class="note"&gt;注意2&lt;/p&gt;</code></pre>
+      <p>どちらも「noteグループの段落」と読めます。一方、次の開始タグは「このページのstartという特定の場所」です。</p>
+      <pre><code>&lt;section id="start"&gt;</code></pre>
+      <p>classは同じ種類の名札、idは個人番号、くらいのイメージです。名前が付いたことで、CSSやリンクからその要素を指定しやすくなります。</p>
+
+      <h2 id="class">classは同じ特徴の要素をまとめる名前</h2>
+      <aside class="term-note" aria-label="英語から覚える：class">
+        <strong>英語から覚える：class</strong>
+        <p>classには「分類」「種類」「クラス」という意味があります。HTMLでは、同じ特徴を持つ要素をまとめて扱うための名前、と考えると分かりやすくなります。</p>
+      </aside>
+      <p>先ほどの2つの段落を太字にしたいとき、CSSでは次のように指定できます。これは説明用のCSSで、このサイトにある設定そのものではありません。</p>
+      <pre><code>.note {
+  font-weight: bold;
+}</code></pre>
+      <p><code>.note</code>は「noteというclassを持つ要素」、<code>font-weight: bold;</code>は「文字を太くする」です。このCSSが適用されると、2つの段落が両方とも太字になります。</p>
+      <p><strong>同じclass名は、複数の要素に付けられます。</strong>HTMLには<code>class="note"</code>、CSSには<code>.note</code>と書かれていたら、同じグループを指しています。</p>
+
+      <h2 id="identifier">idはページ内の1か所を識別する名前</h2>
+      <aside class="term-note" aria-label="英語から覚える：identifier">
+        <strong>英語から覚える：id = identifier</strong>
+        <p>idはidentifierの略です。identifierは「識別子」、つまり「見分けるための名前」という意味で、ページ内の特定の要素を識別します。</p>
+      </aside>
+      <p><code>&lt;section id="start"&gt;</code>なら、そのsectionにstartという固有名を付けています。同じページ内では、同じidの値を重複させず、1つの要素だけに使います。</p>
+      <p>CSSから指定するときは、名前の前に<code>#</code>を付けます。次は読み方のための例で、実際のサイトにある設定ではありません。</p>
+      <pre><code>#start {
+  background: #fff8e3;
+}</code></pre>
+      <p>先頭の<code>#start</code>は「idがstartの要素」です。この例はその背景色を指定しています。なお、<code>#fff8e3</code>は色の値なので、同じ<code>#</code>でも書かれた場所によって意味が違います。</p>
+
+      <h2 id="comparison">classとidを並べて比べる</h2>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>class：グループ名</h3>
+          <p>役割：同じ種類の要素をまとめる<br>共有：同じ名前を複数の要素で使える<br>HTML：<code>class="name"</code><br>CSS：<code>.name</code></p>
+        </div>
+        <div class="card">
+          <h3>id：固有名</h3>
+          <p>役割：特定の1要素を識別する<br>共有：同じ名前は同じページ内で1回<br>HTML：<code>id="name"</code><br>CSS：<code>#name</code></p>
+        </div>
+      </div>
+      <p>別のHTMLページなら、同じid名を使えます。「このページの中で1つ」と読むのがポイントです。</p>
+
+      <h2>このサイトのclassを読んでみる</h2>
+      <p>記事ページのヘッダーには、実際に次の開始タグがあります。</p>
+      <pre><code>&lt;header class="site-header compact"&gt;</code></pre>
+      <p>これは「site-header compact」という1つの名前ではありません。空白で区切られた、次の<strong>2つのclass</strong>を持っています。</p>
+      <ul>
+        <li><code>site-header</code>：サイトのヘッダーに付けるclass。</li>
+        <li><code>compact</code>：このサイトでは、ヘッダーの余白を調整するためにも使うclass。</li>
+      </ul>
+      <p><strong>1つの要素に複数のclassを付けられます。</strong>どんな見た目になるかは、名前だけで決まるのではなく、対応するCSSを見て確認します。</p>
+      <p>ほかにも、ヘッダーには次のclassが使われています。ここでは属性の部分だけを抜き出しています。</p>
+      <pre><code>class="site-title"
+class="tagline"
+class="site-logo"</code></pre>
+      <p>このサイトでは順に、サイト名のリンク、紹介文、錦鯉のロゴ画像に付いています。CSSの<code>.site-title</code>を見つけたら、「サイト名のリンクの見た目を指定しているんだな」とつなげて読めます。</p>
+
+      <h2 id="page-link">このサイトのidと、ページ内リンク</h2>
+      <p>トップページには、次のリンクとsectionがあります。sectionの中身は省略しています。</p>
+      <pre><code>&lt;a class="nav-start" href="#start"&gt;はじめに&lt;/a&gt;
+
+&lt;section id="start" class="section"&gt;</code></pre>
+      <p><code>href="#start"</code>は「このページ内の、idがstartの場所へ移動する」という意味です。クリックすると、サイトの目的が書かれたsectionへ移動します。このサイトでは「はじめに」のナビゲーションリンクはPC表示で確認できます。</p>
+      <p><a href="href-src.html">「hrefとsrcの違い」</a>で見たhrefの行き先は、別ファイルだけとは限りません。<code>#start</code>のように、同じページの特定の場所も指定できます。</p>
+      <p>記事ページからなら<code>../index.html#start</code>と読むこともできます。<a href="relative-path.html">相対パスの道順</a>でトップページへ行き、その中のstartへ進む、という組み合わせです。<a href="../index.html#start">トップページの「このサイトの目的」へ</a>というリンクでも確認できます。</p>
+      <p>このsectionは<code>id="start"</code>と<code>class="section"</code>の両方を持っています。グループ名と固有名は、1つの要素に一緒に付けられます。</p>
+
+      <h2>なぜclassは共有できて、idは1つなのか</h2>
+      <p>classは、同じ種類をまとめて扱うためのものです。同じグループにいくつも要素が入っていて自然です。</p>
+      <p>idは、特定の場所を一意に見つけるためのものです。同じページにstartが何個もあると、「どのstartへ行けばいいのか」が曖昧になります。見た目が表示できていても、同じid名を重複して付けるのは避けます。</p>
+
+      <h2 id="css">CSSでは「.はclass、#はid」</h2>
+      <p>CSSで要素を選ぶ部分を読むときは、まず名前の前の記号に注目します。</p>
+      <pre><code>.site-title  → classがsite-titleの要素
+#start       → idがstartの要素</code></pre>
+      <p><strong><code>.</code>はclass、<code>#</code>はid。</strong>HTML側の値には、この記号を付けません。<code>class="site-title"</code>と<code>.site-title</code>、<code>id="start"</code>と<code>#start</code>を対にして読むと分かりやすくなります。</p>
+
+      <h2>JavaScriptでも、要素を探す名前になる</h2>
+      <p>classやidは、JavaScriptからページ内の要素を探すときにも使われます。次は説明用の例です。</p>
+      <pre><code>document.getElementById('start')</code></pre>
+      <p>「このページから、idがstartの要素を探して取得する」と読みます。これだけで、その場所へ移動するわけではありません。今回は、idはJavaScriptにとっても探す目印になる、と分かれば十分です。</p>
+
+      <h2>よくある勘違いは、この3つ</h2>
+      <ul>
+        <li><strong>「classは1つしか付けられない」：</strong>空白で区切れば複数付けられます。<code>site-header compact</code>は2つのclassです。</li>
+        <li><strong>「idも同じ名前を何度でも使える」：</strong>同じページ内では重複させません。共有するグループ名にはclassを使います。</li>
+        <li><strong>「HTMLにも.や#を付ける」：</strong>名前を付けるHTMLでは<code>class="note"</code>や<code>id="start"</code>です。CSSで選ぶときに<code>.note</code>や<code>#start</code>になります。</li>
+      </ul>
+
+      <h2>コードを読むときは、名前の役割を言葉にする</h2>
+      <pre><code>&lt;div class="card"&gt;
+&lt;section id="start"&gt;</code></pre>
+      <p>それぞれの開始タグを、「このdivはcardというグループに属する」「このsectionはstartという固有名を持つ」と読んでみましょう。</p>
+      <p>次にCSSの<code>.card</code>や、リンクの<code>href="#start"</code>を見つければ、どこにつながる指定かが分かります。全部を書けなくても、名前をたどることでコードの意味を追えます。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>classは共有できるグループ名、idは同じページ内で重複させない固有名で、CSSでは<code>.class名</code>と<code>#id名</code>で指定します。</p>
+        <p>1つの要素には、空白で区切って複数のclassを付けられます。</p>
+      </div>
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="relative-path.html" rel="prev">相対パスとは？ ../ の意味を読めるようになる</a></p>
+        <p>次の記事：<a href="function.html" rel="next">functionとは？</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
