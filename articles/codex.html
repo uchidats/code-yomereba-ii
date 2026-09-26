@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codexとは？ AIにコードを読ませて直してもらう仕組み｜コードは読めればいい。たぶん。</title>
+  <meta name="description" content="CodexはOpenAIのAIコーディング支援エージェント。ChatGPTとの使い分け、複数ファイルの修正、diffとGitで確認する流れを初心者向けに説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline">あとはAIに。非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › Codexとは？</p>
+      <h1>Codexとは？ AIにコードを読ませて直してもらう仕組み</h1>
+      <p class="article-lead">ChatGPT = 相談相手。<br>Codex = プロジェクト全体を見て実際にコードを直す担当。</p>
+
+      <p>
+        AIにコードを相談するたびに、ファイルの中身をコピーし、回答を貼り付け直す。
+        ファイルが増えるほど、この往復は大変になります。
+        Codexは、作業中のプロジェクトを読み、必要なファイルを直接修正する作業を支援します。
+      </p>
+
+      <h2>Codexは、コードの作業を進めるAIエージェント</h2>
+      <p>
+        Codex（コーデックス）は、OpenAIのAIコーディング支援ツール／エージェントです。
+        エージェントとは、指示に沿ってファイルを調べたり、編集したり、確認の作業を進めたりするAI、と考えれば大丈夫です。
+      </p>
+      <p>
+        VS CodeではCodexの拡張機能を使って、開いているプロジェクトを対象に作業できます。
+        このサイトなら、HTMLと共通CSSの関係を調べ、複数ファイルにまたがる修正を頼めます。
+        読み書きできる範囲は、開いた作業フォルダや権限の設定によって決まります。
+      </p>
+
+      <aside class="term-note" aria-label="名前の由来：Codex">
+        <strong>名前の由来：Codex</strong>
+        <p>一般語のcodexには、古い冊子・写本、法典などの意味があります。「書かれたものをまとめた本」というイメージで名前を覚えられますが、それが製品の命名理由だと断定するものではありません。</p>
+      </aside>
+
+      <h2>ChatGPTとの違いは、作業の頼み方で考える</h2>
+      <ul>
+        <li><strong>ChatGPTに相談：</strong>「HTMLとCSSは何が違う？」「この仕組みはどう作ればいい？」と、考え方や説明を聞く。</li>
+        <li><strong>Codexに作業を頼む：</strong>「このプロジェクトの全ページのヘッダーを統一して」と、実際のファイルへの変更を頼む。</li>
+      </ul>
+      <p>
+        これは初心者向けの使い分けの目安です。ChatGPTもコードの作成を手伝えますし、Codexにも説明や相談を頼めます。
+        Codexでは、プロジェクトのファイルを対象に、調査から編集まで続けて頼める点を押さえましょう。
+      </p>
+
+      <h2>自然な言葉で、複数ファイルの修正を頼める</h2>
+      <p>プログラムの命令を書く代わりに、次のように日本語で作業を伝えられます。</p>
+      <ul>
+        <li>「この関数だけ直してください。それ以外の処理は変更しないでください」</li>
+        <li>「全ページのヘッダーを統一してください。本文とデザインは変えないでください」</li>
+        <li>「まずファイルの役割を説明してください。まだ変更しないでください」</li>
+      </ul>
+      <p>
+        Codexが作業フォルダのファイルを読める場合、コードを毎回丸ごとコピー＆ペーストする手間を減らせます。
+        ただし、「プロジェクト全体を見られる」ことは、全ファイルを常に読み終えているという意味ではありません。
+        全ページを対象にするなら、その範囲を指示に含めると意図が伝わります。
+      </p>
+
+      <h2>実例：全ページのヘッダーを統一する</h2>
+      <p>Codexの拡張機能とGit、GitHubへの接続設定が済んだプロジェクトで、次のように進めます。</p>
+      <ol>
+        <li><strong>VS Codeでプロジェクトを開く：</strong>1つのHTMLだけでなく、記事やCSSを含むプロジェクトのフォルダを開きます。</li>
+        <li><strong>Codexに指示する：</strong>「全ページのヘッダーを統一して。サイト名は『コードは読めればいい。たぶん。』にし、本文は変えないで」と伝えます。</li>
+        <li><strong>Codexが複数のHTMLを修正：</strong>対象ファイルを調べ、各ページに必要な変更を加えます。</li>
+        <li><strong>diffを確認：</strong>変更前後を比べ、対象のヘッダーだけが変わっているか確認します。ブラウザでも表示を確認します。</li>
+        <li><strong>commitしてGitHubへ保存：</strong>確認した変更を選んでcommitし、その後pushしてGitHubへ送ります。</li>
+      </ol>
+      <p>
+        commitはローカルで履歴を記録する操作です。GitHubへ保存するにはpushも必要です。
+        「コードを修正して」という依頼と、履歴の記録・送信は別の作業として区別しておきましょう。
+      </p>
+
+      <h2>Gitと組み合わせると、確認して戻しやすい</h2>
+      <p>
+        作業前の状態をGitに記録し、Codexの修正後にdiffを見れば、何が変わったかを追えます。
+        意図と違う変更があった場合も、履歴をもとに修正し直したり、記録済みの変更をrevertで打ち消したりできます。
+      </p>
+      <p>
+        Codexの変更が必ず正しいとは限りません。小さな単位で依頼し、確認してcommitする流れが、戻しやすい作業につながります。
+        操作の意味は<a href="git-github.html">GitとGitHubの記事</a>で確認できます。
+      </p>
+
+      <h2>GASやWebページの開発にも使える</h2>
+      <p>
+        HTMLの文章や構造を直す、CSSで表示を整える、JavaScriptの条件分岐を修正する、といった作業に使えます。
+        GASのコードも、内容を説明してもらったり、処理の修正を頼んだりできます。
+      </p>
+      <p>
+        Google側だけにあるGASのプロジェクトが、VS CodeのCodexに自動で見えるわけではありません。
+        作業フォルダにコードを用意し、Google側へ反映する手順や同期の設定を別に整える必要があります。
+      </p>
+
+      <h2>コードを直す担当と、実際に動かす場所は別</h2>
+      <p>
+        Codexは主にコードを読む・書く・修正する担当です。
+        Webページはブラウザで、GASの処理はGoogle側で動きます。Codex自体がそれらの実行環境に置き換わるわけではありません。
+      </p>
+      <p>
+        一方で、Codexは利用できる環境と権限の範囲で、コマンドやテストを実行することもできます。
+        「ファイルを修正できた」と「GAS上で動作を確認できた」は別なので、どこまで確認したかも説明してもらいましょう。
+      </p>
+      <p>
+        VS Codeでの利用方法は、<a href="https://learn.chatgpt.com/docs/codex/ide">OpenAI公式のCodex IDE拡張機能の資料</a>で確認できます。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>ChatGPT = 相談相手。Codex = プロジェクト全体を見て実際にコードを直す担当。</p>
+        <p>修正後はdiffと動作を確認し、commitで記録してからpushすると、変更を追いやすくなります。</p>
+      </div>
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="git-github.html" rel="prev">Gitとは？ GitHubとは？ 変更履歴を残して安全に開発する仕組み</a></p>
+        <!-- 次の記事を公開したら、ここにrel="next"のリンクを追加します。 -->
+      </div>
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。</p>
+    </div>
+  </footer>
+</body>
+</html>
