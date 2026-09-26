@@ -410,6 +410,7 @@ pre {
 
 @media (width < 600px) {
   .tagline-extra,
+  .nav-start,
   .nav-about {
     display: none;
   }
