@@ -1,0 +1,21 @@
+{
+  "name": "コードは読めればいい。たぶん。",
+  "short_name": "コードは読めればいい",
+  "start_url": "/code-yomereba-ii/",
+  "scope": "/code-yomereba-ii/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#163b60",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

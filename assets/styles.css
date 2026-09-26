@@ -109,8 +109,8 @@ main .narrow {
   font-size: 0.92rem;
 }
 
-.tagline-mobile {
-  display: none;
+.tagline-extra {
+  display: inline;
 }
 
 nav {
@@ -409,13 +409,12 @@ pre {
 }
 
 @media (width < 600px) {
-  .tagline-desktop,
-  .site-header nav .nav-about {
+  .tagline-extra,
+  .nav-about {
     display: none;
   }
 
-  .tagline-mobile {
-    display: block;
+  .tagline {
     font-size: clamp(0.75rem, 3.5vw, 0.92rem);
     line-height: 1.6;
   }
