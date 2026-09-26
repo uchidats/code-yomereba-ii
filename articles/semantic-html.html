@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-27T04:50:00+09:00 -->
+  <title>header・nav・main・section・articleの違い｜HTMLの骨組みを読む｜コードは読めればいい</title>
+  <meta name="description" content="header・nav・main・section・articleは、ページの「役割」を名前で示すHTMLタグです。なぜ全部divではないのか、それぞれ何を表すのかを実際のコードで読んでみましょう。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › header・nav・main・section・articleの違い</p>
+
+      <h1>header・nav・main・section・articleの違い｜HTMLの骨組みを読む</h1>
+      <p class="article-lead"><code>&lt;header&gt;</code>・<code>&lt;nav&gt;</code>・<code>&lt;main&gt;</code>・<code>&lt;section&gt;</code>・<code>&lt;article&gt;</code>は、ページの中で「ここは何の役割か」を名前で示すHTMLタグです。見た目ではなく構造を読むための目印として、それぞれの意味を確認しましょう。</p>
+
+      <h2 id="conclusion">まず結論</h2>
+      <p>5つのタグは、次のような感覚で読めれば十分です。</p>
+      <pre><code>header  = 冒頭
+nav     = 移動
+main    = 主役
+section = 章・まとまり
+article = 独立した記事</code></pre>
+      <p>これらは<strong>見た目ではなく「役割」を表すタグ</strong>です。タグ名がそのまま、そのまとまりが何であるかを教えてくれます。</p>
+
+      <h2 id="why-not-div">なぜ全部 div ではないのか</h2>
+      <p><a href="div-span.html">「divとspanの違い」</a>で読んだとおり、<code>div</code>はひとまとまりを作る汎用的な「箱」で、特別な意味を持ちません。</p>
+      <p>例えば、次のように書いても動きます。</p>
+      <pre><code>&lt;div class="navigation"&gt;
+  &lt;a href="..."&gt;ホーム&lt;/a&gt;
+  &lt;a href="..."&gt;カテゴリ&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+      <p>でも、こう書けばどうでしょうか。</p>
+      <pre><code>&lt;nav&gt;
+  &lt;a href="..."&gt;ホーム&lt;/a&gt;
+  &lt;a href="..."&gt;カテゴリ&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+      <p><code>&lt;nav&gt;</code>と書くだけで、「ここはナビゲーション」とコードを読む人にもブラウザにも伝わります。classの名前を読まなくても、タグ名だけで役割が分かるのです。</p>
+      <p><code>&lt;header&gt;</code>・<code>&lt;nav&gt;</code>・<code>&lt;main&gt;</code>・<code>&lt;section&gt;</code>・<code>&lt;article&gt;</code>は、どれも「その部分がページの中で何の役割を持つか」を名前で示すタグです。</p>
+
+      <h2 id="header">header とは？</h2>
+      <p><code>header</code>は英語で「見出し」「冒頭部分」「ヘッダー」の意味です。Webでは、<strong>ページやまとまりの最初に置く導入部分</strong>として使います。</p>
+      <p>例えば次のものが入ることがあります。</p>
+      <ul>
+        <li>サイト名</li>
+        <li>ロゴ</li>
+        <li>タグライン（紹介文）</li>
+      </ul>
+      <p>このサイトでは、すべての記事ページの冒頭に実際に次の<code>header</code>があります。</p>
+      <pre><code>&lt;header class="site-header compact"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="site-brand"&gt;
+      &lt;img class="site-logo" src="../assets/koi.png" alt=""&gt;
+      &lt;div class="site-brand-text"&gt;
+        &lt;a class="site-title" href="../index.html"&gt;コードは読めればいい。たぶん。&lt;/a&gt;
+        &lt;p class="tagline"&gt;...&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+      <p><code>&lt;header class="site-header compact"&gt;</code>を見たら、「ここからサイトのヘッダーが始まる」と読めます。中にはロゴ画像・サイト名・紹介文が入っています。</p>
+
+      <aside class="term-note" aria-label="英語から覚える：header">
+        <strong>英語から覚える：header</strong>
+        <p>headerは英語で「頭・冒頭」を意味する言葉です。手紙や文書の「ヘッダー（最上部の記載）」と同じ感覚で、「ページの頭の部分」と覚えると読みやすくなります。</p>
+      </aside>
+
+      <h2 id="nav">nav とは？</h2>
+      <p><code>nav</code>は<strong>navigation（ナビゲーション）の略</strong>です。navigationは英語で「案内」「移動」の意味で、船や飛行機の「航法」を表す言葉でもあります。</p>
+      <p>Webでは、<strong>他のページやページ内の場所へ移動するための主要なリンク群</strong>をまとめる部分に使います。例えば次のようなものが入ります。</p>
+      <ul>
+        <li>カテゴリへのリンク</li>
+        <li>学習ロードマップへのリンク</li>
+        <li>新着記事・索引へのリンク</li>
+      </ul>
+      <p>このサイトのトップページには、実際に次の<code>nav</code>があります。</p>
+      <pre><code>&lt;nav aria-label="メインメニュー"&gt;
+  &lt;a class="nav-start" href="#start"&gt;はじめに&lt;/a&gt;
+  &lt;a href="#categories"&gt;カテゴリ&lt;/a&gt;
+  &lt;a href="#articles"&gt;学習ロードマップ&lt;/a&gt;
+  &lt;a href="#latest"&gt;新着記事&lt;/a&gt;
+  &lt;a href="indexes/index.html"&gt;索引&lt;/a&gt;
+  &lt;a href="articles/about.html"&gt;このサイトについて&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+      <p>ただし、「リンクが1つあるだけで必ず<code>nav</code>にする」わけではありません。主要な移動リンクをまとめる場合に使うタグです。</p>
+
+      <h2 id="main">main とは？</h2>
+      <p><code>main</code>は英語の「主要な」「中心の」という意味です。Webでは、<strong>そのページの主役となる内容</strong>を囲うタグです。</p>
+      <p>初心者向けに言い換えると、「このページで一番読んでほしい部分」が<code>main</code>の中に入ります。記事ページなら、例えば次のものが含まれます。</p>
+      <ul>
+        <li>記事タイトル（h1）</li>
+        <li>本文</li>
+        <li>コード例</li>
+      </ul>
+      <p>このサイトでは、記事の本文全体を囲うように<code>&lt;main class="article"&gt;</code>が使われています。</p>
+      <pre><code>&lt;main class="article"&gt;
+  &lt;article class="container narrow"&gt;
+    ...（記事の内容）...
+  &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+      <p><code>&lt;main&gt;</code>を見たら、「ここからページの主な内容が始まる」と読みましょう。</p>
+
+      <h2 id="section">section とは？</h2>
+      <p><code>section</code>は英語で「区分」「節」「章」の意味です。Webでは、<strong>内容上の意味のあるまとまり</strong>に使います。</p>
+      <p>目安として、<strong>見出しを持つひとまとまりの話題</strong>と考えると分かりやすくなります。</p>
+      <pre><code>&lt;section&gt;
+  &lt;h2&gt;headerとは？&lt;/h2&gt;
+  &lt;p&gt;...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+      <p>このサイトのトップページでは、「このサイトの目的」「カテゴリ」「学習ロードマップ」「新着記事」がそれぞれ<code>section</code>で区切られています。</p>
+      <p>ただし、単に見た目を整えるためだけに囲いたい場合は、<code>div</code>の方が自然なこともあります。「意味のあるまとまり」かどうかが判断の目安です。</p>
+
+      <h2 id="article">article とは？</h2>
+      <p><code>article</code>は英語で「記事」の意味です。Webでは、<strong>それ単独でも意味が通る独立したコンテンツ</strong>に使います。例えば次のようなものです。</p>
+      <ul>
+        <li>ブログ記事</li>
+        <li>ニュース記事</li>
+        <li>投稿・コメント</li>
+      </ul>
+      <p>初心者向けの目安として、「<strong>その部分だけ切り取っても1つの読み物として成立するか？</strong>」を考えてみましょう。成立するなら<code>article</code>が適切な候補になります。</p>
+      <p>このサイトの記事ページでは、本文全体を<code>&lt;article class="container narrow"&gt;</code>で囲っています。記事ページの中身は、それ1本で独立した読み物として成立するからです。</p>
+
+      <h2 id="section-vs-article">section と article の違い</h2>
+      <p>この2つは混乱しやすいポイントです。イメージとして、こう分けてみましょう。</p>
+      <ul>
+        <li><strong>article</strong> = 1本の記事そのもの</li>
+        <li><strong>section</strong> = 1つの記事の中の章</li>
+      </ul>
+      <p>例えば次のように入れ子にして読めます。</p>
+      <pre><code>&lt;article&gt;
+  &lt;h1&gt;APIとは？&lt;/h1&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;まず結論&lt;/h2&gt;
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;例えで理解する&lt;/h2&gt;
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/article&gt;</code></pre>
+      <p>外側の<code>article</code>が「APIとは？」という1本の記事を表し、内側の<code>section</code>が「まず結論」「例えで理解する」という章を表しています。</p>
+
+      <h2 id="comparison">5つを並べて比べる</h2>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>&lt;header&gt;</code></h3>
+          <p>役割：冒頭・導入部分<br>読み方：ここからヘッダーが始まる</p>
+        </div>
+        <div class="card">
+          <h3><code>&lt;nav&gt;</code></h3>
+          <p>役割：移動用のリンク群<br>読み方：ここはナビゲーション</p>
+        </div>
+        <div class="card">
+          <h3><code>&lt;main&gt;</code></h3>
+          <p>役割：ページの主な内容<br>読み方：ここがページの中心</p>
+        </div>
+        <div class="card">
+          <h3><code>&lt;section&gt;</code></h3>
+          <p>役割：意味のある話題のまとまり<br>読み方：ここから1つの章</p>
+        </div>
+        <div class="card">
+          <h3><code>&lt;article&gt;</code></h3>
+          <p>役割：独立したコンテンツ<br>読み方：ここから1本の記事</p>
+        </div>
+      </div>
+
+      <h2 id="reading-this-site">このサイトの HTML を実際に読む</h2>
+      <p>このサイトの記事ページの骨組みを、タグの役割を意識しながら読んでみましょう。</p>
+      <pre><code>&lt;header class="site-header compact"&gt;
+  ...サイト名・ロゴなど...
+&lt;/header&gt;
+
+&lt;main class="article"&gt;
+  &lt;article class="container narrow"&gt;
+    ...記事のタイトルと本文...
+  &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer class="site-footer"&gt;
+  ...著作権表示など...
+&lt;/footer&gt;</code></pre>
+      <p>こう読めます。</p>
+      <ul>
+        <li><code>&lt;header class="site-header compact"&gt;</code>：「サイトのヘッダーが始まる」</li>
+        <li><code>&lt;main class="article"&gt;</code>：「ここからページの主な内容」</li>
+        <li><code>&lt;article class="container narrow"&gt;</code>：「ここから1本の記事が始まる」</li>
+        <li><code>&lt;/article&gt;&lt;/main&gt;</code>：「記事と主な内容がここで終わる」</li>
+      </ul>
+      <p>また、トップページには<code>&lt;nav aria-label="メインメニュー"&gt;</code>や<code>&lt;section id="articles" class="section"&gt;</code>などのタグも使われています。タグ名を見るだけで、そのまとまりの役割が一目で分かります。</p>
+
+      <h2 id="css-and-html">見た目は CSS、意味は HTML</h2>
+      <p><a href="html-css-js.html">「HTML・CSS・JavaScriptの違い」</a>で読んだとおり、見た目を担当するのはCSSです。</p>
+      <p><code>&lt;header&gt;</code>や<code>&lt;main&gt;</code>を使ったからといって、特別なデザインになるわけではありません。例えば<code>header</code>を使っても、色や余白はすべてCSSで指定しています。</p>
+      <p>HTMLタグの役割は、「ここは何の部分なのか」という<strong>意味や構造を示すこと</strong>です。見た目の指定はCSSが担当し、HTMLは「骨組みと役割」を書くものです。</p>
+
+      <h2 id="semantic">semantic HTML について</h2>
+      <p><code>header</code>・<code>nav</code>・<code>main</code>・<code>section</code>・<code>article</code>のように、<strong>意味を持つタグを使う考え方</strong>を<strong>semantic HTML（セマンティックHTML）</strong>と呼ぶことがあります。</p>
+      <p>semanticは英語で「意味に関する」という意味です。意味のあるタグを使うと、<strong>人間にもブラウザにも構造が伝わりやすくなります</strong>。「ここはナビゲーション」「ここは記事」とタグ名だけで読めるコードは、divだけで書かれたコードより構造を追いやすくなります。</p>
+
+      <aside class="term-note" aria-label="英語から覚える：semantic">
+        <strong>英語から覚える：semantic</strong>
+        <p>semanticは「意味論的な」「意味に関する」という形容詞です。言語学では「言葉の意味を扱う分野」をsemantics（意味論）と呼びます。HTMLの文脈では「コードの意味・役割を大切にする」という方向性を指します。</p>
+      </aside>
+
+      <h2 id="misconceptions">よくある勘違い</h2>
+      <ul>
+        <li><strong>「headerはページに1個しか使えない」：</strong>必ずしもそうではありません。ページ全体のヘッダーだけでなく、記事や区画の冒頭部分に使うこともできます。ただし、初心者のうちはページの冒頭部分として読めれば十分です。</li>
+        <li><strong>「sectionは単なる装飾用の箱」：</strong>sectionは見た目を囲うためのタグではなく、内容上のまとまりを示すタグです。見た目だけ調整したいときはdivが適切です。</li>
+        <li><strong>「articleはブログ記事にしか使えない」：</strong>独立したコンテンツであれば、ブログ記事以外にも使えます。コメント欄の1件ひとつなど、単体で意味が通るものが目安です。</li>
+      </ul>
+
+      <h2 id="how-to-read">コードを読むときのコツ</h2>
+      <p>HTMLを読むとき、タグを1行ずつ細かく追うより、まず<strong>ページの大きな骨組みを見る</strong>のがコツです。</p>
+      <pre><code>&lt;header&gt;    ← ここはヘッダー
+  ...
+&lt;/header&gt;
+
+&lt;nav&gt;       ← ここはナビゲーション
+  ...
+&lt;/nav&gt;
+
+&lt;main&gt;      ← ここからページの主な内容
+  &lt;article&gt; ← ここから1本の記事
+    &lt;section&gt; ← ここから1つの章
+    &lt;/section&gt;
+  &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+      <p>HTMLは<strong>入れ子になった箱</strong>として読むと分かりやすくなります。まず外側の大きなタグ（<code>header</code>・<code>main</code>など）を確認してページの全体像をつかみ、それから中身に入っていくと、構造が追いやすくなります。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p><code>header</code>＝冒頭、<code>nav</code>＝移動リンク、<code>main</code>＝ページの主役、<code>section</code>＝内容のまとまり、<code>article</code>＝独立したコンテンツ。</p>
+        <p>これらは見た目ではなく「役割」を表すタグです。<code>div</code>は意味の薄い汎用的な箱で、役割が明確な場合は専用のタグを使う方がHTMLの骨組みを読みやすくなります。</p>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="div-span.html" rel="prev">divとspanの違い｜HTMLの「まとまり」と「一部分」</a></p>
+        <p>次の記事：<a href="function.html" rel="next">functionとは？</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
