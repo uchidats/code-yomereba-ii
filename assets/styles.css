@@ -109,6 +109,10 @@ main .narrow {
   font-size: 0.92rem;
 }
 
+.tagline-mobile {
+  display: none;
+}
+
 nav {
   display: flex;
   gap: 18px;
@@ -340,6 +344,15 @@ pre {
   margin-top: 42px;
 }
 
+.return-navigation,
+.return-links {
+  display: contents;
+}
+
+.return-koi {
+  display: none;
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 24px 0;
@@ -392,6 +405,58 @@ pre {
 
   pre {
     padding: 14px;
+  }
+}
+
+@media (width < 600px) {
+  .tagline-desktop,
+  .site-header nav .nav-about {
+    display: none;
+  }
+
+  .tagline-mobile {
+    display: block;
+    font-size: clamp(0.75rem, 3.5vw, 0.92rem);
+    line-height: 1.6;
+  }
+
+  .site-title {
+    font-size: clamp(1.1rem, 5vw, 1.45rem);
+    line-height: 1.5;
+  }
+
+  .site-header .site-logo {
+    display: none;
+  }
+
+  .return-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 42px;
+    margin-bottom: 1em;
+  }
+
+  .return-links {
+    display: block;
+    min-width: 0;
+  }
+
+  .return-links > :first-child {
+    margin-top: 0;
+  }
+
+  .return-links > :last-child {
+    margin-bottom: 0;
+  }
+
+  .return-koi {
+    display: block;
+    height: 54px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
   }
 }
 
