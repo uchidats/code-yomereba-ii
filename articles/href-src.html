@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 初回公開時に published: YYYY-MM-DDTHH:mm:ss+09:00 の形式で実際の公開日時を記録する。 -->
+  <title>hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う｜コードは読めればいい</title>
+  <meta name="description" content="hrefは参照先、srcは読み込み元。リンク・CSS・画像・JavaScriptの例を見ながら、HTMLを読むための違いを英語の意味と一緒に整理します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › hrefとsrcの違い</p>
+      <h1>hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う</h1>
+      <p class="article-lead"><code>href</code>は「参照先」、<code>src</code>は「読み込み元」。どちらも場所を指定しますが、何のための場所なのかを、前にあるタグと一緒に読むと分かります。</p>
+
+      <h2>まず結論：参照先と、読み込み元</h2>
+      <p>HTMLを読んでいると、<code>href="..."</code>や<code>src="..."</code>が出てきます。こうしたタグに付く情報を「属性」と呼びますが、まずは次の感覚で読めれば十分です。</p>
+      <ul>
+        <li><strong>href：</strong>「どこを見る・どこへ行く？」という行き先・参照先。</li>
+        <li><strong>src：</strong>「何をここへ持ってくる？」という読み込むものの場所。</li>
+      </ul>
+      <p>ただし、「hrefなら読み込まない」という区別ではありません。CSSを参照する<code>&lt;link&gt;</code>でも、実際にはファイルが読み込まれます。タグを見て、その場所をどう使うのかを読むのがポイントです。</p>
+
+      <h2 id="english">英語から覚える：referenceとsource</h2>
+      <aside class="term-note" aria-label="英語から覚える：hrefとsrc">
+        <strong>href = Hypertext Reference、src = source</strong>
+        <p><code>href</code>はHypertext Referenceの略で、referenceは「参照」という意味です。「参照する先はどこ？」と結び付けると覚えやすくなります。</p>
+        <p><code>src</code>はsourceの略で、sourceは「元・出どころ」という意味です。「この画像やプログラムの出どころはどこ？」と読んでみましょう。</p>
+      </aside>
+
+      <h2><code>&lt;a href="..."&gt;</code>：クリックしたときの移動先</h2>
+      <p>トップページへ戻るリンクの例です。</p>
+      <pre><code>&lt;a href="../index.html"&gt;トップへ戻る&lt;/a&gt;</code></pre>
+      <p><code>&lt;a&gt;</code>はリンクを表すタグです。この例では「トップへ戻る」という文字をクリックすると、<code>href</code>で指定した<code>../index.html</code>へ移動します。</p>
+      <p>ここでは<strong>「href = リンク先」</strong>という理解で十分です。表示する文字と、移動先の場所は別々に書かれています。</p>
+
+      <h2><code>&lt;link href="..."&gt;</code>：CSSの参照先</h2>
+      <p>次は、ページの見た目を決めるCSSを指定する例です。</p>
+      <pre><code>&lt;link rel="stylesheet" href="../assets/styles.css"&gt;</code></pre>
+      <p><code>rel="stylesheet"</code>は「見た目を指定するスタイルシートとの関係」を表し、<code>href</code>がそのファイルの場所を示します。「このCSSファイルを参照して、見た目を整える」と読めます。</p>
+      <p>この行はクリックするリンクではありません。ブラウザがCSSを読み込み、ページに適用します。そのため、hrefは単なる「クリック先」よりも、広く<strong>「参照先」</strong>と覚える方が読み違えにくくなります。</p>
+
+      <h2><code>&lt;img src="..."&gt;</code>：画像の読み込み元</h2>
+      <p>画像をページに表示する例です。</p>
+      <pre><code>&lt;img src="../assets/koi.png" alt=""&gt;</code></pre>
+      <p><code>&lt;img&gt;</code>は画像のタグです。<code>src</code>で指定した場所から画像ファイルを読み込み、このページ内に表示します。</p>
+      <p>「画像の出どころは<code>../assets/koi.png</code>」と読めば、sourceの意味とつながります。この例の<code>alt=""</code>は、装飾用の画像として代替テキストを空にしています。</p>
+
+      <h2><code>&lt;script src="..."&gt;</code>：JavaScriptの読み込み元</h2>
+      <p>こちらは説明用の例です。同じフォルダに<code>app.js</code>というJavaScriptファイルがあると仮定しています。このサイトに実在するファイルではありません。</p>
+      <pre><code>&lt;script src="app.js"&gt;&lt;/script&gt;</code></pre>
+      <p>「<code>app.js</code>を読み込んで、このページで実行する」と読みます。そのファイルをページ内で使うために読み込むので、ここでは<code>src</code>を使います。</p>
+      <p>画像なら表示するため、JavaScriptなら処理を動かすため。読み込んだ後の使い方は違っても、「読み込み元を示す」という役割は同じです。</p>
+
+      <h2 id="comparison">hrefとsrcを並べて比べる</h2>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>href</code>：参照先</h3>
+          <p>よく使うタグ：<code>&lt;a&gt;</code>、<code>&lt;link&gt;</code><br>「どこへ行く？」「何を参照する？」と読む。referenceの「参照」が手がかり。</p>
+        </div>
+        <div class="card">
+          <h3><code>src</code>：読み込み元</h3>
+          <p>よく使うタグ：<code>&lt;img&gt;</code>、<code>&lt;script&gt;</code><br>「何をここへ読み込む？」と読む。sourceの「出どころ」が手がかり。</p>
+        </div>
+      </div>
+      <p>どちらの値にもURLやファイルの場所が入ります。場所の文字列だけで判断せず、<code>&lt;a&gt;</code>なのか<code>&lt;img&gt;</code>なのか、左側のタグも一緒に見ると役割が分かります。</p>
+
+      <h2>このサイトのコードを読んでみる</h2>
+      <p>このサイトの記事ページにも、次の指定があります。別々の場所にある行を抜き出し、画像のクラスやサイズ指定は省略しています。</p>
+      <pre><code>&lt;link rel="stylesheet" href="../assets/styles.css"&gt;
+&lt;img src="../assets/koi.png" alt=""&gt;
+&lt;a href="../index.html"&gt;← トップページへ戻る&lt;/a&gt;</code></pre>
+      <ul>
+        <li><code>&lt;link&gt;</code>：共通CSSの<code>styles.css</code>を参照し、見た目を整える。</li>
+        <li><code>&lt;img&gt;</code>：錦鯉の画像<code>koi.png</code>を読み込み、表示する。</li>
+        <li><code>&lt;a&gt;</code>：クリックしたらトップページの<code>index.html</code>へ移動する。</li>
+      </ul>
+      <p>この3行を見て「CSSの場所」「画像の場所」「戻る先」が分かれば、全部の書き方を暗記しなくても、コードの意味を追えています。</p>
+
+      <h2><code>../</code>は「1つ上のフォルダへ」</h2>
+      <p><code>href</code>や<code>src</code>の中にある<code>../</code>は、この例では「1つ上のフォルダへ戻る」という意味です。記事が入っている<code>articles</code>フォルダから1つ上へ戻り、<code>assets</code>や<code>index.html</code>を探しています。</p>
+      <p>こうした場所の書き方を「相対パス」と呼びます。詳しくは今後の記事で扱います。今回は、hrefとsrcのどちらにも同じ場所の書き方が使える、と分かれば大丈夫です。</p>
+
+      <p>参考：<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/link">MDNのlink要素の説明</a>でも、CSSなど外部リソースとの関係を指定する役割を確認できます。</p>
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p><code>href</code>は参照先（<code>&lt;a&gt;</code>・<code>&lt;link&gt;</code>）、<code>src</code>は読み込み元（<code>&lt;img&gt;</code>・<code>&lt;script&gt;</code>）です。</p>
+        <p>迷ったら、referenceは「参照」、sourceは「元・出どころ」を思い出し、タグと一緒に読みましょう。</p>
+      </div>
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="html-css-js.html" rel="prev">HTML・CSS・JavaScriptの違い</a></p>
+        <p>次の記事：<a href="function.html" rel="next">functionとは？</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
