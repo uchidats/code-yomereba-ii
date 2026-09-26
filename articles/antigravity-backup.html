@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-26T23:15:00+09:00 -->
+  <title>CodexのバックアップとしてAntigravityを試してみた｜コードは読めればいい</title>
+  <meta name="description" content="Codexのレート制限で作業が止まるのを防ぐため、予備の開発エージェントとしてGoogle Antigravityを導入した実践記録です。同じローカルフォルダを共有する運用や初心者の気づきをまとめました。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/practice.html">実践記録</a> › CodexのバックアップにAntigravity</p>
+      <h1>CodexのバックアップとしてAntigravityを試してみた</h1>
+      <p class="article-lead">Codexのレート制限で作業が止まったときのために、Googleの開発エージェント「Antigravity」を予備として導入してみました。乗り換えるのではなく、困ったときの“バックアップ”として同じフォルダを編集する実験記録です。</p>
+
+      <h2>1. きっかけはCodexのレート制限</h2>
+      <p>このサイトの更新や記事の追加は、主にVS Code上でCodexにお願いして進めています。非エンジニアの私にとって、複数のファイルをまとめて確認して直してくれるCodexは本当に頼もしい存在です。</p>
+      <p>ところが先日、記事をテンポよく追加していたところ、突然ChatGPT Plusプランの<strong>レート制限（利用上限）</strong>に達してしまいました。</p>
+      <p>もちろん、少し待てば（数分から数時間経てば）再び使えるようにはなります。とはいえ、「よし、今日も作業を進めるぞ！」と集中していたタイミングで手が止まってしまうのは、なんとももったいない時間です。「Codexが休んでいる間だけ、代わりに手伝ってくれる予備のエージェントがいたら助かるのにな……」と考えたのが、今回のきっかけでした。</p>
+
+      <h2>2. すでにGeminiに課金していたという現実的な理由</h2>
+      <p>予備のAIツールを探すとなると、GitHub Copilotなど他のサービスを新しく契約する方法もあります。ですが、月額の固定費をあちこちに増やすのはできれば避けたいところです。</p>
+      <p>そこで思い出したのが、<strong>「そういえば私、GoogleのGemini系サービスにもすでに月額料金を払っているのでは？」</strong>ということでした。</p>
+      <p>Googleが提供している開発エージェント「Antigravity」なら、手持ちのGoogleアカウントの契約を活かして、追加の出費を抑えながら使える可能性があります。「乗り換える」のではなく「すでにある枠を予備として活用する」。お財布的にも無理のない、とても現実的な理由からのスタートでした。</p>
+
+      <h2>3. Windows版Antigravityをインストール</h2>
+      <p>さっそくWindows版のAntigravityをダウンロードしてPCにインストールしました。</p>
+      <p>初期設定を進めると、開発用途に合わせたプラグインを選ぶ画面が表示されました。今回はこのWebサイト制作が目的なので、<strong>「Modern Web Guidance」</strong>を選択しました。</p>
+      <p>他にもAndroidアプリ開発やFirebase、Flutterといった選択肢が並んでいましたが、今の私にはまだ必要ありません。手を広げすぎず、自分が今やっているWeb制作に直結するものだけを素直に選んで導入を完了しました。</p>
+
+      <h2>4. VS Codeの拡張ではなく「別の開発環境」だった</h2>
+      <p>ここで、初心者ならではの思い込みがありました。私は使う前まで、勝手に「VS Codeの中で、CodexからGeminiのボタンに切り替えて使うのかな？」と想像していたのです。</p>
+      <p>しかし実際に起動してみて驚きました。AntigravityはVS Codeの拡張機能ではなく、<strong>それ自体が独立した別の開発環境（IDE・別アプリ）</strong>だったのです。</p>
+      <p>「えっ、別のソフトだと今までの作業はどうなるの？」と一瞬戸惑いましたが、すぐに大切なことに気づきました。<strong>「同じローカルフォルダを開けば、編集する対象は同じ」</strong>ということです。</p>
+      <p>たとえば、このサイトのプロジェクトフォルダ（<code>code-yomereba-ii</code>）は、PCの中に1つだけ存在しています。それを「VS Code + Codex」から開いても、「Antigravity」から開いても、見ているファイルは全く同じ手元のフォルダです。アプリが違っても、作業机の上の同じノートを開いているようなものだと分かり、ほっと安心しました。</p>
+
+      <h2>5. 同じフォルダだから、Git pullは必要ない</h2>
+      <p>ここも非エンジニアにとって目からウロコだった、重要なポイントです。</p>
+      <p>別のアプリで作業するとなると、「GitでGitHubから変更をpull（取得）してこないといけないのかな？」と考えてしまいがちです。ですが、<strong>同じパソコン内の同じフォルダを直接編集している限り、Git pullは一切不要</strong>でした。</p>
+      <p>Antigravityがファイルを修正して保存すると、その変更はパソコン内のファイルにそのまま保存されます。そのため、VS Codeに戻って同じファイルを見るだけで、何もしなくても「変更された差分」がそのまま画面に現れます。</p>
+      <p>クラウドを経由してやり取りしているのではなく、単に同じ部屋にある同じファイルを2つのソフトで交代で見ているだけ。この感覚がつかめると、2つのツールの行き来がとてもシンプルに思えてきました。</p>
+
+      <h2>6. 実際の運用ルール：主役はCodex、予備にAntigravity</h2>
+      <p>両方の道具が揃ったところで、迷わないようにこれからの作業ルールを決めました。</p>
+      <ol>
+        <li><strong>普段（Codexが動くとき）：</strong><br>これまで通り「VS Code」でCodexに指示して修正する。</li>
+        <li><strong>Codexがレート制限になったとき：</strong><br>「Antigravity」を起動し、同じフォルダを開いて修正してもらい保存する。</li>
+        <li><strong>修正が終わったら：</strong><br>Antigravityを閉じ、「VS Code」に戻る。</li>
+        <li><strong>Gitの記録と送信：</strong><br>VS Codeの画面で変更（diff）を確認し、納得できたらVS Code側でcommitとpushを行う。</li>
+      </ol>
+      <p>Gitのcommitやpushといった履歴管理の操作は、慣れているVS Code側に一本化することにしました。こうしておけば、「どちらのツールでGit操作をしたっけ？」と混乱することもありません。</p>
+
+      <h2>7. 最初にやらせたこと：「このサイトの構成を説明して」</h2>
+      <p>Antigravityを立ち上げてプロジェクトフォルダを開いたあと、いきなりファイルの修正を頼むのは少し不安でした。そこで最初に、こんなお願いをしてみました。</p>
+      <p><strong>「このプロジェクトの構成を確認して、既存ファイルは変更せず、サイトの目的と主要フォルダ構成だけ説明してください」</strong></p>
+      <p>するとAntigravityは、ファイルを一切勝手に書き換えることなく、以下のような構成を的確に答えてくれました。</p>
+      <ul>
+        <li>非エンジニア向けの入門サイトであること（<code>README.md</code>の内容）</li>
+        <li>トップページや記事が入った<code>articles</code>フォルダ</li>
+        <li>カテゴリ一覧をまとめた<code>categories</code>フォルダ</li>
+        <li>用語やコードを調べる<code>indexes</code>フォルダ</li>
+        <li>スタイルシートや画像が置かれた<code>assets</code>フォルダ</li>
+        <li>PWA用設定の<code>manifest.webmanifest</code></li>
+      </ul>
+      <p>プロジェクトの全体像をスラスラと説明する姿を見て、「あ、この子もしっかりサイト全体を読めているな」と確認できました。まずは“読む力”があるかをテストしてみる。これは新しいAIツールを試すときの安心な第一歩だと感じます。</p>
+
+      <h2>8. Codexの代わりになるのか？ バックアップとしての価値</h2>
+      <p>では、AntigravityはCodexの完全な代わりになるのでしょうか？</p>
+      <p>正直なところ、現時点では<strong>「まだ分からないし、焦って比べる必要もない」</strong>というのが私の率直な感想です。私はすでにCodexの操作感に慣れていますし、これまでの修正品質にも十分に満足しています。Antigravityがどこまで細かなニュアンスを汲み取ってくれるかは、これから実際に使いながら確かめていく予定です。</p>
+      <p>ただひとつ言えるのは、<strong>「Codexが止まったときに作業を止めずに済むバックアップがある」というだけで、大きな価値がある</strong>ということです。</p>
+      <p>しかも、もしAntigravityの修正が思うようにいかなければ、その変更をGitでcommitせずに元に戻し、Codexの制限が解除されたあとにCodexでやり直せばいいだけです。ローカルのGitがあるからこそ、失敗を恐れずに予備ツールを試すことができます。</p>
+
+      <h2>9. AI開発では「1つのツールに依存しすぎない」方が気が楽</h2>
+      <p>今回の体験を通じて、AIを使った開発では「特定の1つのサービスに依存しすぎない体制」が意外と便利かもしれないと感じました。</p>
+      <ul>
+        <li>全体の相談や方針決め：<strong>ChatGPT</strong></li>
+        <li>普段のメイン作業：<strong>VS Code + Codex</strong></li>
+        <li>レート制限時の予備・補佐：<strong>Google Antigravity</strong></li>
+      </ul>
+      <p>もちろん、最初からたくさんのツールを同時に使い分けると頭がパンクしてしまいます。だからこそ、<strong>「主役はあくまでCodex、Antigravityは困ったときの頼れる控え選手」</strong>というシンプルな位置づけにしておくのが、初心者にはちょうどいい距離感です。</p>
+
+      <h2>10. この記事自体をAntigravityで作ってみた</h2>
+      <p>せっかく予備の開発環境を整えたので、この記事の初稿の作成とサイトへの追加作業は、<strong>実際にAntigravityにお願いして行いました。</strong></p>
+      <p>「CodexのバックアップとしてAntigravityを試す」という記事を、当のAntigravity自身に作ってもらう。ちょっとした実験気分でしたが、サイトのルールに従って見出しを整理し、他のHTMLとのリンクもスムーズにつなげてくれました。これなら、いざCodexが休憩に入っても、安心して留守を任せられそうです。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>同じローカルフォルダを開けば、VS CodeでもAntigravityでも編集対象は同じ。pull不要で差分を確認できます。</p>
+        <p>「主役はいつものAI、止まったら予備のAI」。バックアップを1つ持っておくと、開発が止まらず安心です。</p>
+      </div>
+
+      <aside class="term-note" aria-label="制作についての注記">
+        <strong>制作についての注記</strong>
+        <p>※この記事はAntigravityを用いて作成しました。テーマ設定、構成、内容確認は人間が行っています。</p>
+      </aside>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="build-site-in-one-day.html" rel="prev">非エンジニアがAIとCodexで1日でWebサイトを公開した記録</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+          <p><a href="../categories/practice.html">← 実践記録の記事一覧へ</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
