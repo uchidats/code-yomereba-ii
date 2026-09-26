@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>コード索引｜コードは読めればいい</title>
+  <meta name="description" content="コードに出てきた文字・記号・関数名から、意味と読み方を調べる辞書です。同じ記号でも、言語や前後のコードによって意味が変わります。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+      <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article index-page">
+    <div class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="index.html">索引</a> › コード索引</p>
+      <h1>コード索引</h1>
+      <p class="article-lead">コードに出てきた文字・記号・関数名から、意味と読み方を調べる辞書です。同じ記号でも、言語や前後のコードによって意味が変わります。</p>
+<nav class="index-jump" aria-label="カテゴリから探す">
+        <a href="#javascript">JavaScriptでよく見る言葉</a>
+        <a href="#symbols">記号（主にJavaScript）</a>
+        <a href="#json">JSON関連</a>
+        <a href="#gas">GASでよく見るもの</a>
+        <a href="#html-css">HTML / CSSでよく見るもの</a>
+      </nav>
+<p>カテゴリから選ぶか、ブラウザの「ページ内検索」で見かけた言葉を探せます。関連記事は、その言葉の背景となる基本を読むための入口です。</p>
+<section aria-labelledby="javascript">
+<h2 id="javascript">JavaScriptでよく見る言葉</h2>
+<ul class="index-quick-links" aria-label="JavaScriptでよく見る言葉の項目">
+<li><a href="#javascript-1"><code>const</code></a></li>
+<li><a href="#javascript-2"><code>let</code></a></li>
+<li><a href="#javascript-3"><code>if</code></a></li>
+<li><a href="#javascript-4"><code>else</code></a></li>
+<li><a href="#javascript-5"><code>function</code></a></li>
+<li><a href="#javascript-6"><code>return</code></a></li>
+<li><a href="#javascript-7"><code>true</code></a></li>
+<li><a href="#javascript-8"><code>false</code></a></li>
+<li><a href="#javascript-9"><code>null</code></a></li>
+<li><a href="#javascript-10"><code>undefined</code></a></li>
+</ul>
+<dl class="index-entries">
+<div id="javascript-1"><dt><code>const</code></dt><dd><p>再代入しない変数の宣言。「この名前で値を扱い、別の値は入れ直さない」と読みます。配列やオブジェクトの中身まで変更禁止になるわけではありません。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="javascript-2"><dt><code>let</code></dt><dd><p>再代入できる変数の宣言。「この名前の値は後で変わるかもしれない」と読み、値を入れ直す箇所を探します。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="javascript-3"><dt><code>if</code></dt><dd><p>条件による分かれ道。「もし丸かっこの条件が成り立つなら、この処理をする」と読みます。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="javascript-4"><dt><code>else</code></dt><dd><p>条件に合わなかった場合の処理。「それ以外なら、こちらを実行する」と読みます。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="javascript-5"><dt><code>function</code></dt><dd><p>関数を定義する目印。「ここから呼び出せる処理のまとまりを用意する」と読みます。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
+<div id="javascript-6"><dt><code>return</code></dt><dd><p>関数を終え、結果を呼び出し元へ返す目印。「この値を戻して、ここで関数を終える」と読みます。値を書かないreturnもあります。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
+<div id="javascript-7"><dt><code>true</code></dt><dd><p>真を表す値。「条件が成り立つ」「はい」に当たる値として読みます。引用符付きの文字列とは別です。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="javascript-8"><dt><code>false</code></dt><dd><p>偽を表す値。「条件が成り立たない」「いいえ」に当たる値として読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="javascript-9"><dt><code>null</code></dt><dd><p>値がないことを明示する値。「ここには値を入れていない」と読みます。0や空の文字列とは別です。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="javascript-10"><dt><code>undefined</code></dt><dd><p>値がまだ設定されていないことなどを表す値。存在しない項目を読んだときや、値を返さない関数の結果にも現れます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+</dl>
+</section>
+<section aria-labelledby="symbols">
+<h2 id="symbols">記号（主にJavaScript）</h2>
+<ul class="index-quick-links" aria-label="記号（主にJavaScript）の項目">
+<li><a href="#symbols-1"><code>=</code></a></li>
+<li><a href="#symbols-2"><code>==</code></a></li>
+<li><a href="#symbols-3"><code>===</code></a></li>
+<li><a href="#symbols-4"><code>!=</code></a></li>
+<li><a href="#symbols-5"><code>!==</code></a></li>
+<li><a href="#symbols-6"><code>&amp;&amp;</code></a></li>
+<li><a href="#symbols-7"><code>||</code></a></li>
+<li><a href="#symbols-8"><code>!</code></a></li>
+<li><a href="#symbols-9"><code>=&gt;</code></a></li>
+<li><a href="#symbols-10"><code>()</code></a></li>
+<li><a href="#symbols-11"><code>[]</code></a></li>
+<li><a href="#symbols-12"><code>{}</code></a></li>
+<li><a href="#symbols-13"><code>.</code></a></li>
+<li><a href="#symbols-14"><code>:</code></a></li>
+<li><a href="#symbols-15"><code>,</code></a></li>
+<li><a href="#symbols-16"><code>;</code></a></li>
+<li><a href="#symbols-17"><code>&gt;=</code></a></li>
+<li><a href="#symbols-18"><code>+</code></a></li>
+<li><a href="#symbols-19"><code>*</code></a></li>
+</ul>
+<dl class="index-entries">
+<div id="symbols-1"><dt><code>=</code></dt><dd><p>値を代入する記号。「右の値を左の名前に入れる」と読みます。等しいかを調べる比較とは異なります。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="symbols-2"><dt><code>==</code></dt><dd><p>型の変換を伴うことがある比較。「同じとみなせるか？」と読み、例えば数値の1と文字列の&quot;1&quot;も同じと判定します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-3"><dt><code>===</code></dt><dd><p>型を変換しない比較。「値と型が同じか？」と読みます。オブジェクトや配列では、中身の一致ではなく同じものを参照しているかを比べます。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-4"><dt><code>!=</code></dt><dd><p>型の変換を伴うことがある不一致の比較。「==で同じとみなされないか？」と読みます。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-5"><dt><code>!==</code></dt><dd><p>型を変換しない不一致の比較。「===で同じと判定されないか？」と読みます。数値の1と文字列の&quot;1&quot;は異なると判定します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-6"><dt><code>&amp;&amp;</code></dt><dd><p>条件をつなぐ「かつ」。条件式では「両方とも成り立つか」と読みます。実際には左側の値に応じて、どちらかの値を返します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-7"><dt><code>||</code></dt><dd><p>条件をつなぐ「または」。条件式では「どちらかが成り立つか」と読みます。実際には左側の値に応じて、どちらかの値を返します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-8"><dt><code>!</code></dt><dd><p>真偽を反転する記号。「〜ではない」と読み、例えば!trueはfalseになります。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-9"><dt><code>=&gt;</code></dt><dd><p>アロー関数の目印。「左側で情報を受け取り、右側で処理する関数」と読みます。大小を比べる記号ではありません。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
+<div id="symbols-10"><dt><code>()</code></dt><dd><p>関数の引数や条件、計算のまとまりを囲む丸かっこ。名前の直後なら「関数を呼ぶ」、ifの直後なら「条件を調べる」と周囲から読み分けます。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
+<div id="symbols-11"><dt><code>[]</code></dt><dd><p>配列や要素の参照に使う角かっこ。「値の一覧」や「一覧の何番目かを読む」と読みます。JavaScriptの配列の番号は0から始まります。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-12"><dt><code>{}</code></dt><dd><p>処理やデータをまとめる波かっこ。ifや関数の後ろなら処理の範囲、JSONなら名前と値をまとめたオブジェクトと読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-13"><dt><code>.</code></dt><dd><p>中の項目や機能を参照する記号。GmailAppの後ろなら「GmailAppが持つ機能」と読みます。CSSでは.class名のようにクラスの指定にも使います。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
+<div id="symbols-14"><dt><code>:</code></dt><dd><p>名前と値を対応させる区切り。JSONの&quot;name&quot;: &quot;Masa&quot;なら「nameの値はMasa」、CSSのcolor: blueなら「文字色は青」と読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-15"><dt><code>,</code></dt><dd><p>項目の区切り。配列の値、オブジェクトの項目、関数に渡す引数などを分けて読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-16"><dt><code>;</code></dt><dd><p>文や指定の区切り。JavaScriptでは「ここで1つの文が終わる」、CSSでは「ここで1つの指定が終わる」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="symbols-17"><dt><code>&gt;=</code></dt><dd><p>「以上」の比較。score &gt;= 80なら「点数が80以上か」と読み、80ちょうども含めます。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
+<div id="symbols-18"><dt><code>+</code></dt><dd><p>数値の足し算や文字列の連結。前後の値を見て「足す」か「文字をつなぐ」かを読み分けます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="symbols-19"><dt><code>*</code></dt><dd><p>掛け算。price * quantityなら「単価と数量を掛ける」と読みます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+</dl>
+</section>
+<section aria-labelledby="json">
+<h2 id="json">JSON関連</h2>
+<ul class="index-quick-links" aria-label="JSON関連の項目">
+<li><a href="#json-1"><code>JSON.parse()</code></a></li>
+<li><a href="#json-2"><code>JSON.stringify()</code></a></li>
+</ul>
+<dl class="index-entries">
+<div id="json-1"><dt><code>JSON.parse()</code></dt><dd><p>JSONの文字列をJavaScriptの値へ変換する関数。「受け取った文字を、プログラムで扱えるデータにする」と読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="json-2"><dt><code>JSON.stringify()</code></dt><dd><p>JavaScriptの値をJSONの文字列へ変換する関数。「データを送信・保存用の文字にする」と読みます。undefinedなど、JSONにそのまま表せない値もあります。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+</dl>
+</section>
+<section aria-labelledby="gas">
+<h2 id="gas">GASでよく見るもの</h2>
+<ul class="index-quick-links" aria-label="GASでよく見るものの項目">
+<li><a href="#gas-1"><code>GmailApp</code></a></li>
+<li><a href="#gas-2"><code>CalendarApp</code></a></li>
+<li><a href="#gas-3"><code>DriveApp</code></a></li>
+<li><a href="#gas-4"><code>SpreadsheetApp</code></a></li>
+<li><a href="#gas-5"><code>Logger.log()</code></a></li>
+</ul>
+<dl class="index-entries">
+<div id="gas-1"><dt><code>GmailApp</code></dt><dd><p>GASからGmailを操作する入口。「この後ろでメールに関する操作をしている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
+<div id="gas-2"><dt><code>CalendarApp</code></dt><dd><p>GASからGoogleカレンダーを操作する入口。「予定を調べたり作成したりする処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
+<div id="gas-3"><dt><code>DriveApp</code></dt><dd><p>GASからGoogleドライブを操作する入口。「ファイルやフォルダを扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
+<div id="gas-4"><dt><code>SpreadsheetApp</code></dt><dd><p>GASからGoogleスプレッドシートを操作する入口。「シートやセルの値を扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
+<div id="gas-5"><dt><code>Logger.log()</code></dt><dd><p>実行ログに値を出力する機能。「丸かっこの中身を、確認用の記録に出している」と読みます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+</dl>
+</section>
+<section aria-labelledby="html-css">
+<h2 id="html-css">HTML / CSSでよく見るもの</h2>
+<ul class="index-quick-links" aria-label="HTML / CSSでよく見るものの項目">
+<li><a href="#html-css-1"><code>&lt;div&gt;</code></a></li>
+<li><a href="#html-css-2"><code>&lt;span&gt;</code></a></li>
+<li><a href="#html-css-3"><code>&lt;a&gt;</code></a></li>
+<li><a href="#html-css-4"><code>&lt;img&gt;</code></a></li>
+<li><a href="#html-css-5"><code>class</code></a></li>
+<li><a href="#html-css-6"><code>id</code></a></li>
+<li><a href="#html-css-7"><code>href</code></a></li>
+<li><a href="#html-css-8"><code>src</code></a></li>
+</ul>
+<dl class="index-entries">
+<div id="html-css-1"><dt><code>&lt;div&gt;</code></dt><dd><p>内容をまとめる汎用のHTML要素。「この範囲をひとまとまりにしている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-2"><dt><code>&lt;span&gt;</code></dt><dd><p>文章の一部分などをまとめる汎用のHTML要素。「この部分に見た目などの指定を付ける目印」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-3"><dt><code>&lt;a&gt;</code></dt><dd><p>リンクを表すHTML要素。hrefがあれば「ここを押すと指定先へ移動する」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-4"><dt><code>&lt;img&gt;</code></dt><dd><p>画像を表示するHTML要素。「srcの場所にある画像を表示する」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-5"><dt><code>class</code></dt><dd><p>HTML要素に付ける分類名。「同じ分類にまとめて、CSSなどから指定する目印」と読みます。CSSでは.名前で指定します。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-6"><dt><code>id</code></dt><dd><p>HTML要素を識別する名前。「このページ内の特定の要素を指す目印」と読みます。CSSやページ内リンクでは#名前で指定します。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-7"><dt><code>href</code></dt><dd><p>リンク先などの場所を表す属性。a要素なら「押したときの移動先」、link要素なら「関連ファイルの場所」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+<div id="html-css-8"><dt><code>src</code></dt><dd><p>画像など、読み込むものの場所を表す属性。「この場所のファイルを読み込む」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
+</dl>
+</section>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="index.html">← 索引トップへ戻る</a></p>
+          <p><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

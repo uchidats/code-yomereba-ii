@@ -459,6 +459,90 @@ pre {
   }
 }
 
+.index-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.index-cards h2 {
+  margin: 0 0 8px;
+}
+
+.index-cards a:hover h2 {
+  text-decoration: underline;
+}
+
+.index-jump,
+.index-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--soft-blue);
+}
+
+.index-quick-links {
+  list-style: none;
+}
+
+.index-jump a,
+.index-quick-links a {
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.index-entries > div {
+  margin: 16px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.index-entries dt {
+  color: var(--heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.index-entries dt code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--soft-blue);
+}
+
+.index-entries dd {
+  margin: 8px 0 0;
+}
+
+.index-entries p {
+  margin: 8px 0 0;
+}
+
+.index-related {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.index-page [id] {
+  scroll-margin-top: 20px;
+}
+
+.index-entries > div:target {
+  border-color: var(--accent);
+  background: var(--soft-blue);
+}
+
+@media (max-width: 760px) {
+  .index-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .index-entries > div {
+    padding: 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
