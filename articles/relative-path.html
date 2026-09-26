@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 初回公開時に published: YYYY-MM-DDTHH:mm:ss+09:00 の形式で実際の公開日時を記録する。 -->
+  <title>相対パスとは？ ../ の意味を読めるようになる｜コードは読めればいい</title>
+  <meta name="description" content="相対パスの ../ は1つ上のフォルダへ戻る意味。実際のフォルダ図とHTMLの例から、画像やCSSまでの道順、ページによって書き方が変わる理由を読み解きます。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › 相対パスとは？</p>
+      <h1>相対パスとは？ <code>../</code> の意味を読めるようになる</h1>
+      <p class="article-lead"><code>../</code>を見たら「1つ上のフォルダへ戻る」と読みます。このサイトのファイルをたどりながら、画像やCSSまでの道順を読んでみましょう。</p>
+
+      <h2>まず結論：<code>../</code>は1つ上へ戻る</h2>
+      <p>記事のHTMLに、こんな指定があるとします。</p>
+      <pre><code>&lt;img src="../assets/koi.png" alt=""&gt;</code></pre>
+      <p>「今いる場所から1つ上へ戻って、<code>assets</code>フォルダの中にある<code>koi.png</code>を読み込む」という意味です。ここでの「今いる場所」は、<strong>この指定を書いているHTMLファイルが置かれたフォルダ</strong>と考えてください。</p>
+      <p>記号のかたまりに見えますが、やっていることはファイル探しです。まずは<code>../</code>を「上へ1回」と読めれば大丈夫です。</p>
+
+      <h2 id="path">そもそも「パス」とは？</h2>
+      <p>パスは、ファイルやフォルダの「住所」のようなものです。相対パスは、その住所を<strong>「今いる場所」を基準にした道順</strong>で表します。</p>
+      <aside class="term-note" aria-label="英語から覚える：path">
+        <strong>英語から覚える：path</strong>
+        <p>pathは英語で「道」「経路」という意味です。Web開発では「ファイルまでたどる道順」と考えると、記号の意味もつかみやすくなります。</p>
+      </aside>
+      <p>このサイトのフォルダ構成を、今回使う部分だけ抜き出すと次のようになります。ほかの記事や設定ファイルは省略しています。</p>
+      <pre><code>code-yomereba-ii/
+├─ index.html
+├─ assets/
+│  ├─ styles.css
+│  └─ koi.png
+└─ articles/
+   ├─ html-css-js.html
+   ├─ if.html
+   └─ href-src.html</code></pre>
+      <p>トップページの<code>index.html</code>と、<code>assets</code>・<code>articles</code>の各フォルダが同じ階層にあります。記事は<code>articles</code>の中、画像やCSSは<code>assets</code>の中です。</p>
+
+      <h2 id="diagram"><code>../</code>を図で理解する</h2>
+      <p>いま<code>articles/href-src.html</code>を読んでいて、錦鯉の画像を読み込みたいとします。画像は別のフォルダにあるので、まず<code>articles</code>から1つ上へ戻ります。</p>
+      <pre><code>articles/href-src.html
+  │ 基準は articles フォルダ
+  ↓ ../（1つ上へ）
+code-yomereba-ii/
+  ↓ assets/（中へ入る）
+assets/
+  ↓ koi.png（ファイルを選ぶ）
+koi.png</code></pre>
+      <p>この道順を続けて書いたものが、<code>../assets/koi.png</code>です。</p>
+      <div class="card">
+        <h3>左から順番に読む</h3>
+        <p><code>../</code> → 1つ上へ戻る<br><code>assets/</code> → assetsフォルダへ入る<br><code>koi.png</code> → この画像ファイルを選ぶ</p>
+      </div>
+
+      <h2>このサイトで使っているコードを読む</h2>
+      <p>前の記事<a href="href-src.html">「hrefとsrcの違い」</a>では、参照先と読み込み元を見ました。今度は、その中に書かれた「場所」に注目します。次の例は記事ページの指定を抜き出したもので、画像のクラスやサイズ指定、リンクの文言は説明用に簡略化しています。</p>
+      <h3>CSSを参照する</h3>
+      <pre><code>&lt;link rel="stylesheet" href="../assets/styles.css"&gt;</code></pre>
+      <p><strong>1つ上へ戻る → assetsへ入る → styles.cssを参照する。</strong>ブラウザが共通CSSを読み込み、ページの見た目に適用します。</p>
+      <h3>画像を読み込む</h3>
+      <pre><code>&lt;img src="../assets/koi.png" alt=""&gt;</code></pre>
+      <p><strong>1つ上へ戻る → assetsへ入る → koi.pngを読み込む。</strong>その画像がページ内に表示されます。</p>
+      <h3>トップページへ移動する</h3>
+      <pre><code>&lt;a href="../index.html"&gt;トップへ戻る&lt;/a&gt;</code></pre>
+      <p><strong>1つ上へ戻る → index.htmlへ移動する。</strong>リンクをクリックすると、そのHTMLが開きます。トップページを指定しているのは、<code>../</code>に続く<code>index.html</code>の部分です。</p>
+
+      <h2 id="starting-point">なぜトップページでは<code>../</code>が要らないのか</h2>
+      <p>トップページの<code>index.html</code>から見ると、<code>assets</code>は同じ階層にあります。上へ戻らず、そのまま中へ入ればCSSに届きます。</p>
+      <pre><code>&lt;!-- トップページの index.html から --&gt;
+&lt;link rel="stylesheet" href="assets/styles.css"&gt;</code></pre>
+      <p>一方、<code>articles</code>の中にいる記事から見ると、<code>assets</code>は1つ上の階層にあります。</p>
+      <pre><code>&lt;!-- articles 内の記事から --&gt;
+&lt;link rel="stylesheet" href="../assets/styles.css"&gt;</code></pre>
+      <p><strong>同じファイルを指定していても、今いる場所によって道順が変わります。</strong>CSSが2つあるわけではなく、出発地点が違うだけです。</p>
+      <p>記事の中で<code>assets/styles.css</code>とだけ書くと、この構成では<code>articles/assets/styles.css</code>を探してしまいます。そこにはファイルがないので、正しいCSSを読み込めません。</p>
+
+      <h2 id="two-levels"><code>../../</code>は2つ上へ戻る</h2>
+      <p><code>../</code>が1つ上なら、<code>../../</code>は2つ上です。「上へ戻る」を2回続ける、と読めます。</p>
+      <pre><code>../       → 1つ上へ
+../../    → 2つ上へ</code></pre>
+      <p>さらに深いフォルダの中から戻るときに使います。まずは<code>../</code>の数だけ上へ戻る、と分かれば十分です。</p>
+
+      <h2 id="current-folder"><code>./</code>は今いるフォルダ</h2>
+      <p>点が1つの<code>./</code>は「今いるフォルダ」を表します。次は、同じフォルダに<code>photo.png</code>があると仮定した説明用の例です。このサイトに実在する画像ではありません。</p>
+      <pre><code>&lt;img src="./photo.png" alt="説明用の写真"&gt;</code></pre>
+      <p>「今いるフォルダのphoto.pngを読み込む」と読めます。この例では、次のように<code>./</code>を省略しても同じ場所を指します。</p>
+      <pre><code>&lt;img src="photo.png" alt="説明用の写真"&gt;</code></pre>
+      <p>HTMLではこのように省略できることが多いので、<code>./</code>をあまり見かけなくても不思議ではありません。点が1つなら「ここ」、2つなら「1つ上」です。</p>
+
+      <h2 id="absolute">絶対的な指定との違い</h2>
+      <p>次は説明用のURLです。場所を最初から全部指定する「絶対URL」の例で、このサイトの画像のURLではありません。</p>
+      <pre><code>https://example.com/assets/koi.png</code></pre>
+      <p>これなら、どのページから見ても指定先は同じです。一方、<code>../assets/koi.png</code>は今いる場所を基準にするので「相対パス」と呼びます。</p>
+      <p>「絶対パス」は、基準となる最上位の場所から道順を指定する言い方です。Webでは<code>/assets/koi.png</code>のように先頭を<code>/</code>にすると、サイトのドメイン直下が基準になります。フォルダの下で公開しているサイトでは、プロジェクトの先頭と一致するとは限りません。</p>
+      <p>今回は、<strong>「相対パスは出発地点によって読み方が変わる」</strong>という違いを押さえておけば大丈夫です。</p>
+
+      <h2>エクスプローラーのフォルダ移動にたとえると</h2>
+      <p>Windowsのエクスプローラーで<code>articles</code>フォルダを開いている、と想像してみてください。</p>
+      <ol>
+        <li>「上へ」のボタンで、1つ上のフォルダへ戻る。</li>
+        <li><code>assets</code>フォルダを開く。</li>
+        <li><code>koi.png</code>を選ぶ。</li>
+      </ol>
+      <p>この操作を文字にしたものが、<code>../assets/koi.png</code>に近いイメージです。<code>../assets/</code>までなら、「上へ戻って、assetsを開く」という道順になります。</p>
+
+      <h2>よくある勘違いは、この3つ</h2>
+      <ul>
+        <li><strong>「../は必ずトップページへ戻る」ではない。</strong>1つ上のフォルダを指すだけです。もっと深い場所なら、1つ上もまだ途中のフォルダです。</li>
+        <li><strong>「今いる場所」は、エディタで選択中のフォルダではない。</strong>ここまでのHTMLの例では、そのHTMLファイルの場所を基準に読みます。</li>
+        <li><strong>ファイルを移動しても、同じ道順で届くとは限らない。</strong>記事を別の階層へ移すと、同じ画像でも相対パスの書き方が変わることがあります。</li>
+      </ul>
+      <aside class="term-note" aria-label="外部CSSのパスを読むときの補足">
+        <strong>外部CSSでは、CSSファイルの場所が基準</strong>
+        <p>別ファイルのCSS内に画像の<code>url(...)</code>が出てきたら、基準はそのCSSファイルの場所です。HTML内のhref・srcと、外部CSS内の指定では、出発地点が違うことを覚えておくと迷いにくくなります。</p>
+      </aside>
+
+      <h2>href・srcと、道順を分けて読む</h2>
+      <p><code>href</code>や<code>src</code>は「何を指定しているか」、その値にあるパスは「どこにあるか」を表します。</p>
+      <pre><code>&lt;img src="../assets/koi.png" alt=""&gt;</code></pre>
+      <ul>
+        <li><code>src</code> → 読み込み元を指定する属性。</li>
+        <li><code>../assets/koi.png</code> → そのファイルまでの道順。</li>
+      </ul>
+      <p>「画像を読み込む。その場所は、1つ上のassetsの中」と分けて読めれば、記号を丸暗記しなくても意味を追えます。属性の役割は<a href="href-src.html">「hrefとsrcの違い」</a>で振り返れます。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>pathはファイルまでの道順で、相対パスは今いる場所を基準にするため、同じファイルでも現在地によって書き方が変わります。</p>
+        <p><code>../</code>は1つ上、<code>../../</code>は2つ上、<code>./</code>は今いるフォルダ、と読みましょう。</p>
+      </div>
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="href-src.html" rel="prev">hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う</a></p>
+        <p>次の記事：<a href="function.html" rel="next">functionとは？</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
