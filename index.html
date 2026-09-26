@@ -15,7 +15,8 @@
       <nav aria-label="メインメニュー">
         <a href="#start">はじめに</a>
         <a href="#categories">カテゴリ</a>
-        <a href="#articles">記事</a>
+        <a href="#articles">学習ロードマップ</a>
+        <a href="#latest">新着記事</a>
         <a href="articles/about.html">このサイトについて</a>
       </nav>
     </div>
@@ -54,19 +55,20 @@
       <div class="container">
         <h2>カテゴリ</h2>
         <div class="cards">
-          <article class="card"><h3>基本用語</h3><p>function、変数、API、JSONなど。</p></article>
-          <article class="card"><h3>HTML / CSS / JavaScript</h3><p>Webページの骨組み・見た目・動き。</p></article>
-          <article class="card"><h3>Google Apps Script</h3><p>Googleサービスを自動化するための基礎。</p></article>
-          <article class="card"><h3>Codex</h3><p>AIにコードを読ませ、直してもらう方法。</p></article>
-          <article class="card"><h3>Git / GitHub</h3><p>変更履歴を残し、安全に開発するための仕組み。</p></article>
-          <article class="card"><h3>実践記録</h3><p>非エンジニアが実際に作って分かったこと。</p></article>
+          <a class="card category-card" href="categories/basics.html"><h3>基本用語</h3><p>function、変数、API、JSONなど。</p></a>
+          <a class="card category-card" href="categories/web.html"><h3>HTML / CSS / JavaScript</h3><p>Webページの骨組み・見た目・動き。</p></a>
+          <a class="card category-card" href="categories/gas.html"><h3>Google Apps Script</h3><p>Googleサービスを自動化するための基礎。</p></a>
+          <a class="card category-card" href="categories/codex.html"><h3>Codex</h3><p>AIにコードを読ませ、直してもらう方法。</p></a>
+          <a class="card category-card" href="categories/git-github.html"><h3>Git / GitHub</h3><p>変更履歴を残し、安全に開発するための仕組み。</p></a>
+          <a class="card category-card" href="categories/practice.html"><h3>実践記録</h3><p>非エンジニアが実際に作って分かったこと。</p></a>
         </div>
       </div>
     </section>
 
     <section id="articles" class="section">
       <div class="container narrow">
-        <h2>まず読んでほしい記事</h2>
+        <h2>学習ロードマップ</h2>
+        <p>初めての方は、上から順番に読むと基本からGoogleサービスの自動化へ進めます。</p>
         <ol class="article-list">
           <li><a href="articles/about.html">このサイトについて ― なぜ「コードは読めればいい」なのか</a></li>
           <li><a href="articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></li>
@@ -74,9 +76,23 @@
           <li><a href="articles/variable.html">変数とは？ const・letを最低限だけ理解する</a></li>
           <li><a href="articles/if.html">if文とは？ 条件分岐を最低限だけ理解する</a></li>
           <li><a href="articles/api.html">APIとは？ アプリ同士をつなぐ窓口</a></li>
-          <li>Google Apps Script（GAS）とは？ <span class="soon">準備中</span></li>
-          <li>Codexを使うとコードのコピペはどこまで減る？ <span class="soon">準備中</span></li>
+          <li><a href="articles/json.html">JSONとは？ APIでよく使われるデータの書き方</a></li>
+          <li><a href="articles/gas.html">Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み</a></li>
         </ol>
+      </div>
+    </section>
+    <section id="latest" class="section">
+      <div class="container narrow">
+        <h2>新着記事</h2>
+        <p>新しく公開した記事を5件紹介します。</p>
+        <!-- 公開日未記録の既存記事は、記事追加順を暫定の公開順として掲載。README参照。 -->
+        <ul class="article-list">
+          <li><a href="articles/gas.html">Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み</a></li>
+          <li><a href="articles/json.html">JSONとは？ APIでよく使われるデータの書き方</a></li>
+          <li><a href="articles/api.html">APIとは？ アプリ同士をつなぐ窓口</a></li>
+          <li><a href="articles/if.html">if文とは？ 条件分岐を最低限だけ理解する</a></li>
+          <li><a href="articles/variable.html">変数とは？ const・letを最低限だけ理解する</a></li>
+        </ul>
       </div>
     </section>
   </main>

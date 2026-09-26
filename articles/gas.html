@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み｜コードは読めればいい</title>
+  <meta name="description" content="GASはGoogleのサービスを自動で動かすためのJavaScript。カレンダーに予定を追加する例で、組み込みサービス、トリガー、APIとの関係を説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › Google Apps Script（GAS）とは？</p>
+
+      <h1>Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み</h1>
+      <p class="article-lead">GAS = Googleのサービスを自動で動かすためのJavaScript。まずは、このイメージが分かれば大丈夫です。</p>
+
+      <p>
+        毎朝予定を確認する、メールの内容を表に転記する、ファイルを整理する。
+        Googleサービスで繰り返している作業を、コードに任せるための仕組みがGASです。
+        正確には、JavaScriptをベースにしたGoogleの開発環境で、コードを書く場所と実行する仕組みが用意されています。
+      </p>
+
+      <aside class="term-note" aria-label="名前の由来：GAS">
+        <strong>名前の由来：GAS</strong>
+        <p>GASは<strong>Google Apps Script</strong>の略です。</p>
+        <ul>
+          <li><strong>Google：</strong>この仕組みを提供している会社の名前。</li>
+          <li><strong>Apps：</strong>Applicationsの略で、アプリやソフトウェアのこと。</li>
+          <li><strong>Script：</strong>英語では「台本」。ここでは「比較的小さな処理を自動化するためのプログラム」というイメージです。</li>
+        </ul>
+        <p>「Googleのアプリに、作業の台本を渡す」と考えると、役割を思い出しやすくなります。</p>
+      </aside>
+
+      <h2>ブラウザで書き、Google側で動かす</h2>
+      <p>
+        GASは、専用ソフトをPCにインストールせず、Googleアカウントでブラウザから使えます。
+        <a href="https://script.google.com/">Apps Script</a>でプロジェクトを作り、エディタにコードを書いて実行します。
+      </p>
+      <p>
+        Googleサービスを操作するスクリプトは、自分のPC上ではなくGoogle側で実行されます。
+        そのため、時間で動くトリガーを設定しておけば、PCを閉じていても処理を実行できます。
+        ブラウザは、コードを書いたり設定したりするための画面です。
+      </p>
+
+      <h2>よく見る4つの名前は、操作先の目印</h2>
+      <p>GASには、Googleサービスを使うための機能が最初から用意されています。</p>
+      <ul>
+        <li><strong>GmailApp：</strong>Gmailのメールを検索したり、送信したりするためのもの。</li>
+        <li><strong>CalendarApp：</strong>Google Calendarの予定を取得・追加するためのもの。</li>
+        <li><strong>DriveApp：</strong>Google Driveのファイルやフォルダを扱うためのもの。</li>
+        <li><strong>SpreadsheetApp：</strong>Google Sheets（スプレッドシート）のセルの値を読み書きするためのもの。</li>
+      </ul>
+      <p>
+        すべての使い方を暗記する必要はありません。
+        コードに <code>CalendarApp</code> が出てきたら「ここはカレンダーを操作する部分」と読めれば、理解の助けになります。
+      </p>
+
+      <h2>短い例：Google Calendarに予定を追加する</h2>
+      <p>
+        次の例は、自分の標準カレンダーに「GASの練習」という30分の予定を追加します。
+        日時は日本時間の2027年1月15日10時から10時30分です。試すときは、都合のよい日時に書き換えてください。
+      </p>
+
+      <pre><code>function main() {
+  const start = new Date("2027-01-15T10:00:00+09:00");
+  const end = new Date("2027-01-15T10:30:00+09:00");
+  CalendarApp.createEvent("GASの練習", start, end);
+}</code></pre>
+
+      <p>
+        エディタに貼り付けて保存し、実行する関数として <code>main</code> を選んで実行します。
+        初回などにカレンダーへのアクセス許可が求められたら、内容を確認して許可します。
+        Google Calendarを開き、指定した日に予定が追加されていることを確認できます。
+      </p>
+      <ol>
+        <li><code>new Date(...)</code> で開始と終了の日時を用意します。<code>+09:00</code> は日本時間を表す指定です。</li>
+        <li><code>CalendarApp.createEvent</code> に、予定名・開始日時・終了日時を渡します。</li>
+        <li>Google側で処理され、標準カレンダーに予定が作られます。</li>
+      </ol>
+      <p>
+        このコードは実際に予定を追加し、実行するたびに新しい予定を作ります。
+        この例だけでは自動実行にはならず、手動で実行ボタンを押したときに動きます。
+        呼び出し方は<a href="https://developers.google.com/apps-script/reference/calendar/calendar-app#createEvent(String,Date,Date)">Googleの公式資料</a>でも確認できます。
+      </p>
+
+      <h2>トリガー：いつ動かすかを決める</h2>
+      <p>
+        トリガーは、処理を開始する「きっかけ」です。
+        エディタのトリガー設定で、実行する関数ときっかけを選ぶと、自分で実行ボタンを押さなくても動かせます。
+      </p>
+      <ul>
+        <li><strong>時間をきっかけに：</strong>毎朝、今日の予定を一覧にする。</li>
+        <li><strong>編集をきっかけに：</strong>スプレッドシートの値が変更されたら処理する。</li>
+        <li><strong>フォーム送信をきっかけに：</strong>回答を受け取ったら内容を整理する。</li>
+      </ul>
+      <p>
+        毎朝の実行は「9時台」のような時間帯の指定で、必ず9時00分ちょうどに動くとは限りません。
+        実行時間や利用回数にも上限があるので、まずは小さな作業から試すと理解しやすくなります。
+      </p>
+
+      <h3>「メールが来たら」は、定期的な確認で実現する</h3>
+      <p>
+        GASの標準トリガーには、Gmailの新着メール受信そのものをきっかけにする種類はありません。
+        「5分ごとにメールを確認し、新しい対象メールがあれば処理する」のように、時間のトリガーと組み合わせます。
+        同じメールを何度も処理しないよう、処理済みの目印を残すことも必要です。
+      </p>
+
+      <h2>APIとGASはどうつながる？</h2>
+      <p>
+        <a href="api.html">API</a>は、サービスの機能を使うための「窓口」と「決められた注文方法」でした。
+        GASは、その窓口へ依頼するプログラムを書き、動かす場所です。
+        先ほどの例なら <code>CalendarApp.createEvent</code> が、予定の追加を依頼するための呼び出し方です。
+      </p>
+      <p>
+        レストランにたとえると、APIは注文窓口、GASは決めた手順に従って注文する係です。
+        GASの組み込みサービスを使えば、自分で通信先のURLを書かずにGoogleの機能を利用できます。
+        また、外部のWeb APIへリクエストを送り、結果を受け取ることもできます。
+      </p>
+
+      <h2>Webアプリとして公開することもできる</h2>
+      <p>
+        GASは裏側の自動処理だけでなく、ブラウザで使うWebアプリとして公開することもできます。
+        例えば、入力画面から受け取った内容をスプレッドシートに記録する、小さな業務アプリを作れます。
+      </p>
+      <p>
+        この場合は、画面をHTMLなどで作り、Googleサービスを操作する処理をGASで書きます。
+        公開するときには、誰がアクセスできるか、誰の権限で処理を動かすかを設定します。
+        まずは「自動化だけでなく、操作画面も作れる」と覚えておけば十分です。
+      </p>
+
+      <h2>AIに頼むときは、作業ときっかけを伝える</h2>
+      <p>
+        「毎朝、今日のカレンダーの予定を取得してスプレッドシートに書き出したい」のように、
+        いつ・どのサービスから・何を取得して・どこへ渡すかを伝えましょう。
+        「必要なアクセス許可とトリガーの設定方法も説明して」と添えると、動かすまでの手順が分かります。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>GAS = Googleのサービスを自動で動かすためのJavaScript。ブラウザで書き、Google側で動かし、トリガーで実行のきっかけを決められます。</p>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="json.html" rel="prev">JSONとは？ APIでよく使われるデータの書き方</a></p>
+        <!-- 次の記事を公開したら、ここにrel="next"のリンクを追加します。 -->
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>

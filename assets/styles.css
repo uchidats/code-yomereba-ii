@@ -180,6 +180,17 @@ h2 {
   padding: 20px;
 }
 
+.category-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.category-card:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .card h3 {
   margin-top: 0;
   margin-bottom: 6px;

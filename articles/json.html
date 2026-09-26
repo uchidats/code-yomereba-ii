@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSONとは？ APIでよく使われるデータの書き方｜コードは読めればいい</title>
+  <meta name="description" content="JSONはデータを名前と値で表す書き方。人物や天気の例で、キーと値、記号、配列と入れ子、JavaScriptのオブジェクトとの違いを説明します。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <a class="site-title" href="../index.html">コードは読めればいい</a>
+      <p class="tagline">非エンジニアのためのAI開発・GAS・Codex入門</p>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › JSONとは？</p>
+
+      <h1>JSONとは？ APIでよく使われるデータの書き方</h1>
+      <p class="article-lead">JSONは、データを決まった形で書くための形式です。まずは「名前と値の組み合わせ」を読めれば大丈夫です。</p>
+
+      <p>
+        APIから返ってきた結果を見ると、かっこや引用符が並んでいて難しく感じるかもしれません。
+        でも、「名前は何か」「その値は何か」と分けて読むと、内容をつかめます。
+        JSON（ジェイソン）は人にも比較的読みやすく、コンピュータ同士のデータ交換にも向いています。
+      </p>
+
+      <h2>キーと値：項目名と、その中身</h2>
+      <p>次は、ある人の情報を表す簡単なJSONです。実行する手順ではなく、データそのものを書いています。</p>
+
+      <pre><code>{
+  "name": "Masa",
+  "age": 31,
+  "isChef": true
+}</code></pre>
+
+      <p>
+        左側の <code>"name"</code> のような項目名を<strong>キー</strong>、
+        右側の <code>"Masa"</code> のような中身を<strong>値</strong>と呼びます。
+        表の「項目名」と「記入した内容」の組み合わせだと思うと読みやすくなります。
+      </p>
+      <ul>
+        <li><code>"name": "Masa"</code>：名前はMasa。</li>
+        <li><code>"age": 31</code>：年齢は31。</li>
+        <li><code>"isChef": true</code>：「シェフである」が真、つまりシェフである。
+      </ul>
+      <p>
+        これらのキーは、この例のデータに付けた名前です。JSONで必ず使う決まりの単語ではありません。
+        APIを読むときも、項目名の意味はそのAPIの説明に合わせて確認します。
+      </p>
+
+      <aside class="term-note" aria-label="名前の由来：JSON">
+        <strong>名前の由来：JSON</strong>
+        <p>JSONは<strong>JavaScript Object Notation</strong>の略です。</p>
+        <ul>
+          <li><strong>JavaScript：</strong>名前のもとになったプログラミング言語。</li>
+          <li><strong>Object：</strong>ここでは、名前と値をまとめたデータのこと。</li>
+          <li><strong>Notation：</strong>「表記法」、つまり書き表すための方法。</li>
+        </ul>
+        <p>「JavaScriptのオブジェクトの書き方をもとにしたデータの表記法」と覚えられますが、JavaScript以外の言語でも使われます。</p>
+      </aside>
+
+      <h2>まず覚える記号は4つ</h2>
+      <ul>
+        <li><code>{ }</code>：名前と値を集めた、ひとまとまりのデータ。これをオブジェクトと呼びます。</li>
+        <li><code>[ ]</code>：値を順番に並べた一覧。これを配列と呼びます。</li>
+        <li><code>:</code>：左の名前と右の値を対応させます。</li>
+        <li><code>,</code>：項目と項目、または配列の値同士を区切ります。</li>
+      </ul>
+      <p>
+        最初の例では、外側の <code>{ }</code> が1人分の情報をまとめています。
+        改行や字下げは読みやすくするためのもので、1行にまとめても同じデータを表せます。
+      </p>
+
+      <h2>文字や数字のほか、一覧や入れ子も扱える</h2>
+      <p>JSONの値には、次のような種類があります。</p>
+      <ul>
+        <li><strong>文字列：</strong><code>"Masa"</code> のような文字。二重引用符で囲みます。</li>
+        <li><strong>数値：</strong><code>31</code> や <code>24.5</code>。引用符は付けません。</li>
+        <li><strong>真偽値：</strong><code>true</code>（真）か <code>false</code>（偽）。「はい・いいえ」の判断を表します。</li>
+        <li><strong>null：</strong>値がないことを表します。0や空の文字列とは別の値です。</li>
+        <li><strong>配列：</strong><code>["読書", "散歩"]</code> のような一覧。</li>
+        <li><strong>オブジェクト：</strong><code>{"city": "東京"}</code> のような、名前と値のまとまり。</li>
+      </ul>
+
+      <h3>入れ子は「まとまりの中に、別のまとまり」</h3>
+      <pre><code>{
+  "name": "Masa",
+  "nickname": null,
+  "hobbies": ["読書", "散歩"],
+  "address": {
+    "city": "東京"
+  }
+}</code></pre>
+      <p>
+        この例では、<code>hobbies</code> に趣味の一覧、<code>address</code> に住所のまとまりが入っています。
+        このように中へ別のデータ構造を入れることを「入れ子」と呼びます。
+        <code>nickname</code> の <code>null</code> は、この例ではニックネームが設定されていないことを表しています。
+      </p>
+      <p>
+        JSON全体が必ず <code>{ }</code> で始まるわけではありません。
+        一覧を返す場合は <code>[ ]</code> が外側になることもあり、文字列や数値だけでもJSONとして表せます。
+      </p>
+
+      <h2>APIの結果としてJSONが返ってくるイメージ</h2>
+      <p>
+        APIに「天気を教えて」と依頼すると、結果がJSONで返ってくることがよくあります。
+        次は、気温を摂氏で返す天気APIを想定した架空の例です。
+      </p>
+      <pre><code>{
+  "weather": "sunny",
+  "temperature": 24
+}</code></pre>
+      <p>
+        <code>weather</code> は天気で、<code>sunny</code> は晴れ。
+        <code>temperature</code> は気温で、この例では24℃と読めます。
+        アプリはこの値を取り出して、画面に「晴れ・24℃」などと表示できます。
+      </p>
+      <p>
+        実際の項目名や温度の単位は、APIごとのルールで決まります。
+        <a href="api.html">APIの記事</a>のたとえでいえば、APIが注文窓口、JSONは返ってきた情報の書き方です。
+        すべてのAPIがJSONを返すわけではありません。
+      </p>
+
+      <h2>JavaScriptのオブジェクトと、完全に同じではない</h2>
+      <p>
+        JavaScriptのオブジェクトは、プログラムの中で扱うデータのまとまりです。
+        JSONは、データを保存したり交換したりするための文字による表記形式です。
+        見た目は似ていますが、書ける内容やルールに違いがあります。
+      </p>
+      <ul>
+        <li>JSONでは、キーと文字列を必ず二重引用符 <code>"</code> で囲みます。</li>
+        <li>JSONでは、最後の項目の後ろに余分なカンマを付けません。</li>
+        <li>JSONには、コメント、関数、<code>undefined</code> は書けません。</li>
+      </ul>
+      <p>
+        例えば <code>{name: 'Masa'}</code> はJavaScriptのオブジェクトの書き方として使えますが、JSONではありません。
+        JSONなら <code>{"name": "Masa"}</code> と書きます。
+        JavaScriptやGASでは、JSONの文字列をデータに変換する <code>JSON.parse()</code>、
+        データをJSONの文字列にする <code>JSON.stringify()</code> が用意されています。
+        今は「扱うデータと、受け渡すための書き方を変換できる」程度の理解で十分です。
+      </p>
+
+      <h2>AIにJSONを説明してもらうときは</h2>
+      <p>
+        「各キーの意味と値の種類を説明してください」「このJSONから天気と気温を取り出したい」と伝えましょう。
+        キーの意味が分からない場合は、APIの説明も一緒に確認すると読み違いを減らせます。
+      </p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <p>JSONは、APIなどでデータを受け渡すための書き方。まずは「キーは項目名、値はその中身」と読み、{ }はまとまり、[ ]は一覧と覚えましょう。</p>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="api.html" rel="prev">APIとは？ アプリ同士をつなぐ窓口</a></p>
+        <p>次の記事：<a href="gas.html" rel="next">Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み</a></p>
+      </div>
+
+      <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい</p>
+    </div>
+  </footer>
+</body>
+</html>
