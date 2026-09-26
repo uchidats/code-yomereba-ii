@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-27T05:40:00+09:00 -->
+  <title>HTMLタグとは？ &lt; &gt; の中には何が書いてある？｜コードは読めればいい</title>
+  <meta name="description" content="HTMLの &lt; &gt; の中にあるタグ名・属性・入れ子の構造を初心者向けに解説。開始タグと終了タグの見分け方、class・id・href・srcが「属性」である理由をコードを読む視点でまとめます。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › HTMLタグとは？</p>
+
+      <h1>HTMLタグとは？ &lt; &gt; の中には何が書いてある？</h1>
+      <p class="article-lead">HTMLのコードを見たとき、<code>&lt;div&gt;</code>や<code>&lt;a href="..."&gt;</code>の山かっこの中に何が書いてあるか分かれば、コードの構造がぐっと読みやすくなります。</p>
+
+      <h2>まず結論：HTMLタグは「ここから○○」「ここまで○○」の目印</h2>
+      <p>次のコードを見てください。</p>
+      <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+      <ul>
+        <li><code>&lt;p&gt;</code>：ここから段落が始まる</li>
+        <li><code>こんにちは</code>：中身（テキスト）</li>
+        <li><code>&lt;/p&gt;</code>：ここで段落が終わる</li>
+      </ul>
+      <p>HTMLタグは「ここから○○」「ここまで○○」という目印です。この読み方さえ分かれば、HTMLのコードを見たとき、構造を追えるようになります。</p>
+
+      <h2 id="what-is-tag">そもそも「タグ」とは？</h2>
+      <aside class="term-note" aria-label="英語から覚える：tag">
+        <strong>英語から覚える：tag</strong>
+        <p>tagは英語で「札」「ラベル」「荷札」などの意味です。荷物に付ける値札や、商品のタグをイメージすると分かりやすくなります。</p>
+      </aside>
+      <p>HTMLでは、文章や画像などに「これは見出し」「これは段落」「これはリンク」と<strong>札を付ける</strong>ようなイメージで使います。</p>
+      <pre><code>&lt;h1&gt;タイトル&lt;/h1&gt;
+&lt;p&gt;本文です。&lt;/p&gt;</code></pre>
+      <ul>
+        <li><code>h1</code>：見出し（heading 1の略）</li>
+        <li><code>p</code>：段落</li>
+      </ul>
+      <p>タグ名を見るだけで「このまとまりが何者か」が伝わります。英語の意味が分かると、タグは暗号ではなくなります。</p>
+
+      <h2 id="angle-brackets">&lt; &gt; は何？</h2>
+      <p><code>&lt;</code>と<code>&gt;</code>で囲まれた部分がHTMLタグです。この記号は「山かっこ（angle bracket）」と呼ばれます。</p>
+      <pre><code>&lt;p&gt;</code></pre>
+      <p>山かっこの中の <code>p</code> がタグ名です。<strong>山かっこの中を見ると「この部分が何者か」が分かる</strong>、と読みましょう。</p>
+      <aside class="term-note" aria-label="英語から覚える：p">
+        <strong>英語から覚える：p = paragraph</strong>
+        <p>pはparagraph（段落）の略です。paragraph＝段落、と結び付けると、なぜ段落に<code>&lt;p&gt;</code>を使うのかが覚えやすくなります。</p>
+      </aside>
+
+      <h2 id="open-close">開始タグと終了タグ</h2>
+      <p>多くのHTMLタグには「開始タグ」と「終了タグ」があります。</p>
+      <pre><code>&lt;p&gt;本文です。&lt;/p&gt;</code></pre>
+      <ul>
+        <li><code>&lt;p&gt;</code>：開始タグ</li>
+        <li><code>&lt;/p&gt;</code>：終了タグ</li>
+      </ul>
+      <p>終了タグでは、タグ名の前に<strong><code>/</code>（スラッシュ）が付く</strong>のがポイントです。<strong>「/ が付いたら、ここで終わり」</strong>と読めば大丈夫です。</p>
+
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>&lt;tag&gt;</code>（始まり）</h3>
+          <p>開始タグ。ここからその要素が始まる目印です。</p>
+        </div>
+        <div class="card">
+          <h3><code>&lt;/tag&gt;</code>（終わり）</h3>
+          <p>終了タグ。/ が付いたら「ここで終わり」と読みます。</p>
+        </div>
+      </div>
+
+      <h2 id="content">タグの中身</h2>
+      <p>開始タグと終了タグに挟まれた部分が「内容」です。</p>
+      <pre><code>&lt;p&gt;これは本文です。&lt;/p&gt;</code></pre>
+      <p>「これは本文です。」がこの<code>&lt;p&gt;</code>タグの内容です。HTMLでは、</p>
+      <p><strong>開始タグ → 内容 → 終了タグ</strong></p>
+      <p>という形がよく出てきます。内容にはテキストだけでなく、別のタグが入ることもあります。</p>
+
+      <h2 id="nesting">タグは入れ子になる</h2>
+      <p>HTMLでは、タグの中に別のタグを入れることができます。</p>
+      <pre><code>&lt;div&gt;
+  &lt;p&gt;本文です。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p><code>div</code>の中に<code>p</code>が入っています。さらに、複数のタグが入ることもあります。</p>
+      <pre><code>&lt;div class="card"&gt;
+  &lt;h2&gt;タイトル&lt;/h2&gt;
+  &lt;p&gt;説明文です。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p><strong>HTMLは箱の中に箱が入っているような構造</strong>です。大きな箱（<code>div</code>）の中に、見出し（<code>h2</code>）と段落（<code>p</code>）という小さな箱が入っています。</p>
+
+      <aside class="term-note" aria-label="英語から覚える：nesting">
+        <strong>英語から覚える：nesting（入れ子）</strong>
+        <p>nestingは英語で「入れ子」の意味です。nestは「鳥の巣」や「組み合わさって収まる形」を意味し、小さいものが大きいものの中に収まるイメージと結び付けると覚えやすくなります。</p>
+      </aside>
+
+      <p>この「箱の中に箱」という構造は、<a href="div-span.html">「divとspanの違い」</a>や<a href="semantic-html.html">「header・nav・main・section・articleの違い」</a>でも詳しく見てきました。タグが入れ子になっているとき、どこからどこまでが1つのまとまりかを意識するとコードが読みやすくなります。</p>
+
+      <h2 id="attribute">属性とは？</h2>
+      <p>タグには、追加の情報を書くことができます。</p>
+      <pre><code>&lt;a href="../index.html"&gt;トップへ戻る&lt;/a&gt;</code></pre>
+      <ul>
+        <li><code>a</code>：タグ名（リンクを表す）</li>
+        <li><code>href="../index.html"</code>：追加情報（どこへ移動するか）</li>
+      </ul>
+      <p>このような追加情報を<strong>属性（attribute）</strong>と呼びます。</p>
+      <aside class="term-note" aria-label="英語から覚える：attribute">
+        <strong>英語から覚える：attribute（属性）</strong>
+        <p>attributeは「属性」「特徴」という意味の英単語です。「そのタグが持っている特徴・追加情報」と結び付けると覚えやすくなります。</p>
+      </aside>
+      <p>属性は「タグに追加の情報を与えるもの」と理解すれば十分です。細かな種類は、使いながら覚えていけます。</p>
+
+      <h2 id="class-id-attr">class と id も属性</h2>
+      <p>以前の記事でも出てきた <code>class</code> や <code>id</code> も、属性の一種です。</p>
+      <pre><code>&lt;div class="card"&gt;
+&lt;section id="start"&gt;</code></pre>
+      <ul>
+        <li><code>class="card"</code>：このまとまりに「card」というグループ名を付ける属性</li>
+        <li><code>id="start"</code>：このsectionに「start」という固有名を付ける属性</li>
+      </ul>
+      <p>詳しくは<a href="class-id.html">「classとidの違い」</a>で読めますが、どちらも「そのタグに追加の名前情報を与える属性」と読めます。</p>
+
+      <h2 id="href-src-attr">href と src も属性</h2>
+      <p>リンクや画像でよく見る <code>href</code> と <code>src</code> も属性です。</p>
+      <pre><code>&lt;a href="../index.html"&gt;トップへ戻る&lt;/a&gt;
+&lt;img src="../assets/koi.png" alt=""&gt;</code></pre>
+      <ul>
+        <li><code>href="../index.html"</code>：移動先のファイルを指定する属性</li>
+        <li><code>src="../assets/koi.png"</code>：表示する画像ファイルの場所を指定する属性</li>
+      </ul>
+      <p><code>href</code>と<code>src</code>の役割の違いは<a href="href-src.html">「hrefとsrcの違い」</a>で詳しく説明しています。どちらも属性の一種であり、タグに追加情報を与えている、と読めれば大丈夫です。</p>
+
+      <h2 id="void-element">閉じタグがないように見えるものもある</h2>
+      <p>HTMLには、終了タグを書かない要素もあります。</p>
+      <pre><code>&lt;img src="../assets/koi.png" alt=""&gt;
+&lt;meta charset="utf-8"&gt;</code></pre>
+      <p><code>&lt;/img&gt;</code>や<code>&lt;/meta&gt;</code>を書かなくても動きます。これらは「内容を挟む」ではなく、「それ自体が1つの指示」として機能するためです。</p>
+      <p>専門的には<strong>void element（空要素）</strong>と呼びます。「すべてのタグに終了タグがあるわけではない」と覚えれば十分です。</p>
+
+      <h2 id="tag-names">a の a は何の略？</h2>
+      <p>よく見るタグの名前には、英語の由来があります。由来が分かると、タグは暗号ではなくなります。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>p</code> = paragraph（段落）</h3>
+          <p>文章の段落を表します。</p>
+        </div>
+        <div class="card">
+          <h3><code>a</code> = anchor（錨）</h3>
+          <p>リンクを作るタグ。anchorは「錨」の意味で、リンク先に「つなぎとめる」イメージです。</p>
+        </div>
+        <div class="card">
+          <h3><code>img</code> = image（画像）</h3>
+          <p>画像を表示するタグです。</p>
+        </div>
+        <div class="card">
+          <h3><code>nav</code> = navigation（案内）</h3>
+          <p>移動用のリンクをまとめるタグです。</p>
+        </div>
+        <div class="card">
+          <h3><code>main</code> = main（主要）</h3>
+          <p>ページの主な内容を囲うタグです。</p>
+        </div>
+        <div class="card">
+          <h3><code>article</code> = article（記事）</h3>
+          <p>独立したひとまとまりの内容を表すタグです。</p>
+        </div>
+      </div>
+
+      <h2 id="real-code">このサイトのコードを実際に読む</h2>
+      <p>このサイトの記事ページのヘッダーには、次の開始タグがあります。</p>
+      <pre><code>&lt;header class="site-header compact"&gt;</code></pre>
+      <ul>
+        <li><code>header</code>：タグ名（ページのヘッダー部分を表す）</li>
+        <li><code>class</code>：属性の名前</li>
+        <li><code>"site-header compact"</code>：classの値（空白で区切って2つのclassを持っている）</li>
+      </ul>
+      <p>さらに、同じヘッダーの中には次のようなコードもあります。</p>
+      <pre><code>&lt;img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371"&gt;</code></pre>
+      <ul>
+        <li><code>img</code>：画像タグ（image の略）</li>
+        <li><code>class="site-logo"</code>：見た目やグループ分けに使う属性</li>
+        <li><code>src="../assets/koi.png"</code>：画像ファイルの場所を指定する属性</li>
+        <li><code>alt=""</code>：画像の代替テキスト（ここでは空）を指定する属性</li>
+        <li><code>width</code>・<code>height</code>：画像の幅と高さを指定する属性</li>
+      </ul>
+      <p>1つの開始タグの中に、複数の属性が並ぶこともあります。それぞれが「このタグへの追加情報」と読めます。</p>
+
+      <h2 id="how-to-read">HTMLを読むときのコツ</h2>
+      <p>HTMLを1文字ずつ読もうとすると、どこから手を付ければいいか分からなくなります。次の順番で読むと、全体の構造がつかみやすくなります。</p>
+      <ol>
+        <li><strong>タグ名を見る</strong>：何の要素か確認する</li>
+        <li><strong>属性を見る</strong>：追加の情報（名前・場所・リンク先など）を確認する</li>
+        <li><strong>どこまで囲っているかを見る</strong>：終了タグを探し、内容の範囲を把握する</li>
+      </ol>
+      <p>例えば、このサイトのトップページには次のようなリンクがあります。</p>
+      <pre><code>&lt;a class="nav-start" href="#start"&gt;はじめに&lt;/a&gt;</code></pre>
+      <p>この順番で読んでみましょう。</p>
+      <ul>
+        <li><code>a</code>タグ → リンクを表す</li>
+        <li><code>class="nav-start"</code> → nav-startというグループ名が付いている</li>
+        <li><code>href="#start"</code> → ページ内のidがstartの場所への移動先</li>
+        <li>挟まれているのは「はじめに」というテキスト</li>
+      </ul>
+      <p>「aタグなのでリンク。classはnav-start。hrefはstartという場所への移動先。表示される文字は『はじめに』」と読めます。</p>
+      <p>最初はゆっくりで大丈夫です。タグ名→属性→範囲の順に読む習慣を付けると、知らないタグでも構造を追えるようになります。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li>HTMLタグ = 要素の役割を示す札（<code>&lt; &gt;</code>の中にタグ名を書く）</li>
+          <li><code>&lt;tag&gt;</code> = 開始、<code>&lt;/tag&gt;</code> = 終了（/ が付けば終了タグ）</li>
+          <li>タグの中に別のタグを入れることができる（入れ子構造）</li>
+          <li><code>class</code>・<code>id</code>・<code>href</code>・<code>src</code>などはすべて「属性」= タグへの追加情報</li>
+          <li>すべてのタグに終了タグがあるわけではない（<code>&lt;img&gt;</code>・<code>&lt;meta&gt;</code>など）</li>
+        </ul>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="html-css-js.html" rel="prev">HTML・CSS・JavaScriptの違い</a></p>
+        <p>次の記事：<a href="href-src.html" rel="next">hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
