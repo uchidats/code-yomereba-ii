@@ -19,6 +19,9 @@
   <title>索引｜コードは読めればいい</title>
   <meta name="description" content="記事やAIの回答、コードで見かけた「これ、何だろう？」を調べる入口です。意味を確かめながら、コードを読み進めましょう。">
   <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/index-search.css">
+  <script src="../assets/search-index.js" defer></script>
+  <script src="../assets/index-search.js" defer></script>
 </head>
 <body>
   <header class="site-header compact">
@@ -38,6 +41,14 @@
       <p class="breadcrumb"><a href="../index.html">トップ</a> › 索引</p>
       <h1>索引</h1>
       <p class="article-lead">記事やAIの回答、コードで見かけた「これ、何だろう？」を調べる入口です。意味を確かめながら、コードを読み進めましょう。</p>
+      <section class="index-search" role="search" aria-labelledby="index-search-label" hidden>
+        <label id="index-search-label" for="index-search-input">用語・コードを検索</label>
+        <p id="index-search-help">用語索引とコード索引から、関連記事を探せます。</p>
+        <input id="index-search-input" type="search" placeholder="例：class、../、JSON.parse、GmailApp" aria-describedby="index-search-help" aria-controls="index-search-results" autocomplete="off" spellcheck="false" autocapitalize="off">
+        <p id="index-search-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <ul id="index-search-results" class="index-search-results"></ul>
+      </section>
+      <noscript><p>検索にはJavaScriptが必要です。下の用語索引・コード索引からも調べられます。</p></noscript>
       <div class="cards index-cards">
         <a class="card category-card" href="terms.html"><h2>用語索引</h2><p>AI開発、Web、GAS、Git、Codexなどで出てくる用語を調べる。</p></a>
         <a class="card category-card" href="code.html"><h2>コード索引</h2><p>コード中に出てきた文字、記号、関数名の意味と読み方を調べる。</p></a>
