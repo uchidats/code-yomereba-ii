@@ -76,15 +76,35 @@ main .narrow {
   padding-bottom: 20px;
 }
 
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.site-brand-text {
+  min-width: 0;
+}
+
 .site-title {
+  max-width: 100%;
   color: var(--heading);
   text-decoration: none;
   font-size: 1.45rem;
   font-weight: 800;
 }
 
+.site-logo {
+  display: block;
+  height: 66px;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
 .tagline {
-  margin: 3px 0 12px;
+  margin: 3px 0 0;
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -328,6 +348,14 @@ pre {
 }
 
 @media (max-width: 760px) {
+  .site-logo {
+    height: 52px;
+  }
+
+  .site-brand {
+    gap: 12px;
+  }
+
   .container {
     width: calc(100% - 32px);
   }
