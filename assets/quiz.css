@@ -36,6 +36,9 @@
 .quiz-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
 .quiz-links a { display: inline-block; padding: 8px 0; }
 .quiz-links .button { margin-top: 0; }
+.quiz-review { display: grid; gap: 16px; }
+.quiz-review-card { min-width: 0; }
+.quiz-review-card h3 { margin-top: 0; }
 .quiz-page [hidden] { display: none; }
 @media (max-width: 760px) {
   .quiz-card { padding: 16px; }

@@ -17,6 +17,38 @@
   let position;
   let score;
   let answered;
+  let mistakes;
+
+  function showReview() {
+    const review = get("quiz-review");
+    review.replaceChildren();
+    const element = (tag, text) => {
+      const node = document.createElement(tag);
+      node.textContent = text;
+      return node;
+    };
+    if (mistakes.length === 0) {
+      review.append(element("p", "今回は復習が必要な問題はありません。"));
+      return;
+    }
+    for (const { question, selectedAnswer } of mistakes) {
+      const card = document.createElement("article");
+      card.className = "quiz-card quiz-review-card";
+      const code = document.createElement("pre");
+      code.append(element("code", question.code));
+      const link = element("a", "検索・索引で確認する");
+      link.href = "../indexes/index.html";
+      card.append(
+        element("h3", question.question),
+        code,
+        element("p", `選んだ回答：${question.choices[selectedAnswer]}`),
+        element("p", `正解：${question.choices[question.answer]}`),
+        element("p", question.explanation),
+        link,
+      );
+      review.append(card);
+    }
+  }
 
   function showQuestion(moveFocus) {
     answered = false;
@@ -55,6 +87,8 @@
     round = round.slice(0, 10);
     position = 0;
     score = 0;
+    mistakes = [];
+    get("quiz-review").replaceChildren();
     result.hidden = true;
     panel.hidden = false;
     showQuestion(moveFocus);
@@ -72,6 +106,7 @@
     const question = round[position];
     const correct = Number(selected.value) === question.answer;
     if (correct) score++;
+    else mistakes.push({ question, selectedAnswer: Number(selected.value) });
     choices.disabled = true;
     submit.disabled = true;
     get("quiz-verdict").textContent = correct ? "○ 正解" : "× 不正解";
@@ -95,6 +130,7 @@
     panel.hidden = true;
     result.hidden = false;
     get("quiz-score").textContent = `${round.length}問中${score}問正解`;
+    showReview();
     get("quiz-score").focus();
   });
 
