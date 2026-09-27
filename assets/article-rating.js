@@ -1,11 +1,63 @@
 /**
  * 記事評価ボタン (Good / Bad)
+ * - 全ユーザー共通Goodカウンター (Google Apps Script + スプレッドシート連携)
  * - 1ブラウザ1回の投票制御 (localStorage: liked: <article-id>)
- * - 将来の Google Apps Script (GAS) 連携に対応した設計
+ * - JSONP通信方式により、GitHub Pages環境におけるCORSや302リダイレクト問題を完全回避
  */
 (() => {
-  // 将来Googleスプレッドシート+GASと連携する場合、発行したWebアプリURLをここに設定します
-  const GAS_ENDPOINT_URL = null;
+  // ★ Google Apps Script (GAS) をデプロイ後、発行された「ウェブアプリのURL」をここに設定してください
+  // 例: 'https://script.google.com/macros/s/AKfycb.../exec'
+  const GAS_ENDPOINT_URL = '';
+
+  /**
+   * JSONPリクエスト送信ヘルパー
+   * 静的サイトからGAS Webアプリへ確実にクロスオリジン通信を行うための軽量実装
+   */
+  function requestGasJsonp(url, params, timeoutMs = 6000) {
+    return new Promise((resolve, reject) => {
+      const callbackName = 'gas_rating_cb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+      const queryParams = new URLSearchParams({
+        ...params,
+        callback: callbackName,
+        _nocache: Date.now()
+      });
+
+      const script = document.createElement('script');
+      script.src = `${url}?${queryParams.toString()}`;
+      script.async = true;
+
+      let timer = null;
+
+      const cleanup = () => {
+        if (timer) clearTimeout(timer);
+        try {
+          delete window[callbackName];
+        } catch (e) {
+          window[callbackName] = undefined;
+        }
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      };
+
+      window[callbackName] = (data) => {
+        cleanup();
+        resolve(data);
+      };
+
+      script.onerror = () => {
+        cleanup();
+        reject(new Error('JSONP load error'));
+      };
+
+      timer = setTimeout(() => {
+        cleanup();
+        reject(new Error('JSONP timeout'));
+      }, timeoutMs);
+
+      document.head.appendChild(script);
+    });
+  }
 
   function initRating() {
     const container = document.querySelector('.article-rating[data-article-id]');
@@ -25,24 +77,10 @@
     try {
       votedAction = localStorage.getItem(storageKey);
     } catch (e) {
-      // プライベートブラウジング等でlocalStorageが無効な場合のフォールバック
+      // プライベートブラウズ等の制限環境フォールバック
     }
 
-    // 将来GASと連携する場合のカウント取得処理（非同期）
-    if (GAS_ENDPOINT_URL) {
-      fetch(`${GAS_ENDPOINT_URL}?articleId=${encodeURIComponent(articleId)}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && typeof data.goodCount === 'number' && countEl) {
-            countEl.textContent = data.goodCount;
-          }
-        })
-        .catch((err) => {
-          console.warn('[ArticleRating] カウント取得エラー:', err);
-        });
-    }
-
-    // 既に評価済みの場合は状態を反映
+    // 既に評価済みの場合は状態をボタンへ反映
     if (votedAction) {
       applyVotedState(votedAction);
     }
@@ -63,43 +101,60 @@
       }
     }
 
-    // Goodボタン押下
+    const isGasConfigured = typeof GAS_ENDPOINT_URL === 'string' &&
+      GAS_ENDPOINT_URL.startsWith('https://script.google.com/');
+
+    // 1. 初期カウントの取得（GASから全ユーザー共通のGood数を取得）
+    if (isGasConfigured) {
+      requestGasJsonp(GAS_ENDPOINT_URL, { action: 'get', articleId: articleId })
+        .then((res) => {
+          if (res && res.success && typeof res.goodCount === 'number' && countEl) {
+            countEl.textContent = res.goodCount;
+          }
+        })
+        .catch((err) => {
+          // 通信エラー時も記事の閲覧や他の動作を妨げない
+          console.warn('[ArticleRating] カウント取得スキップ:', err.message);
+        });
+    }
+
+    // 2. Goodボタン押下処理
     goodBtn.addEventListener('click', () => {
       if (goodBtn.disabled) return;
 
-      // カウントを1増やす（Good数そのものはlocalStorageで管理せず、画面上のカウント加算として処理）
+      // 画面上のカウントを即座に+1（Optimistic UI Update）
       if (countEl) {
         const currentCount = parseInt(countEl.textContent || '0', 10);
         countEl.textContent = (isNaN(currentCount) ? 0 : currentCount) + 1;
       }
 
-      // 1ブラウザ1回の連打防止フラグのみ保存
+      // localStorageには投票済みフラグ（liked）のみを記録（Good数は保存しない）
       try {
         localStorage.setItem(storageKey, 'good');
       } catch (e) {}
 
       applyVotedState('good');
 
-      // 将来GASへGoodを送信する処理
-      if (GAS_ENDPOINT_URL) {
-        fetch(GAS_ENDPOINT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({
-            articleId: articleId,
-            action: 'good'
+      // GASへGood加算リクエストを送信
+      if (isGasConfigured) {
+        requestGasJsonp(GAS_ENDPOINT_URL, { action: 'good', articleId: articleId })
+          .then((res) => {
+            // スプレッドシート側の確定最新値で画面を同期
+            if (res && res.success && typeof res.goodCount === 'number' && countEl) {
+              countEl.textContent = res.goodCount;
+            }
           })
-        }).catch((err) => {
-          console.warn('[ArticleRating] 送信エラー:', err);
-        });
+          .catch((err) => {
+            console.warn('[ArticleRating] Goodカウント送信エラー:', err.message);
+          });
       }
     });
 
-    // Badボタン押下
+    // 3. Badボタン押下処理
     badBtn.addEventListener('click', () => {
       if (badBtn.disabled) return;
 
-      // Badはサーバー保存や件数記録は行わない
+      // Badはサーバー/GAS送信・スプレッドシート記録は一切行わない
       try {
         localStorage.setItem(storageKey, 'bad');
       } catch (e) {}

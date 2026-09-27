@@ -63,6 +63,10 @@
   font-size: 0.9rem;
 }
 
+.rating-btn .rating-count:empty {
+  display: none;
+}
+
 /* 押下後の強調スタイル */
 .rating-btn.is-active {
   border-color: var(--accent, #245880);
