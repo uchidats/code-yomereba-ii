@@ -591,5 +591,68 @@ window.siteQuizQuestions = [
     answer: 1,
     explanation: "HTMLの class 属性に対応するCSSセレクタは、先頭に . を付けた .site-box です。# は id を指定するときに使います。",
     article: "../articles/css-selector.html"
+  },
+
+  // ── . と () 編（dot-parentheses.html 追加分）─────────────
+
+  {
+    id: "js-dot-meaning",
+    category: "javascript",
+    question: "GASやJavaScriptのコードで SpreadsheetApp.getActiveSpreadsheet() とあるとき、.（ドット）の役割として最も適切なものはどれ？",
+    code: "SpreadsheetApp.getActiveSpreadsheet()",
+    choices: [
+      "2つの文章を足し算して連結する",
+      "左のもの（SpreadsheetApp）の中にある右の機能（getActiveSpreadsheet）を参照する",
+      "プログラムの実行を一時停止する",
+      "新しいスプレッドシートファイルを削除する"
+    ],
+    answer: 1,
+    explanation: "ドット（.）は「左のものの中にある右のもの」を参照する記号です。SpreadsheetAppという道具箱の中から、getActiveSpreadsheetという機能を取り出しています。",
+    article: "../articles/dot-parentheses.html"
+  },
+  {
+    id: "js-parentheses-execution",
+    category: "javascript",
+    question: "コード内の機能名の後ろにある ()（かっこ）が表している意味として正しいものはどれ？",
+    code: "SpreadsheetApp.getActiveSpreadsheet()",
+    choices: [
+      "その関数・機能を実際に呼び出して実行する",
+      "機能の名前を別の名前に書き換える",
+      "この機能はまだ使えない（無効化されている）ことを示す",
+      "Googleドライブ上のファイルサイズを表す"
+    ],
+    answer: 0,
+    explanation: "() は関数や機能を実際に実行（呼び出し）する合図です。機能名だけでは動かず、() が付くことで処理が開始されます。",
+    article: "../articles/dot-parentheses.html"
+  },
+  {
+    id: "js-arguments-meaning",
+    category: "javascript",
+    question: "GmailApp.search(\"label:todo\") のように、() の中に文字や値が入っている場合、その中身は何と呼ばれる？",
+    code: 'GmailApp.search("label:todo")',
+    choices: [
+      "セレクタ",
+      "引数（ひきすう / argument）",
+      "タグ名",
+      "クラス名"
+    ],
+    answer: 1,
+    explanation: "関数や機能の () の中に渡す材料・情報を「引数（ひきすう）」と呼びます。ここでは検索機能に \"label:todo\" という検索条件を渡しています。",
+    article: "../articles/dot-parentheses.html"
+  },
+  {
+    id: "js-dot-chaining",
+    category: "javascript",
+    question: "次のコードのように .（ドット）が連続してつながっている場合、どのように読むのが基本？",
+    code: "SpreadsheetApp.getActiveSpreadsheet().getActiveSheet()",
+    choices: [
+      "一番右の機能だけが動き、左側の記述は無視される",
+      "右から左へ逆順に処理をたどる",
+      "左から順番に実行結果を受け取りながら次の機能へつなげて読む",
+      "エラーになる書き方なので読まなくてよい"
+    ],
+    answer: 2,
+    explanation: "ドットが連続している場合（メソッドチェーン）は、左から順に読みます。まずスプレッドシートを取得し、その結果に対してさらにgetActiveSheet()を実行しています。",
+    article: "../articles/dot-parentheses.html"
   }
 ];

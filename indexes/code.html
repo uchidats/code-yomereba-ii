@@ -107,10 +107,10 @@
 <div id="symbols-7"><dt><code>||</code></dt><dd><p>条件をつなぐ「または」。条件式では「どちらかが成り立つか」と読みます。実際には左側の値に応じて、どちらかの値を返します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
 <div id="symbols-8"><dt><code>!</code></dt><dd><p>真偽を反転する記号。「〜ではない」と読み、例えば!trueはfalseになります。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
 <div id="symbols-9"><dt><code>=&gt;</code></dt><dd><p>アロー関数の目印。「左側で情報を受け取り、右側で処理する関数」と読みます。大小を比べる記号ではありません。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
-<div id="symbols-10"><dt><code>()</code></dt><dd><p>関数の引数や条件、計算のまとまりを囲む丸かっこ。名前の直後なら「関数を呼ぶ」、ifの直後なら「条件を調べる」と周囲から読み分けます。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
+<div id="symbols-10"><dt><code>()</code></dt><dd><p>関数の引数や条件、計算のまとまりを囲む丸かっこ。名前の直後なら「関数を呼ぶ」、ifの直後なら「条件を調べる」と周囲から読み分けます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#parentheses">. と () は何？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="symbols-11"><dt><code>[]</code></dt><dd><p>配列や要素の参照に使う角かっこ。「値の一覧」や「一覧の何番目かを読む」と読みます。JavaScriptの配列の番号は0から始まります。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-12"><dt><code>{}</code></dt><dd><p>処理やデータをまとめる波かっこ。ifや関数の後ろなら処理の範囲、JSONなら名前と値をまとめたオブジェクトと読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
-<div id="symbols-13"><dt><code>.</code></dt><dd><p>中の項目や機能を参照する記号。GmailAppの後ろなら「GmailAppが持つ機能」と読みます。CSSでは.class名のようにクラスの指定にも使います。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/class-id.html#css">classとidの違い（CSSの.）</a></p></dd></div>
+<div id="symbols-13"><dt><code>.</code></dt><dd><p>中の項目や機能を参照する記号。GmailAppの後ろなら「GmailAppが持つ機能」と読みます。CSSでは.class名のようにクラスの指定にも使います。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#dot">. と () は何？</a>、<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/class-id.html#css">classとidの違い（CSSの.）</a></p></dd></div>
 <div id="symbols-14"><dt><code>:</code></dt><dd><p>名前と値を対応させる区切り。JSONの&quot;name&quot;: &quot;Masa&quot;なら「nameの値はMasa」、CSSのcolor: blueなら「文字色は青」と読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-15"><dt><code>,</code></dt><dd><p>項目の区切り。配列の値、オブジェクトの項目、関数に渡す引数などを分けて読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-16"><dt><code>;</code></dt><dd><p>文や指定の区切り。JavaScriptでは「ここで1つの文が終わる」、CSSでは「ここで1つの指定が終わる」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
@@ -138,6 +138,8 @@
 <li><a href="#gas-3"><code>DriveApp</code></a></li>
 <li><a href="#gas-4"><code>SpreadsheetApp</code></a></li>
 <li><a href="#gas-5"><code>Logger.log()</code></a></li>
+<li><a href="#gas-6"><code>SpreadsheetApp.getActiveSpreadsheet()</code></a></li>
+<li><a href="#gas-7"><code>GmailApp.search()</code></a></li>
 </ul>
 <dl class="index-entries">
 <div id="gas-1"><dt><code>GmailApp</code></dt><dd><p>GASからGmailを操作する入口。「この後ろでメールに関する操作をしている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
@@ -145,6 +147,8 @@
 <div id="gas-3"><dt><code>DriveApp</code></dt><dd><p>GASからGoogleドライブを操作する入口。「ファイルやフォルダを扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
 <div id="gas-4"><dt><code>SpreadsheetApp</code></dt><dd><p>GASからGoogleスプレッドシートを操作する入口。「シートやセルの値を扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
 <div id="gas-5"><dt><code>Logger.log()</code></dt><dd><p>実行ログに値を出力する機能。「丸かっこの中身を、確認用の記録に出している」と読みます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="gas-6"><dt><code>SpreadsheetApp.getActiveSpreadsheet()</code></dt><dd><p>現在開いているスプレッドシートを取得する命令。「スプレッドシートの道具箱の中から、アクティブなシートを取得する機能を呼び出す」と読みます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a></p></dd></div>
+<div id="gas-7"><dt><code>GmailApp.search()</code></dt><dd><p>Gmailのメールを検索する命令。かっこ内に検索キーワードや検索条件（引数）を渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="html-css">
