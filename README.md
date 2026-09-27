@@ -28,6 +28,31 @@
 
 ## ローカルで確認
 
+### 知識確認クイズ β版
+
+`quiz/index.html` を開くと、コードを読む4択クイズを10問出題します。問題順だけをランダムにし、回答・点数はページ内のメモリで管理します。再読み込みでリセットされます。サーバーや追加ライブラリは不要です。
+
+- `assets/quiz-data.js`：問題データ。既存記事で説明されている内容だけを使います。
+- `assets/quiz.js`：問題表示・採点・再挑戦。問題が増えた場合も、ランダムに選んだ10問を出題します。
+- `assets/quiz.css`：クイズ専用の見た目。共通CSSの色を使います。
+
+問題追加時は `window.siteQuizQuestions` 配列へ、次の形式のオブジェクトを追加してください。`id` は重複させず、`choices` は4個、`answer` は正解の選択肢の位置（0〜3）です。選択肢の順序を変更したら `answer` も見直してください。
+
+```javascript
+{
+  id: "unique-question-id",
+  category: "javascript",
+  question: "このコードの意味として、最も近いものはどれ？",
+  code: "const price = 200;",
+  choices: ["200にpriceという名前を付ける", "画像を表示する", "ページへ移動する", "処理を繰り返す"],
+  answer: 0,
+  explanation: "値に名前を付けて、処理の中で後から使えるようにしています。",
+  article: "../articles/variable.html"
+}
+```
+
+`category` は現在 `html`・`javascript` を使用しています。将来は `gas`・`git-github`・`codex` などを追加できます（カテゴリ選択は未実装）。`article` はクイズページから見た出典記事の相対パスです。コードや解説は文字として表示され、HTMLやJavaScriptとして実行しません。解説は1〜3文を目安にし、問題追加後は正解・不正解、10問終了、再挑戦、復習リンクを確認してください。
+
 `index.html` をブラウザで開くだけでも確認できます。
 
 将来的には GitHub Pages / Cloudflare Pages 等で公開できます。
