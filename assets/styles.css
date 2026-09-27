@@ -549,3 +549,16 @@ pre {
     scroll-behavior: auto;
   }
 }
+
+.roadmap-category {
+  margin: 32px 0 12px;
+  padding-left: 10px;
+  border-left: 3px solid var(--accent);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--heading);
+}
+
+.roadmap-category:first-of-type {
+  margin-top: 24px;
+}
