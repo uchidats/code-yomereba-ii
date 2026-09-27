@@ -1,0 +1,88 @@
+/* 記事末尾の評価ボタン (Article Rating) */
+.article-rating {
+  margin: 36px 0 24px;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.article-rating-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  min-width: 44px;
+  padding: 0 14px;
+  background-color: var(--surface, #ffffff);
+  color: var(--muted, #586b7d);
+  border: 1px solid var(--line, #dce3e9);
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rating-btn:hover:not(:disabled) {
+  background-color: var(--soft-blue, #f0f6fb);
+  border-color: #c4d3e0;
+  color: var(--accent, #245880);
+}
+
+.rating-btn:focus-visible {
+  outline: 2px solid var(--accent, #245880);
+  outline-offset: 2px;
+}
+
+.rating-btn .rating-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.rating-btn .rating-count {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+}
+
+/* 押下後の強調スタイル */
+.rating-btn.is-active {
+  border-color: var(--accent, #245880);
+  background-color: var(--soft-blue, #f0f6fb);
+  color: var(--accent, #245880);
+  font-weight: 600;
+}
+
+.rating-btn:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* フィードバックメッセージ */
+.rating-feedback-msg {
+  font-size: 0.85rem;
+  color: var(--muted, #586b7d);
+  margin-left: 4px;
+}
+
+.rating-feedback-msg[hidden] {
+  display: none;
+}
