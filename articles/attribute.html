@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-27T20:15:00+09:00 -->
+  <title>属性とは？ class・id・href・src をまとめて理解する｜コードは読めればいい</title>
+  <meta name="description" content="HTMLタグの後ろに書かれる class・id・href・src・alt などを「属性」としてまとめて理解します。属性名と属性値の読み方、複数の属性が並ぶコードの読み解き方を初心者向けに解説。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › 属性とは？</p>
+
+      <h1>属性とは？ class・id・href・src をまとめて理解する</h1>
+      <p class="article-lead">HTMLのタグ名の後ろに続く <code>class="nav-link"</code> や <code>href="../index.html"</code> は、タグに追加情報を与える「属性」です。この記事では属性の読み方と、よく使う属性をまとめて整理します。</p>
+
+      <p>HTMLのコードを見て、こんな疑問を持ったことはないでしょうか。</p>
+      <pre><code>&lt;a class="nav-link" href="../index.html"&gt;トップへ戻る&lt;/a&gt;</code></pre>
+      <p>どこまでがタグ名で、どこからが別の情報なのか――。<strong>タグ名の後ろに付いている追加情報を、属性（attribute）と呼びます。</strong></p>
+
+      <h2 id="what-is-attribute">属性とは？</h2>
+      <aside class="term-note" aria-label="英語から覚える：attribute">
+        <strong>英語から覚える：attribute（属性）</strong>
+        <p>attribute は「属性」「特徴」「性質」などを意味する英単語です。「そのタグが持っている特徴・追加情報」と結び付けると覚えやすくなります。</p>
+      </aside>
+      <p>HTMLでは、属性は<strong>タグに追加情報を与えるもの</strong>です。次の例を見てください。</p>
+      <pre><code>&lt;a href="https://example.com"&gt;リンク&lt;/a&gt;</code></pre>
+      <ul>
+        <li><code>a</code>：タグ名（リンクを表す）</li>
+        <li><code>href</code>：属性名（どこへ移動するかを示す）</li>
+        <li><code>"https://example.com"</code>：属性値（実際の移動先）</li>
+      </ul>
+      <p>タグ名だけでは「リンクがある」としか分かりません。属性があることで「このリンクはどこへ向かうのか」という追加情報が伝わります。</p>
+      <p>属性は、<a href="html-tags.html">「HTMLタグとは？」</a>でも触れています。この記事では各属性をより詳しく整理します。</p>
+
+      <h2 id="name-value">属性名と属性値</h2>
+      <p>属性は <strong>属性名 = "属性値"</strong> の形で書きます。</p>
+      <pre><code>class="card"</code></pre>
+      <ul>
+        <li><code>class</code>：属性名</li>
+        <li><code>"card"</code>：属性値</li>
+      </ul>
+      <p><code>=</code> は「この属性にはこの値を指定している」くらいの意味で読んでください。属性値は必ず引用符（<code>"</code>）で囲みます。</p>
+
+      <h2 id="multiple">1つのタグに複数の属性を付けられる</h2>
+      <p>属性はスペースで区切って、いくつでも並べられます。</p>
+      <pre><code>&lt;a class="nav-link" href="../index.html"&gt;トップへ戻る&lt;/a&gt;</code></pre>
+      <ul>
+        <li><code>a</code>：タグ名</li>
+        <li><code>class</code>：属性名 → <code>"nav-link"</code>：属性値</li>
+        <li><code>href</code>：属性名 → <code>"../index.html"</code>：属性値</li>
+      </ul>
+      <p>このように、1つのタグに <code>class</code> と <code>href</code> の2つの属性が付いています。属性はスペースで区切られ、順番に意味を持っています。</p>
+
+      <h2 id="class">class</h2>
+      <pre><code>&lt;div class="card"&gt;</code></pre>
+      <p><code>class</code> は要素をグループ分けするための属性です。同じ <code>class</code> 名を複数の要素に付けられ、CSSで見た目を指定したり、JavaScriptから対象を探したりするときによく使います。</p>
+      <p>詳しい使い方と <code>id</code> との違いは、<a href="class-id.html">「classとidの違い」</a>で読めます。</p>
+
+      <h2 id="id">id</h2>
+      <pre><code>&lt;section id="start"&gt;</code></pre>
+      <p><code>id</code> はページ内で特定の要素を識別するための属性です。同じページに同じ <code>id</code> 値を重複させないルールがあります。CSSでその要素のスタイルを指定したり、<code>href="#start"</code> でページ内の特定の場所へリンクしたりするときに使います。</p>
+      <aside class="term-note" aria-label="英語から覚える：id">
+        <strong>英語から覚える：id = identifier（識別子）</strong>
+        <p>identifier は「見分けるための名前」という意味です。「ページの中でこの要素だけを特定する名前」と覚えると読みやすくなります。</p>
+      </aside>
+      <p><code>class</code> との詳しい違いは<a href="class-id.html">「classとidの違い」</a>をご覧ください。</p>
+
+      <h2 id="href">href</h2>
+      <pre><code>&lt;a href="../index.html"&gt;トップへ戻る&lt;/a&gt;</code></pre>
+      <p><code>href</code> はリンク先を指定する属性です。<code>a</code> タグに付けて「クリックしたときにどこへ移動するか」を伝えます。</p>
+      <aside class="term-note" aria-label="英語から覚える：href">
+        <strong>英語から覚える：href</strong>
+        <p>Hypertext Reference の略と説明されることが多く、reference は「参照」という意味です。「参照先・移動先」と結び付けて読みましょう。</p>
+      </aside>
+      <p>詳しい使い方は<a href="href-src.html">「hrefとsrcの違い」</a>で説明しています。</p>
+
+      <h2 id="src">src</h2>
+      <pre><code>&lt;img src="../assets/koi.png" alt=""&gt;</code></pre>
+      <p><code>src</code> は画像やスクリプトなど、読み込むファイルの場所を指定する属性です。<code>img</code> タグでは「どの画像を表示するか」、<code>script</code> タグでは「どのJavaScriptファイルを読み込むか」を伝えます。</p>
+      <aside class="term-note" aria-label="英語から覚える：src">
+        <strong>英語から覚える：src = source（元・出どころ）</strong>
+        <p>source は「元・出どころ」を意味します。「この画像はここから持ってくる」と読むと分かりやすくなります。</p>
+      </aside>
+      <p>詳しい使い方は<a href="href-src.html">「hrefとsrcの違い」</a>で説明しています。</p>
+
+      <h2 id="alt">alt</h2>
+      <pre><code>&lt;img src="../assets/koi.png" alt="鯉のロゴ"&gt;</code></pre>
+      <p><code>alt</code> は画像の代替テキストを指定する属性です。画像が読み込めないときに代わりに表示されたり、スクリーンリーダー（視覚に障害のある方が使う読み上げツール）で内容を伝えたりするために使います。</p>
+      <aside class="term-note" aria-label="英語から覚える：alt">
+        <strong>英語から覚える：alt = alternative（代わりの）</strong>
+        <p>alternative は「代わりの・別の選択肢」という意味です。「画像が見えないときの代わりのテキスト」と覚えましょう。</p>
+      </aside>
+      <p>このサイトのロゴ画像のように、装飾目的の画像では <code>alt=""</code> と空にすることもあります。</p>
+
+      <h2 id="real-code">このサイトのコードを実際に読む</h2>
+      <p>このサイトの各ページのヘッダーには、次のコードがあります。</p>
+      <pre><code>&lt;img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371"&gt;</code></pre>
+      <p>分解してみましょう。</p>
+      <ul>
+        <li><code>img</code>：タグ名（画像を表す）</li>
+        <li><code>class</code>：属性名 → <code>"site-logo"</code>：属性値（グループ名）</li>
+        <li><code>src</code>：属性名 → <code>"../assets/koi.png"</code>：属性値（画像の読み込み元）</li>
+        <li><code>alt</code>：属性名 → <code>""</code>：属性値（装飾画像のため空）</li>
+        <li><code>width</code>・<code>height</code>：属性名 → 画像のサイズを指定する属性</li>
+      </ul>
+      <p>1つの開始タグの中に複数の属性がスペースで区切られて並んでいます。それぞれが「この画像タグへの追加情報」です。</p>
+
+      <h2 id="tag-specific">属性はタグによって使えるものが違う</h2>
+      <p>属性とタグには組み合わせのルールがあります。主なものだけ覚えておけば十分です。</p>
+      <ul>
+        <li><code>href</code> は主に <code>a</code> タグで使う</li>
+        <li><code>src</code> は <code>img</code> や <code>script</code> などで使う</li>
+        <li><code>alt</code> は <code>img</code> タグで使う</li>
+        <li><code>class</code> や <code>id</code> はほぼすべてのHTML要素で使える</li>
+      </ul>
+      <p>「<code>a</code> タグに <code>src</code> を書いても意味がない」という感覚が持てれば、コードを読むときに属性の用途を自然に整理できるようになります。</p>
+
+      <h2 id="how-to-read">HTMLを読むときの順番</h2>
+      <p>実際のコードを読むとき、次の順番で見るとスムーズです。</p>
+      <pre><code>&lt;a class="nav-start" href="#start"&gt;はじめに&lt;/a&gt;</code></pre>
+      <ol>
+        <li><strong>タグ名を見る</strong>：<code>a</code> → リンクを表す</li>
+        <li><strong>属性名を見る</strong>：<code>class</code>、<code>href</code></li>
+        <li><strong>属性値を見る</strong>：<code>"nav-start"</code>（グループ名）、<code>"#start"</code>（移動先）</li>
+        <li><strong>表示内容を見る</strong>：「はじめに」</li>
+      </ol>
+      <p>「aタグなのでリンク。classはnav-start。hrefは#startへの移動先。表示される文字は『はじめに』」と読めれば十分です。ゆっくりで大丈夫です。</p>
+
+      <h2 id="css-relation">属性とCSSの関係</h2>
+      <p><code>class</code> や <code>id</code> は、CSSで見た目を指定するときにも使われます。</p>
+      <pre><code>.card {
+  padding: 16px;
+  border: 1px solid #ccc;
+}</code></pre>
+      <p>CSSの <code>.card</code> は「classがcardの要素にこの見た目を適用する」という意味です。HTMLで付けた <code>class="card"</code> と、CSSの <code>.card</code> がつながっています。詳しいCSSセレクタの読み方（<code>.class</code> と <code>#id</code> の使い分けなど）は、今後の記事でまとめる予定です。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li>タグ名の後ろに付く追加情報を<strong>属性</strong>と呼ぶ</li>
+          <li><code>class="card"</code> では <code>class</code> が属性名、<code>"card"</code> が属性値</li>
+          <li>1つのタグに複数の属性を付けられる（スペースで区切る）</li>
+          <li><code>class</code>・<code>id</code>・<code>href</code>・<code>src</code>・<code>alt</code> はすべて属性</li>
+          <li>HTMLを読むときは「タグ名 → 属性名 → 属性値 → 表示内容」の順に見ると分かりやすい</li>
+        </ul>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="html-tags.html" rel="prev">HTMLタグとは？ &lt; &gt; の中には何が書いてある？</a></p>
+        <p>次の記事：<a href="href-src.html" rel="next">hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

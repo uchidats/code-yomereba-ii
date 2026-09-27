@@ -485,5 +485,48 @@ window.siteQuizQuestions = [
     answer: 1,
     explanation: "APIはApplication Programming Interfaceの略で、プログラム同士が決められた方法で機能やデータをやり取りする窓口です。天気情報の取得やログイン連携などで使われます。",
     article: "../articles/api.html"
+  },
+
+  // ── 属性編（attribute.html 追加分）──────────────────────
+
+  {
+    id: "html-attribute-meaning",
+    category: "html",
+    question: "このコードで「属性」にあたるものはどれ？",
+    code: '<a href="https://example.com" class="link">リンク</a>',
+    choices: ["a", "href と class", "リンク", "</a>"],
+    answer: 1,
+    explanation: "属性はタグに追加情報を与えるものです。href と class はどちらも属性で、タグ名（a）の後ろにスペースで区切って書きます。",
+    article: "../articles/attribute.html"
+  },
+  {
+    id: "html-attribute-name-value",
+    category: "html",
+    question: "class=\"card\" の「属性名」と「属性値」の組み合わせとして正しいものはどれ？",
+    code: '<div class="card">',
+    choices: ["div が属性名、card が属性値", "class が属性名、\"card\" が属性値", "\"card\" が属性名、class が属性値", "class と card のどちらも属性名"],
+    answer: 1,
+    explanation: "属性は「属性名 = 属性値」の形で書きます。class が属性名で、引用符の中の \"card\" が属性値です。",
+    article: "../articles/attribute.html"
+  },
+  {
+    id: "html-multiple-attributes",
+    category: "html",
+    question: "このコードに付いている属性の数はいくつ？",
+    code: '<img class="site-logo" src="../assets/koi.png" alt="">',
+    choices: ["1つ", "2つ", "3つ", "4つ"],
+    answer: 2,
+    explanation: "class・src・alt の3つの属性が付いています。属性はスペースで区切って並べられ、タグによって使えるものが異なります。",
+    article: "../articles/attribute.html"
+  },
+  {
+    id: "html-alt-attribute",
+    category: "html",
+    question: "imgタグの alt 属性の役割として正しいものはどれ？",
+    code: '<img src="../assets/koi.png" alt="鯉のロゴ">',
+    choices: ["画像のサイズを指定する", "画像のリンク先を指定する", "画像が表示できないときや読み上げ時に使われる代替テキストを指定する", "画像の読み込み元を指定する"],
+    answer: 2,
+    explanation: "alt は alternative（代わりの）の略で、画像の代替テキストを指定します。画像が読み込めないときや、スクリーンリーダーによる読み上げ時に内容を伝えます。",
+    article: "../articles/attribute.html"
   }
 ];
