@@ -19,6 +19,7 @@
   <title>Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み｜コードは読めればいい</title>
   <meta name="description" content="GASはGoogleのサービスを自動で動かすためのJavaScript。カレンダーに予定を追加する例で、組み込みサービス、トリガー、APIとの関係を説明します。">
   <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
 </head>
 <body>
   <header class="site-header compact">
@@ -166,6 +167,23 @@
         <p>GAS = Googleのサービスを自動で動かすためのJavaScript。ブラウザで書き、Google側で動かし、トリガーで実行のきっかけを決められます。</p>
       </div>
 
+      <div class="article-rating" data-article-id="gas">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
       <div class="article-navigation" role="navigation" aria-label="前後の記事">
         <p>前の記事：<a href="json.html" rel="prev">JSONとは？ APIでよく使われるデータの書き方</a></p>
         <p>次の記事：<a href="trigger.html" rel="next">トリガーとは？ GASを自動で動かす仕組み</a></p>
@@ -185,5 +203,6 @@
       <p>© コードは読めればいい。たぶん。All rights reserved.</p>
     </div>
   </footer>
+  <script src="../assets/article-rating.js" defer></script>
 </body>
 </html>

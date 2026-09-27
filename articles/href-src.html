@@ -20,6 +20,7 @@
   <title>hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う｜コードは読めればいい</title>
   <meta name="description" content="hrefは参照先、srcは読み込み元。リンク・CSS・画像・JavaScriptの例を見ながら、HTMLを読むための違いを英語の意味と一緒に整理します。">
   <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
 </head>
 <body>
   <header class="site-header compact">
@@ -114,6 +115,23 @@
         <p><code>href</code>は参照先（<code>&lt;a&gt;</code>・<code>&lt;link&gt;</code>）、<code>src</code>は読み込み元（<code>&lt;img&gt;</code>・<code>&lt;script&gt;</code>）です。</p>
         <p>迷ったら、referenceは「参照」、sourceは「元・出どころ」を思い出し、タグと一緒に読みましょう。</p>
       </div>
+      <div class="article-rating" data-article-id="href-src">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
       <div class="article-navigation" role="navigation" aria-label="前後の記事">
         <p>前の記事：<a href="attribute.html" rel="prev">属性とは？ class・id・href・src をまとめて理解する</a></p>
         <p>次の記事：<a href="relative-path.html" rel="next">相対パスとは？ ../ の意味を読めるようになる</a></p>
@@ -133,5 +151,6 @@
       <p>© コードは読めればいい。たぶん。All rights reserved.</p>
     </div>
   </footer>
+  <script src="../assets/article-rating.js" defer></script>
 </body>
 </html>

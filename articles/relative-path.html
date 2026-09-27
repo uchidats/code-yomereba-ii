@@ -20,6 +20,7 @@
   <title>相対パスとは？ ../ の意味を読めるようになる｜コードは読めればいい</title>
   <meta name="description" content="相対パスの ../ は1つ上のフォルダへ戻る意味。実際のフォルダ図とHTMLの例から、画像やCSSまでの道順、ページによって書き方が変わる理由を読み解きます。">
   <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
 </head>
 <body>
   <header class="site-header compact">
@@ -156,6 +157,23 @@ koi.png</code></pre>
         <p>pathはファイルまでの道順で、相対パスは今いる場所を基準にするため、同じファイルでも現在地によって書き方が変わります。</p>
         <p><code>../</code>は1つ上、<code>../../</code>は2つ上、<code>./</code>は今いるフォルダ、と読みましょう。</p>
       </div>
+      <div class="article-rating" data-article-id="relative-path">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
       <div class="article-navigation" role="navigation" aria-label="前後の記事">
         <p>前の記事：<a href="href-src.html" rel="prev">hrefとsrcの違い｜どちらもURLっぽいけれど役割は違う</a></p>
         <p>次の記事：<a href="class-id.html" rel="next">classとidの違い｜HTMLの「グループ名」と「固有名」</a></p>
@@ -175,5 +193,6 @@ koi.png</code></pre>
       <p>© コードは読めればいい。たぶん。All rights reserved.</p>
     </div>
   </footer>
+  <script src="../assets/article-rating.js" defer></script>
 </body>
 </html>

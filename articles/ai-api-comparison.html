@@ -20,6 +20,7 @@
   <title>同じ「APIとは？」を4つのAIに書かせたら、文章はどれくらい違う？｜コードは読めればいい</title>
   <meta name="description" content="同じプロンプトで4つのAIモデルにAPIを説明してもらった実践記録。回答を原文で掲載し、例え方、日本語の自然さ、説明の厳密さを順位をつけずに読み比べます。">
   <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
 </head>
 <body>
   <header class="site-header compact">
@@ -118,6 +119,23 @@
       <p>「AIはどれも同じように答える」と思っていましたが、実際に並べると、文章の癖や例えの選び方にかなり違いがありました。ひとつずつ読んでいたら、どれも「なるほど」で終わっていたかもしれません。</p>
       <p>このサイトで大事にしたいのは、全部を自分で書くことより、書かれたものを読んで理解できることです。<strong>AIに書いてもらうだけでなく、出力を読んで比較できることにも意味がある。</strong>今回は、APIの説明を通じて、そのことを実感しました。</p>
 
+      <div class="article-rating" data-article-id="ai-api-comparison">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
       <div class="article-navigation" role="navigation" aria-label="前後の記事">
         <p>前の記事：<a href="antigravity-backup.html" rel="prev">CodexのバックアップとしてAntigravityを試してみた</a></p>
       </div>
@@ -137,5 +155,6 @@
       <p>© コードは読めればいい。たぶん。All rights reserved.</p>
     </div>
   </footer>
+  <script src="../assets/article-rating.js" defer></script>
 </body>
 </html>
