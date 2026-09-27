@@ -39,12 +39,22 @@
   <main class="quiz-page">
     <div class="container narrow">
       <p class="breadcrumb"><a href="../index.html">トップ</a> › 知識確認クイズ</p>
-      <p class="eyebrow">全問題からランダムに10問出題</p>
       <h1>知識確認クイズ</h1>
       <p class="article-lead">記事を読んだあと、本当に分かったかを少しだけ確認してみましょう。</p>
       <p>全部覚える必要はありません。分からなかったら<a href="../indexes/index.html">検索・索引</a>から確認できます。</p>
       <p id="quiz-unavailable">クイズを読み込めない場合は、ページを再読み込みしてください。検索・索引からも復習できます。</p>
       <noscript><p>クイズにはJavaScriptが必要です。ブラウザのJavaScriptを有効にしてご利用ください。</p></noscript>
+
+      <section id="quiz-setup" class="quiz-card" aria-labelledby="quiz-setup-heading" hidden>
+        <h2 id="quiz-setup-heading">出題する分野を選んでください</h2>
+        <fieldset id="quiz-category-fieldset">
+          <legend class="sr-only">出題カテゴリ</legend>
+          <div id="quiz-category-list" class="quiz-category-list"></div>
+        </fieldset>
+        <p id="quiz-pool-info" class="quiz-pool-info" aria-live="polite"></p>
+        <p id="quiz-category-error" class="quiz-category-error" aria-live="polite" hidden>1つ以上の分野を選択してください</p>
+        <button id="quiz-start" class="button" type="button">クイズを開始</button>
+      </section>
       <section id="quiz-panel" class="quiz-card" aria-labelledby="quiz-question" hidden>
         <p id="quiz-progress" class="quiz-progress"></p>
         <h2 id="quiz-question" tabindex="-1"></h2>
