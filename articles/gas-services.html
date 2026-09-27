@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-28T08:30:00+09:00 -->
+  <title>SpreadsheetApp・GmailApp・CalendarAppとは？ GASのサービスを読む｜コードは読めればいい</title>
+  <meta name="description" content="GASのコードに登場するSpreadsheetApp・GmailApp・CalendarApp・DriveAppが何かを解説。「左端を見れば何のサービスか分かる」というコードの読み方を身に付けます。">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/gas.html">Google Apps Script</a> › SpreadsheetApp・GmailApp・CalendarAppとは？</p>
+
+      <h1>SpreadsheetApp・GmailApp・CalendarAppとは？ GASのサービスを読む</h1>
+      <p class="article-lead">GASのコードには <code>SpreadsheetApp</code> や <code>GmailApp</code> といった言葉がよく登場します。これらは、操作したいGoogleサービスごとに用意された「入口」です。入口を見れば、何のサービスを使おうとしているかがすぐに分かります。</p>
+
+      <p><a href="dot-parentheses.html">「. と () は何？」</a>という記事で、<code>SpreadsheetApp.getActiveSpreadsheet()</code> のようなコードを左から分解して読む方法を学びました。今回は、その先頭にある <code>SpreadsheetApp</code> や <code>GmailApp</code> などが何なのかを整理します。</p>
+
+      <h2 id="intro">まず結論：GASにはGoogleサービスごとに入口がある</h2>
+      <p>GASには、操作したいGoogleサービスごとに、あらかじめ入口となる名前が用意されています。コードにその名前が出てきたら、「ここでそのサービスを使おうとしているんだな」と読むことができます。</p>
+      <p>代表的な入口は次の4つです。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>SpreadsheetApp</code></h3>
+          <p>Googleスプレッドシートへの入口</p>
+        </div>
+        <div class="card">
+          <h3><code>GmailApp</code></h3>
+          <p>Gmailへの入口</p>
+        </div>
+        <div class="card">
+          <h3><code>CalendarApp</code></h3>
+          <p>Googleカレンダーへの入口</p>
+        </div>
+        <div class="card">
+          <h3><code>DriveApp</code></h3>
+          <p>Google Driveへの入口</p>
+        </div>
+      </div>
+      <p>名前に「App」が付いているものが多いことも、覚えておくと目印になります。<code>GmailApp</code>・<code>CalendarApp</code>・<code>DriveApp</code>・<code>SpreadsheetApp</code> のように、「サービス名 + App」という形になっています。</p>
+
+      <h2 id="spreadsheetapp">SpreadsheetApp：スプレッドシートへの入口</h2>
+      <p>次のコードを見てみましょう。</p>
+      <pre><code>const ss = SpreadsheetApp.getActiveSpreadsheet();</code></pre>
+      <p><a href="dot-parentheses.html">「. と () は何？」</a>で学んだ読み方がそのまま使えます。</p>
+      <ul>
+        <li><code>SpreadsheetApp</code>：Googleスプレッドシートを扱うための入口（道具箱）</li>
+        <li><code>.</code>：その入口の中にある機能を見る</li>
+        <li><code>getActiveSpreadsheet</code>：現在開いているスプレッドシートを取得する機能</li>
+        <li><code>()</code>：その機能を実行する</li>
+        <li><code>const ss =</code>：取得した結果を <code>ss</code> という名前で取っておく</li>
+      </ul>
+      <p>前の記事で学んだ「左 → . → 機能名 → ()」の読み方が、ここでそのまま活きてきます。</p>
+
+      <h2 id="gmailapp">GmailApp：Gmailへの入口</h2>
+      <p>次のコードを見てみましょう。</p>
+      <pre><code>const threads = GmailApp.search("label:todo");</code></pre>
+      <p><code>GmailApp</code> は、GASからGmailを操作するためのサービスです。</p>
+      <ul>
+        <li><code>GmailApp</code>：Gmailを扱うための入口</li>
+        <li><code>.</code>：その入口の中にある機能を見る</li>
+        <li><code>search</code>：メールを検索する機能</li>
+        <li><code>("label:todo")</code>：「label:todo」という検索条件を渡して実行</li>
+      </ul>
+      <p><code>()</code> の中には、「どんな条件で検索するか」という材料（<a href="dot-parentheses.html#arguments">引数</a>）が入っています。ここでは「todoというラベルが付いたメール」を検索しています。<code>GmailApp</code> を見た時点で「Gmailに関する処理だな」と分かれば十分です。</p>
+
+      <h2 id="calendarapp">CalendarApp：Googleカレンダーへの入口</h2>
+      <p>次のコードを見てみましょう。</p>
+      <pre><code>const calendar = CalendarApp.getDefaultCalendar();</code></pre>
+      <p><code>CalendarApp</code> は、GASからGoogleカレンダーを扱うための入口です。</p>
+      <ul>
+        <li><code>CalendarApp</code>：Googleカレンダーを扱うための入口</li>
+        <li><code>.</code>：その入口の中にある機能を見る</li>
+        <li><code>getDefaultCalendar</code>：自分の標準（デフォルト）のカレンダーを取得する機能</li>
+        <li><code>()</code>：その機能を実行する</li>
+      </ul>
+      <p><code>CalendarApp</code> と見えたら、「カレンダーの予定に関する処理」と即座に判断できます。</p>
+
+      <h2 id="driveapp">DriveApp：Google Driveへの入口</h2>
+      <p>次のコードを見てみましょう。</p>
+      <pre><code>const file = DriveApp.getFileById(fileId);</code></pre>
+      <p><code>DriveApp</code> は、Google Drive内のファイルやフォルダを扱うためのサービスです。</p>
+      <ul>
+        <li><code>DriveApp</code>：Google Driveを扱うための入口</li>
+        <li><code>.</code>：その入口の中にある機能を見る</li>
+        <li><code>getFileById</code>：IDを使ってファイルを取得する機能</li>
+        <li><code>(fileId)</code>：取得したいファイルのIDを渡して実行</li>
+      </ul>
+      <p><code>fileId</code> という変数の中身がどこから来たかは、コード全体を追う必要がありますが、「DriveApp を使っているので、Driveのファイルを扱っているんだな」とだけ分かれば今は十分です。</p>
+
+      <h2 id="app-pattern">「App」は全部同じ使い方？</h2>
+      <p>完全に同じではありません。それぞれのサービスが持っている機能は異なりますし、取得できる情報も違います。</p>
+      <p>ただし、コードを読む上での基本的な形はどれも同じです。</p>
+      <pre><code>○○App.機能()</code></pre>
+      <p>この形を見たら、<strong>「○○というGoogleサービスに対して、何かの機能を呼び出している」</strong>と読む習慣を付けましょう。右側の機能名を全部覚えなくても、左端の <code>○○App</code> さえ分かれば、何のサービスを操作しようとしているかは判断できます。</p>
+
+      <h2 id="read-left-first">コードを読むときは左端を見る</h2>
+      <p>GASのコードを見かけたとき、まず左端に注目してみましょう。</p>
+      <pre><code>GmailApp.sendEmail(...)</code></pre>
+      <p><code>GmailApp</code> を見た瞬間に、「これはGmail関係の処理だ」と分かります。後ろの <code>sendEmail</code> は「メールを送信している」と読めますが、まず左端で大まかな処理の分野を把握することが重要です。</p>
+      <pre><code>CalendarApp.createEvent(...)</code></pre>
+      <p><code>CalendarApp</code> と見えたら、「カレンダーに何かする処理」と分かります。<code>createEvent</code> は「予定を作成している」と推測できます。</p>
+      <p>長いコードを全部読む前に、左端を見るだけで「何のサービスを使っているか」が分かる——これは、GASのコードを読むときの大切なコツです。</p>
+
+      <aside class="term-note" aria-label="読み方のポイント：左端を見る">
+        <strong>読み方のポイント：左端を見る</strong>
+        <p><code>SpreadsheetApp</code>・<code>GmailApp</code>・<code>CalendarApp</code>・<code>DriveApp</code> のような名前を左端に発見したら、まず「どのGoogleサービスを操作しようとしているか」を判断しましょう。その後、<code>.</code> の右側で「何をしようとしているか」を確認すれば、コードの意図を大きくつかめます。</p>
+      </aside>
+
+      <h2 id="real-examples">このサイトの実際のコードを読む</h2>
+      <p>このサイトの<a href="gas.html">「Google Apps Script（GAS）とは？」</a>の記事には、次の実在するコードが掲載されています。</p>
+      <pre><code>function main() {
+  const start = new Date("2027-01-15T10:00:00+09:00");
+  const end = new Date("2027-01-15T10:30:00+09:00");
+  CalendarApp.createEvent("GASの練習", start, end);
+}</code></pre>
+      <p>最後の行に注目しましょう。</p>
+      <pre><code>CalendarApp.createEvent("GASの練習", start, end);</code></pre>
+      <ul>
+        <li>左端の <code>CalendarApp</code>：Googleカレンダーへの入口 → 「カレンダー関係の処理」と判断できる</li>
+        <li><code>.</code>：その入口の中の機能を見る</li>
+        <li><code>createEvent</code>：予定を作成する機能</li>
+        <li><code>("GASの練習", start, end)</code>：予定のタイトル、開始時刻、終了時刻を渡して実行</li>
+      </ul>
+      <p>左端の <code>CalendarApp</code> を見た時点で「カレンダーに予定を追加するコードだ」と分かります。詳細は <code>createEvent</code> の部分で確認でき、自然に読み進められます。</p>
+      <p>また、<a href="dot-parentheses.html">「. と () は何？」</a>の記事では、<code>GmailApp.search("label:todo")</code> というコードも例として使っています。<code>GmailApp</code> を見れば「Gmailで検索している」、<code>search</code> を見れば「検索機能を使っている」と読めます。</p>
+
+      <h2 id="other-services">GASにはほかにもサービスがある</h2>
+      <p>GASが用意しているサービスの入口は、ここで紹介した4つだけではありません。</p>
+      <ul>
+        <li><code>DocumentApp</code>：Google ドキュメントを操作するサービス</li>
+        <li><code>FormApp</code>：Google フォームを操作するサービス</li>
+        <li><code>SlidesApp</code>：Google スライドを操作するサービス</li>
+      </ul>
+      <p>ただし、これらをすべて覚える必要はありません。コードを見かけたときに「○○App = ○○サービスへの入口」というパターンで調べれば十分です。このサイトの思想は「全部書けなくていい、読めれば十分」。知らない <code>App</code> が出てきたら、そのときに調べましょう。</p>
+
+      <h2 id="how-to-read">コードを読むときの5つのステップ</h2>
+      <p>GASのコードを読むときは、次の順番で目を動かしてみましょう。</p>
+      <pre><code>const threads = GmailApp.search("label:todo");</code></pre>
+      <ol>
+        <li><strong>左端の ○○App を見る</strong>：<code>GmailApp</code> → Gmailに関する処理だと判断する</li>
+        <li><strong>何のGoogleサービスか判断する</strong>：Gmailを使っているので、メールに関係する処理</li>
+        <li><strong>. の右側を見る</strong>：<code>search</code> → 検索機能を使っている</li>
+        <li><strong>() で何を実行しているか読む</strong>：検索機能を呼び出している</li>
+        <li><strong>() の中を見る</strong>：<code>"label:todo"</code> → 「todoラベルのメール」を検索条件として渡している</li>
+      </ol>
+      <p>このステップで読めば、長いコードでも慌てず意味を追えます。前の記事で学んだ「. と () の読み方」と、この「左端 ○○App を見る」ことを組み合わせると、GASのコードの大半は読める構造になっています。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li><code>SpreadsheetApp</code> = Googleスプレッドシートへの入口</li>
+          <li><code>GmailApp</code> = Gmailへの入口</li>
+          <li><code>CalendarApp</code> = Googleカレンダーへの入口</li>
+          <li><code>DriveApp</code> = Google Driveへの入口</li>
+          <li><code>○○App.機能()</code> の形を見たら「○○サービスで何かを実行している」と読む</li>
+          <li>まず左端の <code>○○App</code> を見れば、何のサービスか判断できる</li>
+          <li>全部暗記する必要はない。見かけたときに調べれば十分</li>
+        </ul>
+      </div>
+
+      <div class="article-rating" data-article-id="gas-services">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="gas.html" rel="prev">Google Apps Script（GAS）とは？ Googleサービスを自動化する仕組み</a></p>
+        <p>次の記事：<a href="trigger.html" rel="next">トリガーとは？ GASを自動で動かす仕組み</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+          <p><a href="../categories/gas.html">← Google Apps Scriptの記事一覧へ</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../assets/article-rating.js" defer></script>
+</body>
+</html>

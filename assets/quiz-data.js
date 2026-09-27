@@ -654,5 +654,50 @@ window.siteQuizQuestions = [
     answer: 2,
     explanation: "ドットが連続している場合（メソッドチェーン）は、左から順に読みます。まずスプレッドシートを取得し、その結果に対してさらにgetActiveSheet()を実行しています。",
     article: "../articles/dot-parentheses.html"
+  },
+  {
+    id: "gas-services-gmail",
+    category: "gas",
+    question: "GASで Gmail のメール検索や送信を行うときに使うサービス（入口）はどれ？",
+    code: 'const threads = GmailApp.search("label:todo");',
+    choices: ["CalendarApp", "DriveApp", "GmailApp", "SpreadsheetApp"],
+    answer: 2,
+    explanation: "GmailApp はGASからGmailを操作するための入口です。メールの検索や送信などの機能が用意されています。",
+    article: "../articles/gas-services.html"
+  },
+  {
+    id: "gas-services-calendar",
+    category: "gas",
+    question: "GASのコードで Googleカレンダー に予定を作成・取得するときに使うサービスはどれ？",
+    code: 'CalendarApp.createEvent("会議", start, end);',
+    choices: ["CalendarApp", "DriveApp", "GmailApp", "DocumentApp"],
+    answer: 0,
+    explanation: "CalendarApp はGoogleカレンダーを操作するための入口です。createEvent() で予定の作成、getDefaultCalendar() でカレンダー取得などができます。",
+    article: "../articles/gas-services.html"
+  },
+  {
+    id: "gas-services-drive",
+    category: "gas",
+    question: "GASで Google Drive 内のファイルやフォルダを操作するときに使うサービスはどれ？",
+    code: "const file = DriveApp.getFileById(fileId);",
+    choices: ["SpreadsheetApp", "CalendarApp", "DriveApp", "FormApp"],
+    answer: 2,
+    explanation: "DriveApp はGoogle Drive内のファイルやフォルダを扱うためのサービスです。getFileById() でIDを指定してファイルを取得できます。",
+    article: "../articles/gas-services.html"
+  },
+  {
+    id: "gas-services-pattern",
+    category: "gas",
+    question: "GASのコードで「○○App.機能()」という形を見かけたとき、どのように読むと意味を捉えやすい？",
+    code: 'GmailApp.sendEmail("test@example.com", "件名", "本文");',
+    choices: [
+      "右側の機能だけを見て、左端の○○Appは無視する",
+      "左端の○○Appで何のGoogleサービスか判断し、その機能を呼び出していると読む",
+      "すべてのサービス名と機能名を暗記していないと読めない",
+      "実行せずにスキップする合図と読む"
+    ],
+    answer: 1,
+    explanation: "GASでは「○○App.機能()」という形が基本です。左端の○○App（GmailApp、CalendarAppなど）を見るだけで、どのGoogleサービスに対する操作かが推測できます。",
+    article: "../articles/gas-services.html"
   }
 ];

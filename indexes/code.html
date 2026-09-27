@@ -140,15 +140,19 @@
 <li><a href="#gas-5"><code>Logger.log()</code></a></li>
 <li><a href="#gas-6"><code>SpreadsheetApp.getActiveSpreadsheet()</code></a></li>
 <li><a href="#gas-7"><code>GmailApp.search()</code></a></li>
+<li><a href="#gas-8"><code>CalendarApp.getDefaultCalendar()</code></a></li>
+<li><a href="#gas-9"><code>DriveApp.getFileById()</code></a></li>
 </ul>
 <dl class="index-entries">
-<div id="gas-1"><dt><code>GmailApp</code></dt><dd><p>GASからGmailを操作する入口。「この後ろでメールに関する操作をしている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
-<div id="gas-2"><dt><code>CalendarApp</code></dt><dd><p>GASからGoogleカレンダーを操作する入口。「予定を調べたり作成したりする処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
-<div id="gas-3"><dt><code>DriveApp</code></dt><dd><p>GASからGoogleドライブを操作する入口。「ファイルやフォルダを扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
-<div id="gas-4"><dt><code>SpreadsheetApp</code></dt><dd><p>GASからGoogleスプレッドシートを操作する入口。「シートやセルの値を扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a></p></dd></div>
+<div id="gas-1"><dt><code>GmailApp</code></dt><dd><p>GASからGmailを操作する入口。「この後ろでメールに関する操作をしている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-2"><dt><code>CalendarApp</code></dt><dd><p>GASからGoogleカレンダーを操作する入口。「予定を調べたり作成したりする処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-3"><dt><code>DriveApp</code></dt><dd><p>GASからGoogleドライブを操作する入口。「ファイルやフォルダを扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-4"><dt><code>SpreadsheetApp</code></dt><dd><p>GASからGoogleスプレッドシートを操作する入口。「シートやセルの値を扱う処理」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
 <div id="gas-5"><dt><code>Logger.log()</code></dt><dd><p>実行ログに値を出力する機能。「丸かっこの中身を、確認用の記録に出している」と読みます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
-<div id="gas-6"><dt><code>SpreadsheetApp.getActiveSpreadsheet()</code></dt><dd><p>現在開いているスプレッドシートを取得する命令。「スプレッドシートの道具箱の中から、アクティブなシートを取得する機能を呼び出す」と読みます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a></p></dd></div>
-<div id="gas-7"><dt><code>GmailApp.search()</code></dt><dd><p>Gmailのメールを検索する命令。かっこ内に検索キーワードや検索条件（引数）を渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a></p></dd></div>
+<div id="gas-6"><dt><code>SpreadsheetApp.getActiveSpreadsheet()</code></dt><dd><p>現在開いているスプレッドシートを取得する命令。「スプレッドシートの道具箱の中から、アクティブなシートを取得する機能を呼び出す」と読みます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-7"><dt><code>GmailApp.search()</code></dt><dd><p>Gmailのメールを検索する命令。かっこ内に検索キーワードや検索条件（引数）を渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-8"><dt><code>CalendarApp.getDefaultCalendar()</code></dt><dd><p>自分の標準（デフォルト）のカレンダーを取得する命令。CalendarApp がカレンダーの入口で、getDefaultCalendar が「標準カレンダーを取得する」機能です。</p><p class="index-related">関連記事：<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-9"><dt><code>DriveApp.getFileById()</code></dt><dd><p>Google Drive内のファイルをIDで指定して取得する命令。かっこ内にファイルIDを渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="html-css">
