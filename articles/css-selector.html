@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-27T20:35:00+09:00 -->
+  <title>CSSセレクタとは？ .class と #id を読む｜コードは読めればいい</title>
+  <meta name="description" content="CSSの .card や #start がHTMLのどこを指定しているかを解説。セレクタの意味、.class と #id の違い、HTMLとCSSを行き来してコードを読み解くコツを初心者向けにまとめます。">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/web.html">HTML / CSS / JavaScript</a> › CSSセレクタとは？</p>
+
+      <h1>CSSセレクタとは？ .class と #id を読む</h1>
+      <p class="article-lead">CSSのコードを見たとき、<code>.card</code> や <code>#start</code> がHTMLのどの部分を指しているかが分かれば、デザインがどのように適用されているかをスムーズに追えるようになります。</p>
+
+      <h2>まず結論：. は class、# は id を探す目印</h2>
+      <p>次のCSSを見てください。</p>
+      <pre><code>.card {
+  padding: 16px;
+}</code></pre>
+      <p>先頭に <code>.</code>（ドット）が付いた <code>.card</code> は、<strong>「<code>class="card"</code> が付いている要素を探して、その見た目を指定する」</strong>と読みます。</p>
+      <p>一方、先頭に <code>#</code>（シャープ／ハッシュ）が付いている場合はどうでしょうか。</p>
+      <pre><code>#start {
+  margin-top: 20px;
+}</code></pre>
+      <p><code>#start</code> は、<strong>「<code>id="start"</code> が付いている要素を対象にしている」</strong>と読みます。</p>
+      <ul>
+        <li><code>.</code> を見たら → <strong>class</strong> を探す</li>
+        <li><code>#</code> を見たら → <strong>id</strong> を探す</li>
+      </ul>
+      <p>これさえ知っておけば、CSSの先頭に書いてある言葉の役割がひと目で分かります。</p>
+
+      <h2 id="what-is-selector">そもそも「セレクタ」とは？</h2>
+      <aside class="term-note" aria-label="英語から覚える：selector">
+        <strong>英語から覚える：selector（セレクタ）</strong>
+        <p>selector は英語で「選ぶもの」「選択するもの」という意味です。家電のチャンネル切り替えスイッチ（セレクター）と同じ言葉です。</p>
+      </aside>
+      <p>CSSでは、<strong>どのHTML要素にスタイルを適用するかを選ぶ部分</strong>を「セレクタ」と呼びます。</p>
+      <pre><code>.card {
+  padding: 16px;
+}</code></pre>
+      <ul>
+        <li><code>.card</code>：<strong>セレクタ</strong>（対象を選ぶ）</li>
+        <li><code>{ }</code> の中身：<strong>適用する見た目の指定</strong>（余白を16pxにする）</li>
+      </ul>
+      <p>「セレクタで対象を選び、波かっこ <code>{ }</code> の中で見た目を指定する」というのが、CSSの基本構造です。</p>
+
+      <h2 id="class-selector">.class の意味：classセレクタ</h2>
+      <p><a href="class-id.html">「classとidの違い」</a>で見たように、HTMLではグループ名として <code>class</code> を付けます。</p>
+      <p>HTML側：</p>
+      <pre><code>&lt;div class="card"&gt;
+  &lt;p&gt;お知らせ&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p>CSS側：</p>
+      <pre><code>.card {
+  border-radius: 12px;
+}</code></pre>
+      <p>CSSでは、classの値の前に <code>.</code> を付けて指定します。つまり、</p>
+      <p><strong><code>class="card"</code> ↕ <code>.card</code></strong></p>
+      <p>という対応関係になっています。CSSで <code>.card</code> を見かけたら、HTML側にある <code>class="card"</code> を探せば、どこにスタイルが当たるかが分かります。</p>
+
+      <h2 id="id-selector">#id の意味：idセレクタ</h2>
+      <p>同じくHTMLで特定の要素に付ける固有名が <code>id</code> です。</p>
+      <p>HTML側：</p>
+      <pre><code>&lt;section id="start"&gt;
+  &lt;h2&gt;このサイトの目的&lt;/h2&gt;
+&lt;/section&gt;</code></pre>
+      <p>CSS側：</p>
+      <pre><code>#start {
+  scroll-margin-top: 80px;
+}</code></pre>
+      <p>CSSでは、idの値の前に <code>#</code> を付けて指定します。つまり、</p>
+      <p><strong><code>id="start"</code> ↕ <code>#start</code></strong></p>
+      <p>という対応関係です。CSSで <code>#start</code> を見かけたら、HTML側にある <code>id="start"</code> を探します。</p>
+
+      <h2 id="dot-and-sharp">. と # の違い</h2>
+      <p>覚えるルールはとてもシンプルです。</p>
+      <ul>
+        <li><strong><code>.</code> = class</strong>（複数の要素で共有できるグループ名）</li>
+        <li><strong><code>#</code> = id</strong>（ページ内で重複させない1つだけの固有名）</li>
+      </ul>
+      <p>Webサイトでは同じ見た目を使い回すことが多いため、実際のCSSでは <code>#</code> よりも <code>.</code>（classセレクタ）を見かける場面が圧倒的に多くなります。</p>
+
+      <h2 id="type-selector">タグ名そのものをセレクタにすることもある（要素セレクタ）</h2>
+      <p><code>.</code> や <code>#</code> を付けず、タグ名をそのままセレクタとして書くこともあります。</p>
+      <pre><code>p {
+  line-height: 1.8;
+}</code></pre>
+      <p>これは「ページ内にあるすべての <code>&lt;p&gt;</code> タグ（段落）の行間を1.8にする」という指定です。</p>
+      <p>まずは次の3種類が分かれば十分です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>.card</code>（classセレクタ）</h3>
+          <p><code>class="card"</code> を持つ要素をすべて対象にする。</p>
+        </div>
+        <div class="card">
+          <h3><code>#start</code>（idセレクタ）</h3>
+          <p><code>id="start"</code> を持つ固有の要素を対象にする。</p>
+        </div>
+        <div class="card">
+          <h3><code>p</code>（要素セレクタ）</h3>
+          <p>すべての <code>&lt;p&gt;</code> タグをまとめて対象にする。</p>
+        </div>
+      </div>
+
+      <h2 id="real-code">このサイトの実際のCSSを読む</h2>
+      <p>このサイトで実際に使われている <code>assets/styles.css</code> から、いくつかセレクタを見てみましょう。</p>
+      <pre><code>.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.site-logo {
+  display: block;
+  width: 44px;
+  height: auto;
+}
+
+.tagline {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}</code></pre>
+      <p>これらはすべて <code>.</code> から始まっているため、classを指定していることが分かります。</p>
+      <ul>
+        <li><code>.site-header</code> → HTMLの <code>class="site-header"</code>（ヘッダー全体）</li>
+        <li><code>.site-logo</code> → HTMLの <code>class="site-logo"</code>（鯉のロゴ画像）</li>
+        <li><code>.tagline</code> → HTMLの <code>class="tagline"</code>（サイトの説明文）</li>
+      </ul>
+      <p>「CSSのセレクタを見たら、HTML側で同じclass名を探す」という読み方をすれば、どのデザインがどの要素に当たっているかがすぐに分かります。</p>
+
+      <h2 id="how-to-read">CSSを読むときはHTMLと行き来する</h2>
+      <p>コードを読むときに最も大切なのは、<strong>HTMLとCSSのあいだを行き来する視点</strong>です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>CSSからHTMLを探すとき</h3>
+          <p>CSSで <code>.site-logo { width: 44px; }</code> を見たら、HTMLで <code>class="site-logo"</code> を探す。</p>
+        </div>
+        <div class="card">
+          <h3>HTMLからCSSを探すとき</h3>
+          <p>HTMLで <code>&lt;div class="card"&gt;</code> を見たら、CSSで <code>.card</code> の記述を探す。</p>
+        </div>
+      </div>
+      <p>HTMLの構造とCSSの見た目は、class名やid名という「共通の名前」でつながっています。この往復ができるようになると、Webページのコードがぐっと身近に感じられるはずです。</p>
+
+      <h2 id="curly-braces">{ } の中は何？</h2>
+      <p>波かっこ <code>{ }</code> の中には、具体的な見た目のルールが書かれています。</p>
+      <pre><code>.card {
+  padding: 16px;
+  border-radius: 12px;
+}</code></pre>
+      <ul>
+        <li><code>.card</code>：<strong>対象を選ぶ</strong>（カードの要素）</li>
+        <li><code>{ ... }</code>：<strong>その対象に対する見た目の指定</strong>（内側の余白や角の丸みなど）</li>
+      </ul>
+      <p><code>padding</code> や <code>border-radius</code> などのプロパティの詳しい意味は、必要になったときに調べれば大丈夫です。「セレクタが選んだ相手に対して、波かっこの中身が適用される」という関係だけを押さえておきましょう。</p>
+
+      <h2 id="summary-table">よく見るセレクタの対応表</h2>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>.name</code></h3>
+          <p>HTML：<code>class="name"</code><br>同じグループの要素をまとめて指定する。</p>
+        </div>
+        <div class="card">
+          <h3><code>#name</code></h3>
+          <p>HTML：<code>id="name"</code><br>ページ内で特定の1つだけを指定する。</p>
+        </div>
+        <div class="card">
+          <h3><code>p</code></h3>
+          <p>HTML：<code>&lt;p&gt;</code><br>そのタグ名を持つ要素全体を指定する。</p>
+        </div>
+      </div>
+
+      <h2 id="steps">CSSを読むときのステップ</h2>
+      <p>CSSのコードを見かけたら、次の順番で視点を動かしてみましょう。</p>
+      <ol>
+        <li><strong>セレクタを見る</strong>：先頭の文字を確認する</li>
+        <li><strong><code>.</code> なら class、<code>#</code> なら id</strong> と判断する</li>
+        <li><strong>HTML側で同じ名前を探す</strong>：どの要素が選ばれているかを確認する</li>
+        <li><strong><code>{ }</code> の中身を見る</strong>：どんな見た目が指定されているかを読む</li>
+      </ol>
+      <p>全部を暗記する必要はありません。セレクタの先頭の記号を手がかりに、HTMLとつなげて読んでみてください。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li><strong>セレクタ</strong> = CSSでスタイルを適用する対象を選ぶ部分</li>
+          <li><code>.card</code> は <code>class="card"</code> を持つ要素を指定する（. は class）</li>
+          <li><code>#start</code> は <code>id="start"</code> を持つ要素を指定する（# は id）</li>
+          <li><code>p</code> のようにタグ名そのものを指定する要素セレクタもある</li>
+          <li>CSSを読むときは、HTML側の class や id と対応させて行き来する</li>
+        </ul>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="class-id.html" rel="prev">classとidの違い｜HTMLの「グループ名」と「固有名」</a></p>
+        <p>次の記事：<a href="div-span.html" rel="next">divとspanの違い｜HTMLの「まとまり」と「一部分」</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

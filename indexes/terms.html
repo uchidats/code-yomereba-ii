@@ -90,6 +90,7 @@
 <li><a href="#web-7">PWA（ピーダブリューエー）</a></li>
 <li><a href="#web-13">relative path / 相対パス</a></li>
 <li><a href="#web-21">semantic HTML（セマンティックHTML）</a></li>
+<li><a href="#web-28">selector / セレクタ（CSSセレクタ）</a></li>
 <li><a href="#web-10">source / src</a></li>
 <li><a href="#web-19">span / スパン</a></li>
 <li><a href="#web-24">tag / タグ</a></li>
@@ -97,6 +98,9 @@
 <li><a href="#web-8">キャッシュ</a></li>
 <li><a href="#web-26">属性名（ぞくせいめい）</a></li>
 <li><a href="#web-27">属性値（ぞくせいち）</a></li>
+<li><a href="#web-29">classセレクタ</a></li>
+<li><a href="#web-30">idセレクタ</a></li>
+<li><a href="#web-31">要素セレクタ</a></li>
 </ul>
 <dl class="index-entries">
 <div id="web-11"><dt>absolute path / 絶対パス</dt><dd><p>最上位の場所から指定する道順。Webでは / から始まるパスはドメイン直下を基準にし、完全なURLなら接続先も含めて指定します。</p><p class="index-related">関連記事：<a href="../articles/relative-path.html#absolute">相対パスとは？</a></p></dd></div>
@@ -119,6 +123,7 @@
 <div id="web-19"><dt>span / スパン</dt><dd><p>英語で「範囲・広がり」、動詞では「一定の範囲を覆う」などの意味。HTMLでは文章などの一部分を汎用的に囲う要素です。</p><p class="index-related">関連記事：<a href="../articles/div-span.html#english">divとspanの違い</a></p></dd></div>
 <div id="web-20"><dt>navigation / nav</dt><dd><p>英語で「案内・移動」の意味。HTMLの<code>nav</code>はnavigationの略で、他のページやページ内の場所へ移動するための主要なリンク群をまとめる部分を表します。</p><p class="index-related">関連記事：<a href="../articles/semantic-html.html#nav">header・nav・main・section・articleの違い</a></p></dd></div>
 <div id="web-21"><dt>semantic HTML（セマンティックHTML）</dt><dd><p>semanticは「意味に関する」という意味。意味を持つHTMLタグ（header・nav・main・section・articleなど）を使い、コードの構造を人間にもブラウザにも伝わりやすくする考え方です。</p><p class="index-related">関連記事：<a href="../articles/semantic-html.html#semantic">header・nav・main・section・articleの違い</a></p></dd></div>
+<div id="web-28"><dt>selector / セレクタ（CSSセレクタ）</dt><dd><p>英語で「選ぶもの」の意味。CSSでどのHTML要素にスタイルを適用するかを選ぶ部分です。</p><p class="index-related">関連記事：<a href="../articles/css-selector.html#what-is-selector">CSSセレクタとは？</a></p></dd></div>
 <div id="web-8"><dt>キャッシュ</dt><dd><p>一度読み込んだデータを保存し、再利用する仕組み。ブラウザに古いデータが残り、サイトを修正しても以前の表示が見える場合があります。</p><p class="index-related">関連記事：<a href="../articles/build-site-in-one-day.html#troubles">1日でこのサイトを公開するまで</a></p></dd></div>
 <div id="web-22"><dt>attribute / 属性</dt><dd><p>英語で「特徴・属性」の意味。HTMLタグに追加の情報を与えるもので、<code>class</code>・<code>id</code>・<code>href</code>・<code>src</code>などがこれに当たります。開始タグ内の「タグ名 属性名="値"」の形で書きます。</p><p class="index-related">関連記事：<a href="../articles/attribute.html">属性とは？</a>、<a href="../articles/html-tags.html#attribute">HTMLタグとは？</a></p></dd></div>
 <div id="web-23"><dt>nesting / 入れ子</dt><dd><p>タグの中に別のタグを入れる構造のこと。nestは英語で「巣」の意味から「組み合わさって収まる形」を表します。HTMLは入れ子によって箱の中に箱が入る構造を表現します。</p><p class="index-related">関連記事：<a href="../articles/html-tags.html#nesting">HTMLタグとは？</a></p></dd></div>
@@ -126,6 +131,9 @@
 <div id="web-25"><dt>void element（空要素）</dt><dd><p>終了タグを持たないHTML要素のこと。<code>&lt;img&gt;</code>・<code>&lt;meta&gt;</code>・<code>&lt;br&gt;</code>などが該当します。「自己完結する指示」として機能するため、閉じタグが不要です。</p><p class="index-related">関連記事：<a href="../articles/html-tags.html#void-element">HTMLタグとは？</a></p></dd></div>
 <div id="web-26"><dt>属性名（ぞくせいめい）</dt><dd><p>属性の名前の部分。<code>class="card"</code> なら <code>class</code> が属性名。どのような追加情報を与えるかを示します。</p><p class="index-related">関連記事：<a href="../articles/attribute.html#name-value">属性とは？</a></p></dd></div>
 <div id="web-27"><dt>属性値（ぞくせいち）</dt><dd><p>属性に設定する具体的な値。<code>class="card"</code> なら <code>"card"</code> が属性値。引用符で囲んで書きます。</p><p class="index-related">関連記事：<a href="../articles/attribute.html#name-value">属性とは？</a></p></dd></div>
+<div id="web-29"><dt>classセレクタ（クラスセレクタ）</dt><dd><p><code>.card</code> のように <code>.</code> を先頭に付け、指定したclass名を持つ要素を対象にするCSSの書き方です。</p><p class="index-related">関連記事：<a href="../articles/css-selector.html#class-selector">CSSセレクタとは？</a>、<a href="../articles/class-id.html#css">classとidの違い</a></p></dd></div>
+<div id="web-30"><dt>idセレクタ（アイディーセレクタ）</dt><dd><p><code>#start</code> のように <code>#</code> を先頭に付け、指定したid名を持つ特定の要素を対象にするCSSの書き方です。</p><p class="index-related">関連記事：<a href="../articles/css-selector.html#id-selector">CSSセレクタとは？</a>、<a href="../articles/class-id.html#css">classとidの違い</a></p></dd></div>
+<div id="web-31"><dt>要素セレクタ（ようそセレクタ）</dt><dd><p><code>p</code> や <code>div</code> のようにタグ名を直接セレクタとして書き、その種類のタグすべてを対象にするCSSの書き方です。</p><p class="index-related">関連記事：<a href="../articles/css-selector.html#type-selector">CSSセレクタとは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="data">

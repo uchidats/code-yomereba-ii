@@ -528,5 +528,68 @@ window.siteQuizQuestions = [
     answer: 2,
     explanation: "alt は alternative（代わりの）の略で、画像の代替テキストを指定します。画像が読み込めないときや、スクリーンリーダーによる読み上げ時に内容を伝えます。",
     article: "../articles/attribute.html"
+  },
+
+  // ── CSSセレクタ編（css-selector.html 追加分）──────────────
+
+  {
+    id: "css-selector-dot",
+    category: "html",
+    question: "CSSで .card { padding: 16px; } と書かれているとき、先頭の . が表しているものはどれ？",
+    code: ".card {\n  padding: 16px;\n}",
+    choices: [
+      "HTMLの id=\"card\" を持つ要素を対象にする",
+      "HTMLの class=\"card\" を持つ要素を対象にする",
+      "card という名前のファイルを読み込む",
+      "ページ内のすべてのカードを削除する"
+    ],
+    answer: 1,
+    explanation: "CSSでは class の値の前に . を付けて指定します。.card は class=\"card\" を持つ要素を対象にします。",
+    article: "../articles/css-selector.html"
+  },
+  {
+    id: "css-selector-sharp",
+    category: "html",
+    question: "CSSで #start { margin-top: 20px; } と書かれているとき、この指定が適用される対象はどれ？",
+    code: "#start {\n  margin-top: 20px;\n}",
+    choices: [
+      "class=\"start\" を持つすべての要素",
+      "start という名前の新しいHTMLタグ",
+      "ページ内のリンク先がすべて無効化された要素",
+      "id=\"start\" を持つ特定の要素"
+    ],
+    answer: 3,
+    explanation: "CSSでは id の値の前に # を付けて指定します。#start はページ内で特定の id=\"start\" を持つ要素を対象にします。",
+    article: "../articles/css-selector.html"
+  },
+  {
+    id: "css-selector-element",
+    category: "html",
+    question: "CSSでタグ名そのまま p { line-height: 1.8; } と書いた場合、対象になるものはどれ？",
+    code: "p {\n  line-height: 1.8;\n}",
+    choices: [
+      "ページ内にある最初の1つだけの p タグ",
+      "class=\"p\" が付いている要素",
+      "ページ内にあるすべての p タグ（段落）",
+      "id=\"p\" が付いている要素"
+    ],
+    answer: 2,
+    explanation: "タグ名を直接セレクタとして書く指定を要素セレクタと呼びます。p { } はページ内のすべての <p> タグをまとめて対象にします。",
+    article: "../articles/css-selector.html"
+  },
+  {
+    id: "css-selector-html-pairing",
+    category: "html",
+    question: "HTMLで <div class=\"site-box\"> と書かれた要素にスタイルを当てる場合、CSS側のセレクタとして正しいものはどれ？",
+    code: '<div class="site-box">内容</div>',
+    choices: [
+      "#site-box",
+      ".site-box",
+      "div.box#site",
+      "@site-box"
+    ],
+    answer: 1,
+    explanation: "HTMLの class 属性に対応するCSSセレクタは、先頭に . を付けた .site-box です。# は id を指定するときに使います。",
+    article: "../articles/css-selector.html"
   }
 ];
