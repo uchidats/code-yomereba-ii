@@ -7,7 +7,7 @@
 (() => {
   // ★ Google Apps Script (GAS) をデプロイ後、発行された「ウェブアプリのURL」をここに設定してください
   // 例: 'https://script.google.com/macros/s/AKfycb.../exec'
-  const GAS_ENDPOINT_URL = '';
+  const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzbhG9Yq-5zTr2ChxOaXNBpoOeuSuJX8dJVF_Zw8a1YZJxLThasoh5BBZ4zXcX_mOBN/exec';
 
   /**
    * JSONPリクエスト送信ヘルパー
