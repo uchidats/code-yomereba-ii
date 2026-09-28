@@ -429,6 +429,7 @@ pre {
 @media (width < 600px) {
   .tagline-extra,
   .nav-start,
+  .nav-quiz,
   .nav-about {
     display: none;
   }
