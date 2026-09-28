@@ -63,6 +63,25 @@
     const container = document.querySelector('.article-rating[data-article-id]');
     if (!container) return;
 
+    // 更新日の表示 (data-updated="YYYY-MM-DD" -> "更新：YYYY年M月D日")
+    const updatedDate = container.getAttribute('data-updated');
+    if (updatedDate && !container.querySelector('.article-updated')) {
+      const match = updatedDate.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/);
+      const timeEl = document.createElement('time');
+      timeEl.className = 'article-updated';
+      if (match) {
+        const year = match[1];
+        const month = parseInt(match[2], 10);
+        const day = parseInt(match[3], 10);
+        const iso = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        timeEl.setAttribute('datetime', iso);
+        timeEl.textContent = `更新：${year}年${month}月${day}日`;
+      } else {
+        timeEl.textContent = updatedDate.startsWith('更新：') ? updatedDate : `更新：${updatedDate}`;
+      }
+      container.appendChild(timeEl);
+    }
+
     const articleId = container.getAttribute('data-article-id');
     const goodBtn = container.querySelector('.rating-btn-good');
     const badBtn = container.querySelector('.rating-btn-bad');
