@@ -16,6 +16,8 @@
   const submit   = get("quiz-submit");
   const feedback = get("quiz-feedback");
   const next     = get("quiz-next");
+  const codePre  = get("quiz-code-pre") || (get("quiz-code") ? get("quiz-code").closest("pre") : null);
+  const codeEl   = get("quiz-code");
 
   const categoryList        = get("quiz-category-list");
   const poolInfo            = get("quiz-pool-info");
@@ -296,18 +298,28 @@
     for (const { question, selectedAnswer } of mistakes) {
       const card = document.createElement("article");
       card.className = "quiz-card quiz-review-card";
-      const code = document.createElement("pre");
-      code.append(element("code", question.code));
       const link = element("a", "検索・索引で確認する");
       link.href = "../indexes/index.html";
-      card.append(
-        element("h3", question.question),
-        code,
+
+      const cardChildren = [
+        element("h3", question.question)
+      ];
+
+      const hasCode = typeof question.code === "string" && question.code.trim().length > 0;
+      if (hasCode) {
+        const code = document.createElement("pre");
+        code.append(element("code", question.code));
+        cardChildren.push(code);
+      }
+
+      cardChildren.push(
         element("p", `選んだ回答：${question.choices[selectedAnswer]}`),
         element("p", `正解：${question.choices[question.answer]}`),
         element("p", question.explanation),
-        link,
+        link
       );
+
+      card.append(...cardChildren);
       review.append(card);
     }
   }
@@ -318,7 +330,16 @@
     const question = round[position];
     get("quiz-progress").textContent = `全${round.length}問中 ${position + 1}問目`;
     heading.textContent = question.question;
-    get("quiz-code").textContent = question.code;
+
+    const hasCode = typeof question.code === "string" && question.code.trim().length > 0;
+    if (hasCode) {
+      if (codeEl) codeEl.textContent = question.code;
+      if (codePre) codePre.hidden = false;
+    } else {
+      if (codeEl) codeEl.textContent = "";
+      if (codePre) codePre.hidden = true;
+    }
+
     feedback.hidden = true;
     next.hidden     = true;
     submit.disabled = true;
