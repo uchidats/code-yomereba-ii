@@ -187,6 +187,24 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.section-heading-with-date {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.section-heading-with-date .article-updated {
+  margin-left: auto;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
