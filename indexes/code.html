@@ -66,6 +66,11 @@
 <li><a href="#javascript-14"><code>.length</code></a></li>
 <li><a href="#javascript-15"><code>.push()</code></a></li>
 <li><a href="#javascript-16"><code>values[0][0]</code></a></li>
+<li><a href="#javascript-17"><code>user.name</code></a></li>
+<li><a href="#javascript-18"><code>user["name"]</code></a></li>
+<li><a href="#javascript-19"><code>return { ... }</code></a></li>
+<li><a href="#javascript-20"><code>user.skills[0]</code></a></li>
+<li><a href="#javascript-21"><code>users[0].name</code></a></li>
 </ul>
 <dl class="index-entries">
 <div id="javascript-1"><dt><code>const</code></dt><dd><p>再代入しない変数の宣言。「この名前で値を扱い、別の値は入れ直さない」と読みます。配列やオブジェクトの中身まで変更禁止になるわけではありません。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
@@ -84,6 +89,11 @@
 <div id="javascript-14"><dt><code>.length</code></dt><dd><p>配列の中にある要素の個数を取得するプロパティ。「この配列に値が何個入っているか」と読みます。<code>()</code> は付きません。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
 <div id="javascript-15"><dt><code>.push()</code></dt><dd><p>配列の末尾に新しい要素を追加する命令。かっこ内に追加したい値を渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
 <div id="javascript-16"><dt><code>values[0][0]</code></dt><dd><p>二次元配列から特定の位置の値を取り出す指定。1つ目の角かっこで行、2つ目の角かっこで列の番号を指定します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-17"><dt><code>user.name</code></dt><dd><p>オブジェクトの特定項目の値をドットで取り出す指定。「user というオブジェクトの中の name」と読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/dot-parentheses.html#dot">. と () は何？</a></p></dd></div>
+<div id="javascript-18"><dt><code>user["name"]</code></dt><dd><p>オブジェクトの特定項目の値を角かっこで取り出す指定。<code>user.name</code> と同じ値を取得できます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a></p></dd></div>
+<div id="javascript-19"><dt><code>return { ... }</code></dt><dd><p>functionから複数の値・項目をオブジェクトとしてまとめて返す書き方。「複数の結果をひとまとめにして外へ渡す」と読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/return.html">returnとは？</a></p></dd></div>
+<div id="javascript-20"><dt><code>user.skills[0]</code></dt><dd><p>オブジェクトの中に入っている配列の値を取り出す指定。「user の中の skills の0番目」と左から順に読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-21"><dt><code>users[0].name</code></dt><dd><p>配列の中に入っているオブジェクトの値を取り出す指定。「users 配列の先頭（0番目）の要素の name」と左から順に読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/array.html">配列とは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="symbols">
@@ -108,6 +118,7 @@
 <li><a href="#symbols-17"><code>&gt;=</code></a></li>
 <li><a href="#symbols-18"><code>+</code></a></li>
 <li><a href="#symbols-19"><code>*</code></a></li>
+<li><a href="#symbols-20"><code>key: value</code></a></li>
 </ul>
 <dl class="index-entries">
 <div id="symbols-1"><dt><code>=</code></dt><dd><p>値を代入する記号。「右の値を左の名前に入れる」と読みます。等しいかを調べる比較とは異なります。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
@@ -121,14 +132,15 @@
 <div id="symbols-9"><dt><code>=&gt;</code></dt><dd><p>アロー関数の目印。「左側で情報を受け取り、右側で処理する関数」と読みます。大小を比べる記号ではありません。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="symbols-10"><dt><code>()</code></dt><dd><p>関数の引数や条件、計算のまとまりを囲む丸かっこ。名前の直後なら「関数を呼ぶ」、ifの直後なら「条件を調べる」と周囲から読み分けます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#parentheses">. と () は何？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="symbols-11"><dt><code>[]</code></dt><dd><p>配列や要素の参照に使う角かっこ。「値の一覧」や「一覧の何番目かを読む」と読みます。JavaScriptの配列の番号は0から始まります。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
-<div id="symbols-12"><dt><code>{}</code></dt><dd><p>処理やデータをまとめる波かっこ。ifや関数の後ろなら処理の範囲、JSONなら名前と値をまとめたオブジェクトと読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-12"><dt><code>{}</code></dt><dd><p>処理やデータをまとめる波かっこ。ifや関数の後ろなら処理の範囲、オブジェクトやJSONなら名前と値をまとめたデータと読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-13"><dt><code>.</code></dt><dd><p>中の項目や機能を参照する記号。GmailAppの後ろなら「GmailAppが持つ機能」と読みます。CSSでは.class名のようにクラスの指定にも使います。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#dot">. と () は何？</a>、<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/class-id.html#css">classとidの違い（CSSの.）</a></p></dd></div>
-<div id="symbols-14"><dt><code>:</code></dt><dd><p>名前と値を対応させる区切り。JSONの&quot;name&quot;: &quot;Masa&quot;なら「nameの値はMasa」、CSSのcolor: blueなら「文字色は青」と読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-14"><dt><code>:</code></dt><dd><p>名前と値を対応させる区切り。オブジェクトやJSONの &quot;name&quot;: &quot;Masa&quot; なら「nameの値はMasa」、CSSの color: blue なら「文字色は青」と読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-15"><dt><code>,</code></dt><dd><p>項目の区切り。配列の値、オブジェクトの項目、関数に渡す引数などを分けて読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-16"><dt><code>;</code></dt><dd><p>文や指定の区切り。JavaScriptでは「ここで1つの文が終わる」、CSSでは「ここで1つの指定が終わる」と読みます。</p><p class="index-related">関連記事：<a href="../articles/html-css-js.html">HTML・CSS・JavaScriptの違い</a></p></dd></div>
 <div id="symbols-17"><dt><code>&gt;=</code></dt><dd><p>「以上」の比較。score &gt;= 80なら「点数が80以上か」と読み、80ちょうども含めます。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
 <div id="symbols-18"><dt><code>+</code></dt><dd><p>数値の足し算や文字列の連結。前後の値を見て「足す」か「文字をつなぐ」かを読み分けます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
 <div id="symbols-19"><dt><code>*</code></dt><dd><p>掛け算。price * quantityなら「単価と数量を掛ける」と読みます。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="symbols-20"><dt><code>key: value</code></dt><dd><p>オブジェクトの項目名（キー）と中身（値）を対応させる書き方。コロン（<code>:</code>）で結び、「キーという項目に値が入っている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="json">

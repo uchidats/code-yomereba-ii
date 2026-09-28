@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-28T16:15:00+09:00 -->
+  <title>オブジェクト {} とは？ 名前を付けて値をまとめる｜コードは読めればいい</title>
+  <meta name="description" content="JavaScriptやGASでよく使われるオブジェクト（波かっこ {}）を初心者向けに解説。配列との違い（順番vs名前）、key: valueの構造、user.nameの読み方、配列との組み合わせまで分かります。">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/basics.html">基本用語</a> › オブジェクト {} とは？</p>
+
+      <h1>オブジェクト {} とは？ 名前を付けて値をまとめる</h1>
+      <p class="article-lead">JavaScriptやGASのコードを読んでいると、波かっこ <code>{ }</code> の中に「名前: 値」が並んだ記述がよく登場します。これは<strong>オブジェクト（object）</strong>と呼ばれ、関連する情報に名前を付けてひとまとめに管理するための仕組みです。</p>
+
+      <h2>1. まず結論：オブジェクトは「複数の値に名前を付けてひとまとめにするもの」</h2>
+      <p>初心者の方は、まずこの一言だけ覚えておけば十分です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>オブジェクト（object）の役割</h3>
+          <p>複数のデータに名前（キー）を付けて、1つの変数に整理してまとめておく箱。</p>
+        </div>
+      </div>
+      <p>例えば、あるユーザーの情報をまとめたいときは次のように書きます。</p>
+      <pre><code>const user = {
+  name: "Masa",
+  age: 31,
+  city: "Tokyo"
+};</code></pre>
+      <p><code>name</code>、<code>age</code>、<code>city</code> という名前を付けて、それぞれの値を1つの<a href="variable.html">変数</a> <code>user</code> にまとめています。別々に <code>userName</code>、<code>userAge</code>、<code>userCity</code> と3つ変数を作らなくても、1人の情報として整理できるのがオブジェクトの便利さです。</p>
+
+      <h2>2. 配列との違い：配列は「順番」、オブジェクトは「名前」</h2>
+      <p>前の記事「<a href="array.html">配列 [] とは？</a>」で、複数の値をまとめる箱として配列を学びました。では、配列とオブジェクトはどう使い分けるのでしょうか？</p>
+      <p>同じユーザー情報を配列で書くとこうなります。</p>
+      <pre><code>const userArray = ["Masa", 31, "Tokyo"];</code></pre>
+      <p>この場合、中身を取り出すには <strong>「順番（インデックス番号）」</strong> を指定します。</p>
+      <pre><code>const name = userArray[0]; // 0番目（Masa）を取り出す
+const age = userArray[1];  // 1番目（31）を取り出す</code></pre>
+      <p>一方、オブジェクトの場合は <strong>「名前（キー）」</strong> で取り出します。</p>
+      <pre><code>const user = {
+  name: "Masa",
+  age: 31,
+  city: "Tokyo"
+};
+
+const name = user.name; // "name" という名前で取り出す
+const age = user.age;   // "age" という名前で取り出す</code></pre>
+      <p>「1番目が年齢で、2番目が都市だっけ……？」と順番を覚える必要がなく、名前で中身がすぐ分かるのがオブジェクトの強みです。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>覚え方のコツ</h3>
+          <p><strong>配列 <code>[ ]</code> ＝ 順番で管理する（0番、1番、2番……）</strong><br>
+          <strong>オブジェクト <code>{ }</code> ＝ 名前で管理する（name、age、city……）</strong></p>
+        </div>
+      </div>
+
+      <h2>3. { } を見たらオブジェクトを疑う（ただし例外あり）</h2>
+      <p>JavaScriptのコードで、次のような <code>{ }</code> を見かけたら、まず<strong>「オブジェクトかもしれない」</strong>と疑ってみてください。</p>
+      <pre><code>{
+  key: value
+}</code></pre>
+      <p>ただし、波かっこ <code>{ }</code> はプログラミングの中で複数の役割を持っています。すでに学んだ <a href="function.html">function</a> や <a href="if.html">if文</a> の処理ブロックも <code>{ }</code> を使います。</p>
+      <pre><code>// これはオブジェクトではなく、if文の処理のまとまり
+if (score >= 80) {
+  Logger.log("合格です");
+}</code></pre>
+      <p><strong>「中に <code>名前: 値</code> が並んでいるか？」</strong> を見るのが見分けるポイントです。コロン <code>:</code> で結ばれた項目が並んでいれば、ほぼ確実にオブジェクトです。</p>
+
+      <h2>4. key: value（キーと値）の形</h2>
+      <p>オブジェクトの中身は、必ず「キー（key）」と「値（value）」のペアで書かれます。</p>
+      <pre><code>name: "Masa"</code></pre>
+      <ul>
+        <li><strong>キー（key）</strong>：項目の名前（ここでは <code>name</code>）</li>
+        <li><strong>コロン（:）</strong>：キーと値を結ぶ区切り</li>
+        <li><strong>値（value）</strong>：その項目の中身（ここでは <code>"Masa"</code>）</li>
+      </ul>
+      <p>コードを読むときは難しく考えず、<strong>「name という項目に "Masa" という値が入っている」</strong>と読めれば十分です。このキーと値の組み合わせのことを<strong>「プロパティ（property）」</strong>と呼ぶこともあります。</p>
+
+      <h2>5. 複数の項目はカンマで区切る</h2>
+      <p>オブジェクトの中に複数の項目を並べるときは、配列と同じように<strong>カンマ（,）</strong>で区切ります。</p>
+      <pre><code>const user = {
+  name: "Masa",
+  age: 31,
+  active: true
+};</code></pre>
+      <p>最後の項目の後ろのカンマは、あってもなくても動きますが、AIが書くコードでは改行してきれいに並べられるのが一般的です。</p>
+
+      <h2>6. ドット（.）で値を読む：「user の name」</h2>
+      <p>オブジェクトの中にある特定の値を取り出すときは、<a href="dot-parentheses.html">.（ドット）</a>を使います。</p>
+      <pre><code>Logger.log(user.name); // ログに "Masa" と表示される</code></pre>
+      <p>「. と () は何？」の記事で学んだように、ドットは<strong>「左のものの中にある右のもの」</strong>を取り出す記号でした。ここでもまったく同じです。</p>
+      <p><code>user.name</code> は、左から順に<strong>「user の中の name」</strong>と読むとすんなり理解できます。</p>
+
+      <h2>7. [ ] を使って読むこともある</h2>
+      <p>実は、角かっこ <code>[ ]</code> を使ってオブジェクトの値を読む書き方もあります。</p>
+      <pre><code>const userName = user["name"]; // user.name と同じ "Masa" が取れる</code></pre>
+      <p>キー名を変数で動的に切り替えたい場面などで使われますが、初心者の方はまず基本である <strong><code>user.name</code></strong> のドット記法が読めれば十分です。「こういう書き方もあるんだな」程度に捉えておいてください。</p>
+
+      <h2>8. 値を書き換える</h2>
+      <p>オブジェクトの中の値は、後から書き換えることもできます。</p>
+      <pre><code>user.age = 32;</code></pre>
+      <p>これも左から読みます。<strong>「user の age に 32 を入れる」</strong>という意味です。この一行が実行されると、<code>user.age</code> は <code>31</code> から <code>32</code> に更新されます。</p>
+
+      <h2>9. 新しい項目を追加する</h2>
+      <p>最初にはなかった項目を、後から追加することもできます。</p>
+      <pre><code>user.email = "example@example.com";</code></pre>
+      <p>「user に email という新しい項目を作って、アドレスを入れる」という処理です。自分でゼロから書く必要はありませんが、AIが生成したコードでこの形を見かけたら「あ、後から項目を増やしているんだな」と読めればバッチリです。</p>
+
+      <h2>10. GASでオブジェクトが出てくる例</h2>
+      <p>Google Apps Script（GAS）では、オブジェクトが非常に重要な場面で登場します。特に多いのが<strong>「複数の設定や情報をまとめて渡す場面」</strong>です。</p>
+      <pre><code>// カレンダーの予定情報やメールのオプションをまとめる例
+const event = {
+  title: "定例会議",
+  date: "2026-09-28",
+  location: "オンライン"
+};</code></pre>
+      <p>また、前の記事「<a href="return.html">returnとは？</a>」とつながる重要なパターンとして、<strong>function の実行結果をオブジェクトで返す</strong>書き方があります。</p>
+      <pre><code>function sendDailyReport() {
+  // メール送信などの処理...
+
+  return {
+    success: true,
+    message: "日報を送信しました"
+  };
+}
+
+const result = sendDailyReport();
+Logger.log(result.success); // true
+Logger.log(result.message); // "日報を送信しました"</code></pre>
+      <p>return は通常1つの値しか返せませんが、オブジェクトにまとめれば「成否」と「メッセージ」のように<strong>複数の結果をひとまとめにして呼び出し元へ戻す</strong>ことができます。</p>
+
+      <h2>11. JSONとのつながり：見た目は似ているが別物！</h2>
+      <p>このサイトの「<a href="json.html">JSONとは？</a>」を読んだことがある方は、「あれ？ JSONとそっくりだな」と思ったかもしれません。</p>
+      <p>確かに、JavaScriptのオブジェクトとJSONの書き方は非常によく似ています。</p>
+      <pre><code>// JavaScriptのオブジェクト
+const user = {
+  name: "Masa",
+  age: 31
+};
+
+// JSONのデータ形式（文字列）
+{
+  "name": "Masa",
+  "age": 31
+}</code></pre>
+      <p>しかし、<strong>JavaScriptのオブジェクトとJSONは同じものではありません</strong>。オブジェクトはプログラムの中で動いている「データそのもの」であり、JSONはインターネットなどでデータをやり取りするための「テキスト形式（文字列のルール）」です。JSONではキーを必ずダブルクォーテーション <code>" "</code> で囲むなどの厳密なルールがあります。</p>
+      <p>詳しい違いは <a href="json.html">JSONとは？</a> で解説していますので、気になる方は合わせて確認してみてください。</p>
+
+      <h2>12. オブジェクトの中に配列：user.skills[0]</h2>
+      <p>実務のコードでとてもよく出てくるのが、<strong>オブジェクトの中に配列が入っている構造</strong>です。</p>
+      <pre><code>const user = {
+  name: "Masa",
+  skills: ["HTML", "CSS", "JavaScript"]
+};</code></pre>
+      <p>このデータから「HTML」を取り出したいとき、コードでは次のように書かれます。</p>
+      <pre><code>Logger.log(user.skills[0]); // "HTML"</code></pre>
+      <p>一見ややこしそうに見えますが、左から順番に分解すれば怖くありません。</p>
+      <ol>
+        <li><code>user</code>：ユーザーのオブジェクト</li>
+        <li><code>.skills</code>：その中にある skills（配列）を取り出す</li>
+        <li><code>[0]</code>：その配列の先頭（0番目）の値を取り出す</li>
+      </ol>
+      <p>左から順にたどっていけば、AIが書いた複雑なコードでも必ず意味を追えます。</p>
+
+      <h2>13. 配列の中にオブジェクト：users[0].name</h2>
+      <p>今度は逆のパターンです。<strong>配列の中に複数のオブジェクトが入っている構造</strong>も、スプレッドシートやAPIのデータを扱うときによく登場します。</p>
+      <pre><code>const users = [
+  { name: "Masa", age: 31 },
+  { name: "Ken", age: 28 }
+];</code></pre>
+      <p>この一覧から最初の人の名前を取り出すときは、次のように書きます。</p>
+      <pre><code>Logger.log(users[0].name); // "Masa"</code></pre>
+      <p>これも左から落ち着いて分解してみましょう。</p>
+      <ol>
+        <li><code>users</code>：オブジェクトが並んだ配列</li>
+        <li><code>[0]</code>：その配列の最初（0番目）の要素（<code>{ name: "Masa", age: 31 }</code>）</li>
+        <li><code>.name</code>：そのオブジェクトの中の name（<code>"Masa"</code>）</li>
+      </ol>
+      <p>「配列（番号）」と「オブジェクト（名前）」が組み合わさっているだけだと分かれば、AIのコードに出てきても落ち着いて読み解くことができます。</p>
+
+      <h2>14. コードを読むときのコツ</h2>
+      <p>コードの中で波かっこ <code>{ }</code> を見かけたら、次のステップで観察してみてください。</p>
+      <ol>
+        <li><strong><code>key: value</code> が並んでいるか確認</strong>：コロン <code>:</code> があればオブジェクトです（ifやfunctionの処理ブロックと見分ける）。</li>
+        <li><strong>どんなキー（項目名）があるか見る</strong>：<code>name</code>、<code>date</code>、<code>title</code> など、どんな情報をまとめているか把握します。</li>
+        <li><strong><code>.name</code> のようにどの項目を読んでいるか追う</strong>：ドットの後ろを見て、どの値を使おうとしているか確認します。</li>
+        <li><strong>配列 <code>[ ]</code> と組み合わさっていないか見る</strong>：<code>user.skills[0]</code> や <code>users[0].name</code> のように入れ子になっているときは、左から1段階ずつ分解します。</li>
+        <li><strong><code>return { ... }</code> がないか見る</strong>：関数の末尾にあれば、複数の結果をひとまとめにして返している合図です。</li>
+      </ol>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li><strong>オブジェクト</strong>は、複数の値に名前を付けてひとまとめにする箱</li>
+          <li><strong><code>{ key: value }</code></strong> の形で書く（keyは項目名、valueは中身）</li>
+          <li><strong>配列は「順番」</strong>、<strong>オブジェクトは「名前」</strong>で値を管理する</li>
+          <li><strong><code>user.name</code></strong> のようにドット（.）で値を取り出す</li>
+          <li><code>{ }</code> はifやfunctionでも使われる（<code>:</code> があるかでオブジェクトを見分ける）</li>
+          <li>オブジェクトの中に配列を入れることもできる（<code>user.skills[0]</code>）</li>
+          <li>配列の中にオブジェクトを入れることもできる（<code>users[0].name</code>）</li>
+          <li>複数の結果をまとめて <strong>return</strong> するときにも重宝される</li>
+        </ul>
+      </div>
+
+      <div class="article-rating" data-article-id="object" data-updated="2026-09-28">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="array.html" rel="prev">配列 [] とは？ 複数の値をまとめて扱う</a></p>
+        <p>次の記事：<a href="api.html" rel="next">APIとは？ アプリ同士をつなぐ窓口</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+          <p><a href="../categories/basics.html">← 基本用語の記事一覧へ</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../assets/article-rating.js" defer></script>
+</body>
+</html>

@@ -834,6 +834,96 @@ window.siteQuizQuestions = [
     answer: 1,
     explanation: "二次元配列は [行番号][列番号] で指定します。インデックスは0から始まるため、2行目（インデックス1）の1列目（インデックス0）は values[1][0] と書きます。",
     article: "../articles/array.html"
+  },
+  {
+    id: "js-object-concept",
+    category: "javascript",
+    question: "JavaScriptのオブジェクト（object）の役割として最も適切なものはどれ？",
+    code: 'const user = {\n  name: "Masa",\n  age: 31,\n  city: "Tokyo"\n};',
+    choices: [
+      "複数のデータに名前（キー）を付けて1つの変数にまとめておく箱",
+      "数値を大きい順に自動で並べ替える機能",
+      "同じ処理を100回繰り返すループ処理",
+      "HTMLのデザインを直接変更するタグ"
+    ],
+    answer: 0,
+    explanation: "オブジェクトは複数のデータに名前（キー）を付けて、1つの変数に整理してまとめておくための箱です。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-object-array-diff",
+    category: "javascript",
+    question: "「配列」と「オブジェクト」の違いの覚え方として最も適切なものはどれ？",
+    code: "",
+    choices: [
+      "配列は数字しか入らず、オブジェクトは文字しか入らない",
+      "配列は「順番（0番、1番…）」で管理し、オブジェクトは「名前（キー）」で管理する",
+      "配列はGoogle専用で、オブジェクトはMicrosoft専用",
+      "どちらも全く同じもので違いはない"
+    ],
+    answer: 1,
+    explanation: "配列はインデックス（0番、1番…）という順番で値を管理し、オブジェクトはキー（name、age…）という名前で値を管理します。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-object-dot-access",
+    category: "javascript",
+    question: "オブジェクト const user = { name: \"Masa\", age: 31 }; から \"Masa\" を取り出す基本的な書き方はどれ？",
+    code: 'const user = {\n  name: "Masa",\n  age: 31\n};',
+    choices: [
+      "user(name)",
+      "user.name",
+      "user->name",
+      "user::name"
+    ],
+    answer: 1,
+    explanation: "オブジェクトの値を取り出すときはドット（.）を使い、「user.name」と書きます。「user の中の name」と左から読みます。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-object-vs-block",
+    category: "javascript",
+    question: "JavaScriptで波かっこ { } を見かけたとき、オブジェクトであると判断できる特徴はどれ？",
+    code: "",
+    choices: [
+      "中に「if」の文字が必ず入っている",
+      "波かっこの中が完全に空である",
+      "中にコロン : で結ばれた「キー: 値」のペアが並んでいる",
+      "末尾に必ずセミコロンが10個付いている"
+    ],
+    answer: 2,
+    explanation: "{ } の中に「name: \"Masa\"」のように、コロン : で結ばれたキーと値のペアが並んでいればオブジェクトです。ifやfunctionの後ろの { } は処理のまとまり（ブロック）です。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-object-nested",
+    category: "javascript",
+    question: "次のコードで users[0].name を実行したとき、取り出される値はどれ？",
+    code: 'const users = [\n  { name: "Masa", age: 31 },\n  { name: "Ken", age: 28 }\n];\nconst result = users[0].name;',
+    choices: [
+      '"Ken"',
+      '"Masa"',
+      "31",
+      "28"
+    ],
+    answer: 1,
+    explanation: "左から順に分解します。users[0] で配列の先頭のオブジェクト { name: \"Masa\", age: 31 } を取り出し、その中の .name を指定しているため \"Masa\" が取り出されます。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-object-vs-json",
+    category: "javascript",
+    question: "JavaScriptの「オブジェクト」と「JSON」の関係について正しい説明はどれ？",
+    code: "",
+    choices: [
+      "見た目は似ているが同じものではなく、オブジェクトはプログラム内のデータ、JSONはデータ交換用の文字列形式である",
+      "オブジェクトとJSONは完全に同一のもので名前が違うだけである",
+      "JSONはJavaScriptでは一切読み書きできない",
+      "オブジェクトは必ずダブルクォーテーションで囲まれた文字列でなければならない"
+    ],
+    answer: 0,
+    explanation: "オブジェクトとJSONは見た目がよく似ていますが別物です。オブジェクトはJavaScriptのプログラム内で動くデータそのもの、JSONはテキスト（文字列）としてデータを送受信するための規格です。",
+    article: "../articles/object.html"
   }
 ];
 
