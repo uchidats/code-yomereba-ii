@@ -17,10 +17,37 @@
   const feedback = get("quiz-feedback");
   const next     = get("quiz-next");
 
-  const categoryList  = get("quiz-category-list");
-  const poolInfo      = get("quiz-pool-info");
-  const categoryError = get("quiz-category-error");
-  const startBtn      = get("quiz-start");
+  const categoryList        = get("quiz-category-list");
+  const poolInfo            = get("quiz-pool-info");
+  const categoryError       = get("quiz-category-error");
+  const startBtn            = get("quiz-start");
+  const includeSolvedCheckbox = get("quiz-include-solved");
+  const allSolvedMessage    = get("quiz-all-solved-message");
+
+  // ── localStorage 管理 ──────────────────────────────────
+  const STORAGE_KEY = "quiz_solved_ids";
+
+  function getSolvedIds() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return new Set();
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? new Set(parsed) : new Set();
+    } catch {
+      return new Set();
+    }
+  }
+
+  function saveSolvedId(id) {
+    if (!id) return;
+    try {
+      const set = getSolvedIds();
+      set.add(id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+    } catch {
+      // クォータ超過等の例外時もクイズ動作は継続
+    }
+  }
 
   // ── カテゴリ定義（表示名・value の順序を固定）────────────
   const CATEGORIES = [
@@ -55,42 +82,93 @@
     text.textContent = `${cat.label}`;
 
     const badge = document.createElement("span");
-    badge.className   = "quiz-cat-count";
-    badge.textContent = `${count}問`;
+    badge.className       = "quiz-cat-count";
+    badge.dataset.catBadge = cat.value;
 
     label.append(input, text, badge);
     categoryList.append(label);
   }
 
-  // ── 出題候補数を計算 ──────────────────────────────────
-  function getPoolSize() {
-    const checked = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')]
-      .map((el) => el.value);
-    return questions.filter((q) => checked.includes(q.category)).length;
+  // ── カテゴリごとの進捗バッジ更新 ────────────────────────
+  function updateCategoryBadges() {
+    const solvedSet = getSolvedIds();
+    for (const cat of CATEGORIES) {
+      const badge = categoryList.querySelector(`[data-cat-badge="${cat.value}"]`);
+      if (!badge) continue;
+      const catQuestions = questions.filter((q) => q.category === cat.value);
+      const total = catQuestions.length;
+      const solvedInCat = catQuestions.filter((q) => solvedSet.has(q.id)).length;
+      const unsolved = total - solvedInCat;
+
+      if (unsolved === 0) {
+        badge.textContent = `✓ ${total} / ${total}問`;
+        badge.classList.add("quiz-cat-completed");
+      } else {
+        badge.textContent = `未正解 ${unsolved} / ${total}問`;
+        badge.classList.remove("quiz-cat-completed");
+      }
+    }
   }
 
-  // ── pool表示テキストを更新 ────────────────────────────
+  // ── 出題候補数を計算 ──────────────────────────────────
   const MAX_QUESTIONS = 10;
 
+  function getCandidatePool() {
+    const checked = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')]
+      .map((el) => el.value);
+    if (checked.length === 0) {
+      return { checkedCount: 0, candidatePool: [] };
+    }
+
+    const selectedQuestions = questions.filter((q) => checked.includes(q.category));
+    const includeSolved = includeSolvedCheckbox ? includeSolvedCheckbox.checked : false;
+
+    if (includeSolved) {
+      return { checkedCount: checked.length, candidatePool: selectedQuestions };
+    }
+
+    const solvedSet = getSolvedIds();
+    const candidatePool = selectedQuestions.filter((q) => !solvedSet.has(q.id));
+    return { checkedCount: checked.length, candidatePool };
+  }
+
+  // ── pool表示テキストと開始ボタン状態を更新 ──────────────
   function updatePoolInfo() {
-    const pool = getPoolSize();
-    if (pool === 0) {
+    updateCategoryBadges();
+    const { checkedCount, candidatePool } = getCandidatePool();
+
+    if (checkedCount === 0) {
       poolInfo.textContent = "";
       categoryError.hidden = false;
+      if (allSolvedMessage) allSolvedMessage.hidden = true;
       startBtn.disabled    = true;
-    } else {
-      const actual = Math.min(pool, MAX_QUESTIONS);
-      poolInfo.textContent =
-        pool < MAX_QUESTIONS
-          ? `出題候補：${pool}問 → ${actual}問出題`
-          : `出題候補：${pool}問 → ランダム${actual}問`;
-      categoryError.hidden = true;
-      startBtn.disabled    = false;
+      return;
     }
+
+    categoryError.hidden = true;
+
+    if (candidatePool.length === 0) {
+      // 選択したカテゴリに未正解問題が0問で、正解済みを含めるがOFF
+      poolInfo.textContent = "";
+      if (allSolvedMessage) allSolvedMessage.hidden = false;
+      startBtn.disabled    = true;
+      return;
+    }
+
+    if (allSolvedMessage) allSolvedMessage.hidden = true;
+    const actual = Math.min(candidatePool.length, MAX_QUESTIONS);
+    poolInfo.textContent =
+      candidatePool.length < MAX_QUESTIONS
+        ? `出題候補：${candidatePool.length}問 → ${actual}問出題`
+        : `出題候補：${candidatePool.length}問 → ランダム${actual}問`;
+    startBtn.disabled = false;
   }
 
   // チェックボックスが変わるたびに更新
   categoryList.addEventListener("change", updatePoolInfo);
+  if (includeSolvedCheckbox) {
+    includeSolvedCheckbox.addEventListener("change", updatePoolInfo);
+  }
   // 初期表示
   updatePoolInfo();
 
@@ -165,16 +243,13 @@
     if (moveFocus) heading.focus();
   }
 
-  // ── クイズ開始（カテゴリ絞り込み済みプールからランダム抽出）──
+  // ── クイズ開始（出題候補プールからランダム抽出）──
   function start(moveFocus = true) {
-    const checked = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')]
-      .map((el) => el.value);
-
-    // 選択カテゴリで絞り込み
-    const pool = questions.filter((q) => checked.includes(q.category));
+    const { candidatePool } = getCandidatePool();
+    if (candidatePool.length === 0) return;
 
     // Fisher–Yates シャッフル（元データを変更しない）
-    round = [...pool];
+    round = [...candidatePool];
     for (let i = round.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [round[i], round[j]] = [round[j], round[i]];
@@ -206,8 +281,12 @@
     answered = true;
     const question = round[position];
     const correct  = Number(selected.value) === question.answer;
-    if (correct) score++;
-    else mistakes.push({ question, selectedAnswer: Number(selected.value) });
+    if (correct) {
+      score++;
+      saveSolvedId(question.id);
+    } else {
+      mistakes.push({ question, selectedAnswer: Number(selected.value) });
+    }
     choices.disabled = true;
     submit.disabled  = true;
     get("quiz-verdict").textContent      = correct ? "○ 正解" : "× 不正解";

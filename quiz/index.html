@@ -51,8 +51,18 @@
           <legend class="sr-only">出題カテゴリ</legend>
           <div id="quiz-category-list" class="quiz-category-list"></div>
         </fieldset>
+        <div class="quiz-include-solved-wrapper">
+          <label class="quiz-include-solved-label">
+            <input type="checkbox" id="quiz-include-solved">
+            <span>正解済みの問題も含める</span>
+          </label>
+        </div>
         <p id="quiz-pool-info" class="quiz-pool-info" aria-live="polite"></p>
         <p id="quiz-category-error" class="quiz-category-error" aria-live="polite" hidden>1つ以上の分野を選択してください</p>
+        <div id="quiz-all-solved-message" class="quiz-all-solved-message" aria-live="polite" hidden>
+          <p class="quiz-all-solved-text">選択した分野の問題はすべて正解済みです。</p>
+          <p class="quiz-all-solved-hint">「正解済みの問題も含める」にチェックすると再挑戦できます。</p>
+        </div>
         <button id="quiz-start" class="button" type="button">クイズを開始</button>
       </section>
       <section id="quiz-panel" class="quiz-card" aria-labelledby="quiz-question" hidden>
