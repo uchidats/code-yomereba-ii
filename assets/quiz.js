@@ -24,7 +24,7 @@
   const includeSolvedCheckbox = get("quiz-include-solved");
   const allSolvedMessage    = get("quiz-all-solved-message");
 
-  // ── localStorage 管理 ──────────────────────────────────
+  // ── localStorage 管理 (正解済み問題ID) ──────────────────
   const STORAGE_KEY = "quiz_solved_ids";
 
   function getSolvedIds() {
@@ -49,6 +49,93 @@
     }
   }
 
+  // ── テストモード管理 (quizTestMode) ──────────────────────
+  const TEST_MODE_KEY = "quizTestMode";
+
+  function handleTestModeParam() {
+    try {
+      const url = new URL(window.location.href);
+      const modeParam = url.searchParams.get("testmode");
+      if (modeParam) {
+        const lower = modeParam.toLowerCase();
+        if (lower === "on") {
+          localStorage.setItem(TEST_MODE_KEY, "true");
+        } else if (lower === "off") {
+          localStorage.removeItem(TEST_MODE_KEY);
+        }
+        url.searchParams.delete("testmode");
+        const remainingQuery = url.searchParams.toString();
+        const cleanUrl = url.pathname + (remainingQuery ? `?${remainingQuery}` : "") + url.hash;
+        window.history.replaceState(null, "", cleanUrl);
+      }
+    } catch {
+      // 例外時も動作継続
+    }
+  }
+  handleTestModeParam();
+
+  function isTestMode() {
+    try {
+      return localStorage.getItem(TEST_MODE_KEY) === "true";
+    } catch {
+      return false;
+    }
+  }
+
+  // ── GAS クイズ統計送信 (JSONP) ───────────────────────────
+  const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzbhG9Yq-5zTr2ChxOaXNBpoOeuSuJX8dJVF_Zw8a1YZJxLThasoh5BBZ4zXcX_mOBN/exec";
+
+  function sendQuizStats(stats) {
+    if (isTestMode()) {
+      return; // テストモード時は通信を完全抑止
+    }
+    if (!GAS_ENDPOINT_URL || !GAS_ENDPOINT_URL.startsWith("https://script.google.com/")) {
+      return;
+    }
+
+    const callbackName = "gas_quiz_cb_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+    const queryParams = new URLSearchParams({
+      action: "quizResult",
+      categories: stats.categories,
+      questionCount: String(stats.questionCount),
+      correctCount: String(stats.correctCount),
+      accuracy: String(stats.accuracy),
+      callback: callbackName,
+      _nocache: String(Date.now())
+    });
+
+    const script = document.createElement("script");
+    script.src = `${GAS_ENDPOINT_URL}?${queryParams.toString()}`;
+    script.async = true;
+
+    let timer = null;
+    const cleanup = () => {
+      if (timer) clearTimeout(timer);
+      try {
+        delete window[callbackName];
+      } catch {
+        window[callbackName] = undefined;
+      }
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+
+    window[callbackName] = () => {
+      cleanup();
+    };
+
+    script.onerror = () => {
+      cleanup();
+    };
+
+    timer = setTimeout(() => {
+      cleanup();
+    }, 6000);
+
+    document.head.appendChild(script);
+  }
+
   // ── カテゴリ定義（表示名・value の順序を固定）────────────
   const CATEGORIES = [
     { value: "html",        label: "HTML編" },
@@ -57,6 +144,14 @@
     { value: "git-github",  label: "Git / GitHub編" },
     { value: "codex",       label: "Codex / Antigravity編" },
   ];
+
+  const CATEGORY_NAMES = {
+    "html": "HTML",
+    "javascript": "JavaScript",
+    "gas": "GAS",
+    "git-github": "Git / GitHub",
+    "codex": "Codex / Antigravity"
+  };
 
   // ── カテゴリごとの問題数を事前集計 ───────────────────────
   const countByCategory = {};
@@ -182,6 +277,8 @@
   let score;
   let answered;
   let mistakes;
+  let currentRoundCategories = "";
+  let statsSentForRound = false;
 
   // ── 復習カードの表示 ─────────────────────────────────
   function showReview() {
@@ -260,6 +357,12 @@
     position = 0;
     score    = 0;
     mistakes = [];
+    statsSentForRound = false;
+
+    // 選択されているカテゴリ名を取得
+    const checkedCats = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')].map((el) => el.value);
+    currentRoundCategories = checkedCats.map((c) => CATEGORY_NAMES[c] || c).join(", ") || "全分野";
+
     get("quiz-review").replaceChildren();
     setup.hidden  = true;
     result.hidden = true;
@@ -307,12 +410,23 @@
       showQuestion(true);
       return;
     }
-    panel.hidden  = false;
     panel.hidden  = true;
     result.hidden = false;
     get("quiz-score").textContent = `${round.length}問中${score}問正解`;
     showReview();
     get("quiz-score").focus();
+
+    // ── クイズ完了統計を送信 (1回の完了につき1行のみ) ─────
+    if (!statsSentForRound && round.length > 0) {
+      statsSentForRound = true;
+      const accuracy = Math.round((score / round.length) * 100);
+      sendQuizStats({
+        categories: currentRoundCategories,
+        questionCount: round.length,
+        correctCount: score,
+        accuracy: accuracy
+      });
+    }
   });
 
   // 「もう一度挑戦」はセットアップ画面へ戻す
