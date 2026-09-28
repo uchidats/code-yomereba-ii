@@ -699,5 +699,66 @@ window.siteQuizQuestions = [
     answer: 1,
     explanation: "GASでは「○○App.機能()」という形が基本です。左端の○○App（GmailApp、CalendarAppなど）を見るだけで、どのGoogleサービスに対する操作かが推測できます。",
     article: "../articles/gas-services.html"
+  },
+  {
+    id: "js-return-role",
+    category: "javascript",
+    question: "function（関数）の中で使われる return の役割として最も適切なものはどれ？",
+    code: "function add(a, b) {\n  return a + b;\n}",
+    choices: [
+      "計算結果やデータをfunctionの外側へ返す",
+      "画面に文字を表示して処理を続ける",
+      "functionの名前を変更する",
+      "引数を削除する"
+    ],
+    answer: 0,
+    explanation: "return はfunctionの中で作った結果を外側へ渡すための命令です。外へ渡される結果を「戻り値」と呼びます。",
+    article: "../articles/return.html"
+  },
+  {
+    id: "js-return-termination",
+    category: "javascript",
+    question: "functionの中で return が実行されたとき、その後の処理はどうなる？",
+    code: "function checkAge(age) {\n  if (age < 20) {\n    return \"未成年\";\n  }\n  return \"成人\";\n}",
+    choices: [
+      "return の後ろにあるコードも順番にすべて実行される",
+      "そのfunctionの処理は直ちに終了する",
+      "関数が最初からもう一度実行される",
+      "エラーが発生してブラウザが停止する"
+    ],
+    answer: 1,
+    explanation: "return が実行されると、そのfunctionの処理はそこで直ちに終了します。後ろにコードが残っていても実行されません。",
+    article: "../articles/return.html"
+  },
+  {
+    id: "js-return-variable-receive",
+    category: "javascript",
+    question: "const result = add(2, 3); というコードが表している動作はどれ？",
+    code: "function add(a, b) {\n  return a + b;\n}\nconst result = add(2, 3);",
+    choices: [
+      "add関数を削除して新しくresultという関数を作る",
+      "add(2, 3)が返した結果（5）を変数resultに入れて保存する",
+      "resultに2と3という文字をそのまま文字として連結する",
+      "まだ実行せずに関数の予約だけを行う"
+    ],
+    answer: 1,
+    explanation: "右側の add(2, 3) が実行されて戻り値 5 が返り、その値が左側の変数 result に入ります。",
+    article: "../articles/return.html"
+  },
+  {
+    id: "js-return-vs-console",
+    category: "javascript",
+    question: "return と console.log の違いとして正しいものはどれ？",
+    code: "console.log(value);\nreturn value;",
+    choices: [
+      "どちらも同じ動作で違いはない",
+      "console.logは確認用に表示するだけ、returnは関数の結果として外へ渡す",
+      "returnは画面に大きく表示し、console.logは値を外へ渡す",
+      "console.logを使うと関数が終了する"
+    ],
+    answer: 1,
+    explanation: "console.log（GASではLogger.log）は確認用の表示を行うだけで、他のプログラムに値を渡せません。次の処理に結果を渡したいときは return を使います。",
+    article: "../articles/return.html"
   }
 ];
+

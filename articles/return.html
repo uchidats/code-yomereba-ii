@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-28T15:30:00+09:00 -->
+  <title>returnとは？ functionの結果を返す｜コードは読めればいい</title>
+  <meta name="description" content="JavaScriptやGASのfunctionで使われる return の役割を初心者向けに解説。計算結果を外に渡す「戻り値」の仕組みや、returnを見かけたときの読み方が分かります。">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/basics.html">基本用語</a> › returnとは？</p>
+
+      <h1>returnとは？ functionの結果を返す</h1>
+      <p class="article-lead"><a href="function.html">function（関数）</a>のコードを読んでいると、最後のほうによく <code>return</code> という言葉が出てきます。return は、functionの中で作った「計算結果」や「データ」を外に渡すための仕組みです。</p>
+
+      <h2>まず結論：returnは「結果を外に返す」もの</h2>
+      <p>初心者の方は、まずこれだけ覚えておけば十分です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>return</code> の役割</h3>
+          <p>function の中で作った結果を、呼び出した外側のコードへ渡す（返す）。</p>
+        </div>
+      </div>
+      <p>functionを「作業をお願いする担当者」に例えるなら、頼まれた作業を終えたあと「結果はこれです！」と報告書を手渡してくれる動作が <code>return</code> です。</p>
+
+      <aside class="term-note" aria-label="英語から覚える：return">
+        <strong>英語から覚える：return（戻す・返す）</strong>
+        <p>英語の <strong>return</strong> には「戻る」「返す」「持ち帰る」という意味があります。プログラミングでは、functionが呼び出し元に返す結果のことを<strong>「戻り値（もどりち）」</strong>または「返り値（かえりち）」と呼びます。</p>
+      </aside>
+
+      <h2>最も単純な例：足し算の結果を返す</h2>
+      <p>次のコードを見てみましょう。</p>
+      <pre><code>function add(a, b) {
+  return a + b;
+}</code></pre>
+      <p>このコードは、2つの数を受け取って足し算する関数です。</p>
+      <ul>
+        <li><code>a + b</code> で足し算を計算する</li>
+        <li><code>return</code> でその計算結果を外へ渡す</li>
+      </ul>
+      <p>例えば <code>add(2, 3)</code> を実行すると、<code>2 + 3</code> が計算され、結果として <code>5</code> が外へ返ってきます。</p>
+
+      <h2>returnがないとどうなる？</h2>
+      <p>もし <code>return</code> を書かなかったらどうなるでしょうか。</p>
+      <pre><code>function add(a, b) {
+  a + b;
+}</code></pre>
+      <p>この場合、functionの中で <code>a + b</code> の計算は行われます。しかし、<code>return</code> がないため、計算した結果が外へ渡されません。</p>
+      <p>担当者に「2と3を足しておいて」と頼んで、担当者が頭の中で計算したものの、結果を誰にも言わずに作業を終えてしまったような状態です。外側から見ると、結果を受け取ることができません。</p>
+      <p>計算や処理の結果を外で使いたいときは、必ず <code>return</code> で外へ渡します。</p>
+
+      <h2>変数に受け取る</h2>
+      <p>return で返された結果は、<a href="variable.html">変数</a>に入れて取っておくのが一般的です。</p>
+      <pre><code>const result = add(2, 3);</code></pre>
+      <p>このコードは次のように読みます。</p>
+      <ol>
+        <li>右側の <code>add(2, 3)</code> が実行される</li>
+        <li>functionの中で <code>2 + 3</code> が計算され、<code>return</code> で <code>5</code> が返ってくる</li>
+        <li>返ってきた <code>5</code> が、左側の <code>result</code> という変数に入る</li>
+      </ol>
+      <p>これで、その後の行で <code>result</code> という名前を使って <code>5</code> という値を自由に使えるようになります。</p>
+
+      <h2>GASでよく見るreturn</h2>
+      <p>Google Apps Script（GAS）のコードでも、return は頻出します。</p>
+      <pre><code>function getSheet() {
+  return SpreadsheetApp.getActiveSpreadsheet();
+}</code></pre>
+      <p><a href="dot-parentheses.html">「. と () は何？」</a>や<a href="gas-services.html">「SpreadsheetAppとは？」</a>で学んだ知識で分解してみましょう。</p>
+      <ul>
+        <li><code>SpreadsheetApp.getActiveSpreadsheet()</code>：現在開いているスプレッドシートを取得する</li>
+        <li><code>return</code>：取得したスプレッドシートを、<code>getSheet()</code> の結果として外へ返す</li>
+      </ul>
+      <p>「スプレッドシートを取得して、それを外に手渡す関数だな」と、構造をシンプルに理解できます。</p>
+
+      <h2>returnを見たらどう読むか（重要）</h2>
+      <p>コードの中に <code>return</code> を見かけたら、次のように読みましょう。</p>
+      <pre><code>return something;</code></pre>
+      <p><strong>「このfunctionは something を結果として返す！」</strong></p>
+      <p>function全体の処理が長くても、最後に <code>return</code> されているものを見れば、「結局この関数は何を作り出して渡してくれるのか」が分かります。return は、functionの結論を示す目印です。</p>
+
+      <h2>returnが動くとfunctionはその場で終わる</h2>
+      <p>もうひとつ大切なルールがあります。<strong>return が実行されると、そのfunctionの処理はそこで直ちに終了します。</strong>後ろにまだコードが残っていても実行されません。</p>
+      <p><a href="if.html">if文</a>と組み合わせた例を見てみましょう。</p>
+      <pre><code>function checkAge(age) {
+  if (age &lt; 20) {
+    return "未成年";
+  }
+
+  return "成人";
+}</code></pre>
+      <p>この関数は次のように動きます。</p>
+      <ul>
+        <li>もし <code>age</code> が20未満なら、<code>return "未成年";</code> が実行され、<strong>そこで関数は終了</strong>します。下の行の <code>"成人"</code> は見に行きません。</li>
+        <li>もし <code>age</code> が20以上なら、if文の中は通らず、最後の <code>return "成人";</code> が実行されて <code>"成人"</code> を返します。</li>
+      </ul>
+      <p>「条件に合ったら、そこで結果を返して終わりにする」という書き方は、プログラミングで非常によく使われます。</p>
+
+      <h2>returnは何を返せる？</h2>
+      <p>return の右側には、さまざまな種類のデータを置くことができます。</p>
+      <ul>
+        <li><strong>数字：</strong><code>return 100;</code></li>
+        <li><strong>文字列：</strong><code>return "完了しました";</code></li>
+        <li><strong>true / false：</strong><code>return true;</code></li>
+        <li><strong>配列（一覧データ）：</strong><code>return ["りんご", "みかん"];</code></li>
+        <li><strong>オブジェクト（まとまりデータ）：</strong><code>return { name: "田中", age: 25 };</code></li>
+      </ul>
+      <p>配列 <code>[]</code> やオブジェクト <code>{}</code> については今後の記事で詳しく扱いますが、「functionは数字だけでなく、文字でも一覧でも何でも返せる」と知っておけば十分です。</p>
+
+      <h2>returnとconsole.logの違い</h2>
+      <p>初心者の方が一番混乱しやすいのが、<code>return</code> と <code>console.log</code>（GASでの <code>Logger.log</code>）の違いです。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3><code>console.log(value);</code></h3>
+          <p><strong>画面やログに表示するだけ。</strong><br>人間が確認するためのメモ書き。他のプログラムからはその値を使えません。</p>
+        </div>
+        <div class="card">
+          <h3><code>return value;</code></h3>
+          <p><strong>functionの結果として外へ渡す。</strong><br>変数に入れたり、別の計算に使ったりできます。</p>
+        </div>
+      </div>
+      <p>「画面に表示して確認したいときは log、次の処理にデータを受け渡したいときは return」と区別しましょう。</p>
+
+      <h2>コードを読むときの5つのステップ</h2>
+      <p>function を見かけたら、次の順番で目を動かしてみましょう。</p>
+      <pre><code>function getDiscountPrice(price) {
+  if (price &gt;= 1000) {
+    return price * 0.9;
+  }
+  return price;
+}</code></pre>
+      <ol>
+        <li><strong>function名を見る：</strong><code>getDiscountPrice</code>（割引価格を計算する関数だな）</li>
+        <li><strong>引数（材料）を見る：</strong><code>(price)</code>（元の値段を受け取るんだな）</li>
+        <li><strong>中身の処理を見る：</strong><code>if (price &gt;= 1000)</code>（1000円以上かチェックしている）</li>
+        <li><strong>return を探す：</strong><code>return price * 0.9;</code> と <code>return price;</code> がある</li>
+        <li><strong>何を返しているか確認する：</strong>条件に合えば1割引きの値段、そうでなければ元の値段を返している</li>
+      </ol>
+      <p>このように「最後は何を返しているか（return）」に着目すると、途中の細かい計算に迷わされずに関数の目的をつかむことができます。</p>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li><strong>return</strong> は、functionの中で作った結果を外へ返すもの</li>
+          <li>return の後ろにある値が、関数の<strong>「戻り値」</strong>になる</li>
+          <li>return が実行されると、そのfunctionの処理は<strong>そこで終了</strong>する</li>
+          <li>返された結果は <code>const result = add(2, 3);</code> のように変数で受け取れる</li>
+          <li>コードを読むときは <strong>return を探す</strong>と、その関数の結論が分かる</li>
+        </ul>
+      </div>
+
+      <div class="article-rating" data-article-id="return">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="if.html" rel="prev">if文とは？ 条件分岐を最低限だけ理解する</a></p>
+        <p>次の記事：<a href="api.html" rel="next">APIとは？ アプリ同士をつなぐ窓口</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+          <p><a href="../categories/basics.html">← 基本用語の記事一覧へ</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../assets/article-rating.js" defer></script>
+</body>
+</html>
