@@ -924,6 +924,114 @@ window.siteQuizQuestions = [
     answer: 0,
     explanation: "オブジェクトとJSONは見た目がよく似ていますが別物です。オブジェクトはJavaScriptのプログラム内で動くデータそのもの、JSONはテキスト（文字列）としてデータを送受信するための規格です。",
     article: "../articles/object.html"
+  },
+
+  // ── for・forEach 編（for-foreach.html 追加分）─────────────
+
+  {
+    id: "js-loop-concept",
+    category: "javascript",
+    question: "プログラミングで「for」や「forEach」を使う主な目的・役割はどれ？",
+    code: "",
+    choices: [
+      "新しい変数をすべて削除するため",
+      "同じような処理を何度も繰り返すため",
+      "インターネットの通信速度を速くするため",
+      "HTMLのタグをCSSに変換するため"
+    ],
+    answer: 1,
+    explanation: "for や forEach は「ループ（繰り返し）」を行う仕組みです。特に配列の中に入っているたくさんのデータを1個ずつ順番に処理するときによく使われます。",
+    article: "../articles/for-foreach.html"
+  },
+  {
+    id: "js-foreach-item-arg",
+    category: "javascript",
+    question: "次の fruits.forEach() のコードで、fruit という変数には何が入って実行される？",
+    code: 'const fruits = ["apple", "banana", "orange"];\nfruits.forEach(fruit => {\n  console.log(fruit);\n});',
+    choices: [
+      "常に3つの果物がまとまった配列が入る",
+      "果物の文字数（5、6、6）が入る",
+      '1回目は "apple"、2回目は "banana"、3回目は "orange" と1つずつ入る',
+      '常に最後に置かれた "orange" だけが入る'
+    ],
+    answer: 2,
+    explanation: "forEach は配列の要素を先頭から1つずつ取り出して処理します。丸かっこ内の fruit は取り出した1個の値に付けた一時的な名前で、1周ごとに中身が順番に切り替わります。",
+    article: "../articles/for-foreach.html"
+  },
+  {
+    id: "js-arrow-meaning",
+    category: "javascript",
+    question: "forEach のコードに出てくる =>（イコールと大なり）という記号の役割として最も適切なものはどれ？",
+    code: 'fruits.forEach(fruit => {\n  console.log(fruit);\n});',
+    choices: [
+      "左の fruit の方が右より大きいかを比べる比較演算子",
+      "取り出した値（fruit）に対して「この処理を行う」とつなぐアロー関数の目印",
+      "処理を途中で強制終了する記号",
+      "右の処理結果を左の fruit に代入する記号"
+    ],
+    answer: 1,
+    explanation: "=> はアロー関数という書き方の目印です。比較の「以上（>=）」とは向きが逆で、「左で受け取った値に対して、右の波かっこの処理を実行する」というつなぎ役を果たしています。",
+    article: "../articles/for-foreach.html"
+  },
+  {
+    id: "js-gas-getvalues-foreach",
+    category: "javascript",
+    question: "GASでスプレッドシートの行データを rows.forEach(row => { ... }) で処理するとき、row[0] は何を表している？",
+    code: 'const rows = sheet.getDataRange().getValues();\nrows.forEach(row => {\n  console.log(row[0]);\n});',
+    choices: [
+      "シート全体の行数",
+      "シート全体の最初の行だけ",
+      "エラーの発生回数",
+      "現在処理している行の「1列目（A列）」の値"
+    ],
+    answer: 3,
+    explanation: "getValues() で取得したデータは二次元配列です。forEach で1行ずつ取り出したデータ（row）は1行分の配列なので、row[0] でその行の先頭列（A列）の値を取り出すことができます。",
+    article: "../articles/for-foreach.html"
+  },
+  {
+    id: "js-for-ipp",
+    category: "javascript",
+    question: "for文で見かける i++ という書き方の意味として正しいものはどれ？",
+    code: 'for (let i = 0; i < 3; i++) {\n  console.log(i);\n}',
+    choices: [
+      "i の値をリセットして 0 に戻す",
+      "i の値を 1 増やす（カウントアップする）",
+      "i の値を 2 倍にする",
+      "i がプラスの数かどうかを判定する"
+    ],
+    answer: 1,
+    explanation: "i++ は「i を 1 増やす」という意味の書き方（インクリメント）です。1周処理が終わるたびに i が 1 ずつ増えていきます。",
+    article: "../articles/for-foreach.html"
+  },
+  {
+    id: "js-for-array-access",
+    category: "javascript",
+    question: "次のfor文の中で fruits[i] と書かれているとき、ループが進むにつれて取り出されるものはどれ？",
+    code: 'const fruits = ["apple", "banana", "orange"];\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(fruits[i]);\n}',
+    choices: [
+      "i が 0, 1, 2 と増えるため、fruits[0], fruits[1], fruits[2] と順番に取り出される",
+      "常に fruits の要素数である 3 が取り出される",
+      "fruits のすべての文字を連結した1つの文字列が取り出される",
+      "i という名前の新しい配列が取り出される"
+    ],
+    answer: 0,
+    explanation: "i が 0 から 1 ずつ増えるため、fruits[i] は 1周目 fruits[0]（\"apple\"）、2周目 fruits[1]（\"banana\"）、3周目 fruits[2]（\"orange\"）と順番に中身を取り出します。",
+    article: "../articles/for-foreach.html"
+  },
+  {
+    id: "js-for-vs-foreach",
+    category: "javascript",
+    question: "「for」と「forEach」の使い分け・特徴の違いとして最も適切なものはどれ？",
+    code: "",
+    choices: [
+      "forEach はJavaScript専用で、for はGAS専用である",
+      "forEach は配列の中身をシンプルに1個ずつ処理したいときに向いており、for は回数や番号を細かく制御したいときにも使える",
+      "forEach は必ず3回しか繰り返せないが、for は無限に繰り返せる",
+      "どちらも全く同じ書き方で中身に一切違いはない"
+    ],
+    answer: 1,
+    explanation: "配列の中身を素直に順番に処理したいときは forEach がシンプルで読みやすいです。一方、昔ながらの for文は「0から5回繰り返す」「途中で飛ばす」など回数や添字を細かく制御したい場合にも使われます。",
+    article: "../articles/for-foreach.html"
   }
 ];
 

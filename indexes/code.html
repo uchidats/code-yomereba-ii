@@ -71,6 +71,11 @@
 <li><a href="#javascript-19"><code>return { ... }</code></a></li>
 <li><a href="#javascript-20"><code>user.skills[0]</code></a></li>
 <li><a href="#javascript-21"><code>users[0].name</code></a></li>
+<li><a href="#javascript-22"><code>for (let i = 0; ... )</code></a></li>
+<li><a href="#javascript-23"><code>.forEach()</code></a></li>
+<li><a href="#javascript-24"><code>item =&gt; { ... }</code></a></li>
+<li><a href="#javascript-25"><code>i++</code></a></li>
+<li><a href="#javascript-26"><code>array[i]</code></a></li>
 </ul>
 <dl class="index-entries">
 <div id="javascript-1"><dt><code>const</code></dt><dd><p>再代入しない変数の宣言。「この名前で値を扱い、別の値は入れ直さない」と読みます。配列やオブジェクトの中身まで変更禁止になるわけではありません。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
@@ -94,6 +99,11 @@
 <div id="javascript-19"><dt><code>return { ... }</code></dt><dd><p>functionから複数の値・項目をオブジェクトとしてまとめて返す書き方。「複数の結果をひとまとめにして外へ渡す」と読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/return.html">returnとは？</a></p></dd></div>
 <div id="javascript-20"><dt><code>user.skills[0]</code></dt><dd><p>オブジェクトの中に入っている配列の値を取り出す指定。「user の中の skills の0番目」と左から順に読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/array.html">配列とは？</a></p></dd></div>
 <div id="javascript-21"><dt><code>users[0].name</code></dt><dd><p>配列の中に入っているオブジェクトの値を取り出す指定。「users 配列の先頭（0番目）の要素の name」と左から順に読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-22"><dt><code>for (let i = 0; ... )</code></dt><dd><p>指定した回数や条件に合わせて処理を繰り返す構文。「iを0から始めて、条件を満たす間増やしながら繰り返す」と読みます。</p><p class="index-related">関連記事：<a href="../articles/for-foreach.html">for・forEachとは？</a></p></dd></div>
+<div id="javascript-23"><dt><code>.forEach()</code></dt><dd><p>配列の要素を先頭から1つずつ取り出して処理を実行する命令。「配列のすべての要素に対して同じ処理をする」と読みます。</p><p class="index-related">関連記事：<a href="../articles/for-foreach.html">for・forEachとは？</a>、<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-24"><dt><code>item =&gt; { ... }</code></dt><dd><p>forEachなどで取り出した要素を受け取って処理する書き方。「取り出した値（item）に対して、波かっこの中の処理をする」と読みます。</p><p class="index-related">関連記事：<a href="../articles/for-foreach.html">for・forEachとは？</a></p></dd></div>
+<div id="javascript-25"><dt><code>i++</code></dt><dd><p>変数iの値を1増やす書き方（インクリメント）。for文の末尾で「繰り返すごとに1増やす」合図として登場します。</p><p class="index-related">関連記事：<a href="../articles/for-foreach.html">for・forEachとは？</a></p></dd></div>
+<div id="javascript-26"><dt><code>array[i]</code></dt><dd><p>for文の中で、変数i番目の配列要素を取り出す書き方。「i回目のループで、i番目の要素を読む」と読みます。</p><p class="index-related">関連記事：<a href="../articles/for-foreach.html">for・forEachとは？</a>、<a href="../articles/array.html">配列とは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="symbols">
@@ -129,7 +139,7 @@
 <div id="symbols-6"><dt><code>&amp;&amp;</code></dt><dd><p>条件をつなぐ「かつ」。条件式では「両方とも成り立つか」と読みます。実際には左側の値に応じて、どちらかの値を返します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
 <div id="symbols-7"><dt><code>||</code></dt><dd><p>条件をつなぐ「または」。条件式では「どちらかが成り立つか」と読みます。実際には左側の値に応じて、どちらかの値を返します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
 <div id="symbols-8"><dt><code>!</code></dt><dd><p>真偽を反転する記号。「〜ではない」と読み、例えば!trueはfalseになります。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
-<div id="symbols-9"><dt><code>=&gt;</code></dt><dd><p>アロー関数の目印。「左側で情報を受け取り、右側で処理する関数」と読みます。大小を比べる記号ではありません。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
+<div id="symbols-9"><dt><code>=&gt;</code></dt><dd><p>アロー関数の目印。「左側で情報を受け取り、右側で処理する関数」と読みます。大小を比べる記号ではありません。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a>、<a href="../articles/for-foreach.html">for・forEachとは？</a></p></dd></div>
 <div id="symbols-10"><dt><code>()</code></dt><dd><p>関数の引数や条件、計算のまとまりを囲む丸かっこ。名前の直後なら「関数を呼ぶ」、ifの直後なら「条件を調べる」と周囲から読み分けます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#parentheses">. と () は何？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="symbols-11"><dt><code>[]</code></dt><dd><p>配列や要素の参照に使う角かっこ。「値の一覧」や「一覧の何番目かを読む」と読みます。JavaScriptの配列の番号は0から始まります。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-12"><dt><code>{}</code></dt><dd><p>処理やデータをまとめる波かっこ。ifや関数の後ろなら処理の範囲、オブジェクトやJSONなら名前と値をまとめたデータと読みます。</p><p class="index-related">関連記事：<a href="../articles/object.html">オブジェクトとは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>

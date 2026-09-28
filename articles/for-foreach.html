@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-28T16:30:00+09:00 -->
+  <title>for・forEachとは？ 同じ処理を繰り返す｜コードは読めればいい</title>
+  <meta name="description" content="JavaScriptやGASでよく使われる繰り返し処理（for と forEach）を初心者向けに解説。配列の中身を1つずつ取り出すforEachの読み方、i++やlengthを使ったfor文の構造、GASのgetValues()との組み合わせまで分かります。">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/basics.html">基本用語</a> › for・forEachとは？</p>
+
+      <h1>for・forEachとは？ 同じ処理を繰り返す</h1>
+      <p class="article-lead">JavaScriptやGASのコードを読んでいると、<code>for</code> や <code>forEach</code> という言葉が頻繁に出てきます。これらは<strong>繰り返し処理（ループ / loop）</strong>を行うための仕組みで、特に<strong>配列の中に並んだデータを1個ずつ順番に処理したいとき</strong>に大活躍します。</p>
+
+      <h2>1. まず結論：同じような処理を何度も繰り返すための仕組み</h2>
+      <p>初心者の方は、まずこれだけ覚えておけば十分です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>for と forEach の役割</h3>
+          <p>同じような処理を何度も繰り返す命令。特に<strong>「配列の中身を1個ずつ順番に取り出して処理する」</strong>ときに最もよく使われます。</p>
+        </div>
+      </div>
+      <p>例えば、100人分のメールを順番に送ったり、スプレッドシートの行を1行ずつチェックしたりするとき、100行も同じコードを手書きするのは大変です。<code>forEach</code> や <code>for</code> を使えば、数行書くだけで自動的に全部のデータを回してくれます。</p>
+
+      <h2>2. まず読みやすい forEach から見てみよう</h2>
+      <p>JavaScriptにはいくつか繰り返しの書き方がありますが、AIが書く現代のコードでは <strong><code>forEach</code></strong> の方が直感的で読みやすいので、こちらから先に見てみましょう。</p>
+      <pre><code>const fruits = ["apple", "banana", "orange"];
+
+fruits.forEach(fruit => {
+  Logger.log(fruit);
+});</code></pre>
+      <p>細かい記号は後で説明します。まずはこのコード全体を見て、次のようにざっくり読めれば完璧です。</p>
+      <p><strong>「<code>fruits</code> の中身を1個ずつ取り出して、ログに表示しているんだな」</strong></p>
+      <p><code>fruits.forEach(...)</code> を見かけたら、<strong>「fruits の各要素（each）に対して同じ処理をしている」</strong>と受け止めてください。</p>
+
+      <h2>3. fruit は取り出した1個の値につけた「一時的な名前」</h2>
+      <p>丸っこの中の <code>fruit</code> に注目してみましょう。</p>
+      <pre><code>fruits.forEach(fruit => {</code></pre>
+      <p>この <code>fruit</code> は、配列から<strong>今まさに取り出している1個のデータに付けた名前（変数）</strong>です。</p>
+      <ul>
+        <li>1回目の繰り返し → <code>fruit</code> には <code>"apple"</code> が入る</li>
+        <li>2回目の繰り返し → <code>fruit</code> には <code>"banana"</code> が入る</li>
+        <li>3回目の繰り返し → <code>fruit</code> には <code>"orange"</code> が入る</li>
+      </ul>
+      <p>このように、中身が自動的に入れ替わりながら、<code>{ }</code> の中の処理が3回実行されます。</p>
+      <aside class="term-note" aria-label="名前は何でもよい">
+        <strong>名前は何でもOK</strong>
+        <p><code>fruit</code> という名前は書いた人が自由に決めたものです。<code>item</code> でも <code>f</code> でも動きますが、AIは読みやすいように「複数形（fruits）から1個（fruit）を取り出す」という自然な名前を付けることが多いです。</p>
+      </aside>
+
+      <h2>4. => は何か？ 「この値を使って、この処理をする」の目印</h2>
+      <p><code>fruit => { ... }</code> にある <strong><code>=></code></strong> という記号は、JavaScriptの<strong>アロー関数（arrow function）</strong>と呼ばれる記号です。</p>
+      <p>矢印（アロー）の形をしていることからそう呼ばれますが、ここでは文法を難しく考える必要はありません。初心者の方は、</p>
+      <p><strong>「左で取り出した値（fruit）を使って、右の波かっこ { } の処理を実行する」</strong></p>
+      <p>という橋渡しの区切り記号として捉えておけば十分に読めます。</p>
+
+      <h2>5. GASで一番よく見る例：getValues() と forEach</h2>
+      <p>Google Apps Script（GAS）で最もよく登場するのが、スプレッドシートの表データを読み出してループするパターンです。</p>
+      <pre><code>const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+const values = sheet.getDataRange().getValues();
+
+values.forEach(row => {
+  Logger.log(row[0]);
+});</code></pre>
+      <p>「<a href="array.html">配列 [] とは？</a>」の記事で学んだ知識をつなげて、左から順番に分解してみましょう。</p>
+      <ol>
+        <li><code>getValues()</code>：シートの複数セルをまとめて<strong>二次元配列</strong>として取得する</li>
+        <li><code>values</code>：行がズラリと並んだ配列</li>
+        <li><code>.forEach(row => {</code>：1行ずつ取り出し、その行を <code>row</code> と名付ける</li>
+        <li><code>row[0]</code>：その行の 0番目（A列・最初の列）の値を取り出してログに出す</li>
+      </ol>
+      <p>「表全体のデータを取ってきて、1行ずつ上から順番にA列のデータを確認している」という全体の流れがくっきり見えてきます。</p>
+
+      <h2>6. オブジェクトの配列との組み合わせ</h2>
+      <p>前の記事「<a href="object.html">オブジェクト {} とは？</a>」で学んだ、配列の中にオブジェクトが入っているデータも、<code>forEach</code> でよく処理されます。</p>
+      <pre><code>const users = [
+  { name: "Masa", age: 31 },
+  { name: "Ken", age: 28 }
+];
+
+users.forEach(user => {
+  Logger.log(user.name);
+});</code></pre>
+      <p>これも分解してみると非常にシンプルです。</p>
+      <ol>
+        <li><code>users</code>：ユーザーのオブジェクトが並んだ配列</li>
+        <li><code>user</code>：取り出した1人分のオブジェクト（<code>{ name: "Masa", age: 31 }</code> など）</li>
+        <li><code>user.name</code>：その人の名前を取り出してログに出す</li>
+      </ol>
+      <p>実行すると、ログには順番に <code>"Masa"</code>、<code>"Ken"</code> と表示されます。「配列から1人ずつ取り出して、その人の名前を読んでいる」と自然に読めますね。</p>
+
+      <h2>7. 昔から使われる for文 とは？</h2>
+      <p><code>forEach</code> のほかに、昔からプログラミング全般で使われているのが <strong><code>for文</code></strong> です。</p>
+      <pre><code>for (let i = 0; i < 3; i++) {
+  Logger.log(i);
+}</code></pre>
+      <p>丸かっこの中が少し暗号のように見えますが、細かい文法を暗記する必要はありません。まずはこれだけ分かれば合格です。</p>
+      <p><strong>「i を 0から始めて、3未満の間、1ずつ増やしながら繰り返す」</strong></p>
+      <p>実行すると、ログには <code>0</code>、<code>1</code>、<code>2</code> と順番に出力されます。</p>
+
+      <h2>8. 変数 i とは？ 「現在の回数・番号」</h2>
+      <p>for文で必ずと言っていいほど出てくる <code>i</code> は、<strong>繰り返し回数（カウント）や配列のインデックス番号</strong>を表すためによく使われる変数名です。</p>
+      <p>英語の <strong>index（添字・見出し）</strong> や <strong>iteration（反復）</strong> の頭文字から取られた慣習で、プログラミング界の定番の文字です。</p>
+
+      <h2>9. i++ とは？ 「i を 1増やす」</h2>
+      <p>for文の末尾にある <code>i++</code> は、<strong>「i の値を 1増やす」</strong>という意味の書き方です（インクリメントと呼びます）。</p>
+      <p>処理が1回終わるたびに <code>i++</code> が実行され、<code>i</code> が 0 → 1 → 2 と増えていきます。</p>
+
+      <h2>10. 配列を for文 で読む</h2>
+      <p>配列の中身を <code>for文</code> で順番に取り出すときは、次のように書かれます。</p>
+      <pre><code>const fruits = ["apple", "banana", "orange"];
+
+for (let i = 0; i < fruits.length; i++) {
+  Logger.log(fruits[i]);
+}</code></pre>
+      <p>「配列」の記事で学んだパーツが総動員されていますね。</p>
+      <ul>
+        <li><code>fruits.length</code>：配列の個数（ここでは <code>3</code>）</li>
+        <li><code>let i = 0; i < fruits.length</code>：番号 0 から始めて、3未満（0, 1, 2）まで回す</li>
+        <li><code>fruits[i]</code>：配列の i番目の要素を取り出す（<code>fruits[0]</code>, <code>fruits[1]</code>, <code>fruits[2]</code>）</li>
+      </ul>
+      <p>これで、配列の先頭から末尾までキレイに順番通り取り出すことができます。</p>
+
+      <h2>11. for と forEach の違い：どちらを使えばいい？</h2>
+      <p>AIが生成するコードを見ていると、<code>for</code> も <code>forEach</code> も両方出てきます。初心者のうちは、次のイメージを持っておくだけで十分です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>forEach</h3>
+          <p><strong>配列を1個ずつ順番に処理したいとき</strong>にシンプルで読みやすい。現代のJavaScriptやGASで主流。</p>
+        </div>
+        <div class="card">
+          <h3>for</h3>
+          <p><strong>「3回だけ繰り返したい」「2個飛ばしで進めたい」「途中でループを中断したい」</strong>など、回数や番号を細かくコントロールしたいときに使う。</p>
+        </div>
+      </div>
+      <p>「どちらが優れている」というものではなく、場面によって使い分けられています。自分で選んで書けなくても、コードを見たときに「あ、どちらも繰り返しをしているんだな」と気づければバッチリです。</p>
+
+      <h2>12. コードを読むときのコツ</h2>
+      <p>コードの中でループ処理を見かけたら、次のポイントに注目してみてください。</p>
+      <h3>forEach を見かけたとき</h3>
+      <ol>
+        <li><strong>どの配列を処理しているか</strong>：<code>xxx.forEach</code> の <code>xxx</code> を見る</li>
+        <li><strong>1個ずつ取り出した値の名前は何か</strong>：<code>(item =></code> の <code>item</code> を見る</li>
+        <li><strong>波かっこ { } の中で何をしているか</strong>：取り出した値を使って何を実行しているか追う</li>
+      </ol>
+      <h3>for を見かけたとき</h3>
+      <ol>
+        <li><strong>どこから始まるか</strong>：<code>let i = 0</code> などを確認</li>
+        <li><strong>どこまで続けるか</strong>：<code>i < xxx.length</code> などの終了条件を確認</li>
+        <li><strong>波かっこ { } の中で何をしているか</strong>：<code>array[i]</code> で何を取り出しているか確認</li>
+      </ol>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li><strong>for</strong> と <strong>forEach</strong> は、同じような処理を何度も繰り返す仕組み</li>
+          <li><strong>forEach</strong> は、配列の中身を1個ずつ順番に処理するときによく使う</li>
+          <li><code>array.forEach(item => { ... })</code> を見たら「各 item に対して処理」と読む</li>
+          <li><strong>for文</strong> は、回数やインデックス番号を使って細かく制御したいときに使う</li>
+          <li><strong>i++</strong> は「i を 1増やす」合図</li>
+          <li>GASでは <code>getValues()</code> で取得した表データを <code>forEach</code> で1行ずつ回すのが鉄板パターン</li>
+        </ul>
+      </div>
+
+      <div class="article-rating" data-article-id="for-foreach" data-updated="2026-09-28">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="object.html" rel="prev">オブジェクト {} とは？ 名前を付けて値をまとめる</a></p>
+        <p>次の記事：<a href="api.html" rel="next">APIとは？ アプリ同士をつなぐ窓口</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+          <p><a href="../categories/basics.html">← 基本用語の記事一覧へ</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../assets/article-rating.js" defer></script>
+</body>
+</html>
