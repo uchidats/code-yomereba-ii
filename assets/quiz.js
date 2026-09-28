@@ -20,8 +20,10 @@
   const codeEl   = get("quiz-code");
 
   const categoryList        = get("quiz-category-list");
+  const kindList            = get("quiz-kind-list");
   const poolInfo            = get("quiz-pool-info");
   const categoryError       = get("quiz-category-error");
+  const kindError           = get("quiz-kind-error");
   const startBtn            = get("quiz-start");
   const includeSolvedCheckbox = get("quiz-include-solved");
   const allSolvedMessage    = get("quiz-all-solved-message");
@@ -189,13 +191,66 @@
   // ── カテゴリごとの進捗バッジ更新 ────────────────────────
   function updateCategoryBadges() {
     const solvedSet = getSolvedIds();
+    const checkedKinds = kindList
+      ? [...kindList.querySelectorAll('input[type="checkbox"]:checked')].map((el) => el.value)
+      : ["knowledge", "code"];
+
     for (const cat of CATEGORIES) {
       const badge = categoryList.querySelector(`[data-cat-badge="${cat.value}"]`);
       if (!badge) continue;
-      const catQuestions = questions.filter((q) => q.category === cat.value);
+
+      const catQuestions = checkedKinds.length > 0
+        ? questions.filter((q) => q.category === cat.value && checkedKinds.includes(q.kind))
+        : questions.filter((q) => q.category === cat.value);
+
       const total = catQuestions.length;
+      if (total === 0) {
+        badge.textContent = "0問";
+        badge.classList.remove("quiz-cat-completed");
+        continue;
+      }
+
       const solvedInCat = catQuestions.filter((q) => solvedSet.has(q.id)).length;
       const unsolved = total - solvedInCat;
+
+      if (unsolved === 0) {
+        badge.textContent = `✓ ${total} / ${total}問`;
+        badge.classList.add("quiz-cat-completed");
+      } else {
+        badge.textContent = `未正解 ${unsolved} / ${total}問`;
+        badge.classList.remove("quiz-cat-completed");
+      }
+    }
+  }
+
+  // ── 出題形式ごとの進捗バッジ更新 ────────────────────────
+  function updateKindBadges() {
+    if (!kindList) return;
+    const solvedSet = getSolvedIds();
+    const checkedCats = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')].map((el) => el.value);
+
+    const KINDS = [
+      { value: "knowledge", label: "知識問題" },
+      { value: "code",      label: "コード読解" }
+    ];
+
+    for (const kindObj of KINDS) {
+      const badge = kindList.querySelector(`[data-kind-badge="${kindObj.value}"]`);
+      if (!badge) continue;
+
+      const kindQuestions = checkedCats.length > 0
+        ? questions.filter((q) => q.kind === kindObj.value && checkedCats.includes(q.category))
+        : questions.filter((q) => q.kind === kindObj.value);
+
+      const total = kindQuestions.length;
+      if (total === 0) {
+        badge.textContent = "0問";
+        badge.classList.remove("quiz-cat-completed");
+        continue;
+      }
+
+      const solvedInKind = kindQuestions.filter((q) => solvedSet.has(q.id)).length;
+      const unsolved = total - solvedInKind;
 
       if (unsolved === 0) {
         badge.textContent = `✓ ${total} / ${total}問`;
@@ -211,41 +266,73 @@
   const MAX_QUESTIONS = 10;
 
   function getCandidatePool() {
-    const checked = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')]
+    const checkedCats = [...categoryList.querySelectorAll('input[type="checkbox"]:checked')]
       .map((el) => el.value);
-    if (checked.length === 0) {
-      return { checkedCount: 0, candidatePool: [] };
+    const checkedKinds = kindList
+      ? [...kindList.querySelectorAll('input[type="checkbox"]:checked')].map((el) => el.value)
+      : ["knowledge", "code"];
+
+    if (checkedCats.length === 0 || checkedKinds.length === 0) {
+      return {
+        checkedCatsCount: checkedCats.length,
+        checkedKindsCount: checkedKinds.length,
+        totalSelected: 0,
+        candidatePool: []
+      };
     }
 
-    const selectedQuestions = questions.filter((q) => checked.includes(q.category));
+    const selectedQuestions = questions.filter((q) =>
+      checkedCats.includes(q.category) && checkedKinds.includes(q.kind)
+    );
     const includeSolved = includeSolvedCheckbox ? includeSolvedCheckbox.checked : false;
 
     if (includeSolved) {
-      return { checkedCount: checked.length, candidatePool: selectedQuestions };
+      return {
+        checkedCatsCount: checkedCats.length,
+        checkedKindsCount: checkedKinds.length,
+        totalSelected: selectedQuestions.length,
+        candidatePool: selectedQuestions
+      };
     }
 
     const solvedSet = getSolvedIds();
     const candidatePool = selectedQuestions.filter((q) => !solvedSet.has(q.id));
-    return { checkedCount: checked.length, candidatePool };
+    return {
+      checkedCatsCount: checkedCats.length,
+      checkedKindsCount: checkedKinds.length,
+      totalSelected: selectedQuestions.length,
+      candidatePool
+    };
   }
 
   // ── pool表示テキストと開始ボタン状態を更新 ──────────────
   function updatePoolInfo() {
     updateCategoryBadges();
-    const { checkedCount, candidatePool } = getCandidatePool();
+    updateKindBadges();
+    const { checkedCatsCount, checkedKindsCount, totalSelected, candidatePool } = getCandidatePool();
 
-    if (checkedCount === 0) {
+    const hasCatError = checkedCatsCount === 0;
+    const hasKindError = checkedKindsCount === 0;
+
+    categoryError.hidden = !hasCatError;
+    if (kindError) kindError.hidden = !hasKindError;
+
+    if (hasCatError || hasKindError) {
       poolInfo.textContent = "";
-      categoryError.hidden = false;
       if (allSolvedMessage) allSolvedMessage.hidden = true;
       startBtn.disabled    = true;
       return;
     }
 
-    categoryError.hidden = true;
+    if (totalSelected === 0) {
+      poolInfo.textContent = "出題候補：0問";
+      if (allSolvedMessage) allSolvedMessage.hidden = true;
+      startBtn.disabled    = true;
+      return;
+    }
 
     if (candidatePool.length === 0) {
-      // 選択したカテゴリに未正解問題が0問で、正解済みを含めるがOFF
+      // 選択した条件に未正解問題が0問で、正解済みを含めるがOFF
       poolInfo.textContent = "";
       if (allSolvedMessage) allSolvedMessage.hidden = false;
       startBtn.disabled    = true;
@@ -263,6 +350,9 @@
 
   // チェックボックスが変わるたびに更新
   categoryList.addEventListener("change", updatePoolInfo);
+  if (kindList) {
+    kindList.addEventListener("change", updatePoolInfo);
+  }
   if (includeSolvedCheckbox) {
     includeSolvedCheckbox.addEventListener("change", updatePoolInfo);
   }
@@ -295,7 +385,7 @@
       review.append(element("p", "今回は復習が必要な問題はありません。"));
       return;
     }
-    for (const { question, selectedAnswer } of mistakes) {
+    for (const { question, selectedAnswer, answerStatus } of mistakes) {
       const card = document.createElement("article");
       card.className = "quiz-card quiz-review-card";
       const link = element("a", "検索・索引で確認する");
@@ -312,8 +402,12 @@
         cardChildren.push(code);
       }
 
+      const yourAnswerText = (selectedAnswer === "unknown" || answerStatus === "unknown")
+        ? "わからない"
+        : question.choices[selectedAnswer];
+
       cardChildren.push(
-        element("p", `選んだ回答：${question.choices[selectedAnswer]}`),
+        element("p", `あなたの回答：${yourAnswerText}`),
         element("p", `正解：${question.choices[question.answer]}`),
         element("p", question.explanation),
         link
@@ -358,6 +452,20 @@
       label.append(input, caption);
       get("quiz-options").append(label);
     });
+
+    // 5つ目の選択肢「わからない」を動的に追加
+    const unknownLabel = document.createElement("label");
+    unknownLabel.className = "quiz-option quiz-option-unknown";
+    const unknownInput = document.createElement("input");
+    unknownInput.type     = "radio";
+    unknownInput.name     = "answer";
+    unknownInput.value    = "unknown";
+    unknownInput.required = true;
+    const unknownCaption = document.createElement("span");
+    unknownCaption.textContent = "わからない";
+    unknownLabel.append(unknownInput, unknownCaption);
+    get("quiz-options").append(unknownLabel);
+
     if (moveFocus) heading.focus();
   }
 
@@ -404,17 +512,34 @@
     if (answered || !selected) return;
     answered = true;
     const question = round[position];
-    const correct  = Number(selected.value) === question.answer;
-    if (correct) {
+
+    // 回答判定：「正解」「不正解」「わからない」を内部的に区別
+    let answerStatus;
+    if (selected.value === "unknown") {
+      answerStatus = "unknown";
+    } else if (Number(selected.value) === question.answer) {
+      answerStatus = "correct";
+    } else {
+      answerStatus = "incorrect";
+    }
+
+    const isCorrect = answerStatus === "correct";
+    if (isCorrect) {
       score++;
       saveSolvedId(question.id);
     } else {
-      mistakes.push({ question, selectedAnswer: Number(selected.value) });
+      mistakes.push({
+        question,
+        selectedAnswer: selected.value === "unknown" ? "unknown" : Number(selected.value),
+        answerStatus: answerStatus
+      });
     }
+
     choices.disabled = true;
     submit.disabled  = true;
-    get("quiz-verdict").textContent      = correct ? "○ 正解" : "× 不正解";
-    feedback.dataset.correct             = String(correct);
+    get("quiz-verdict").textContent      = isCorrect ? "○ 正解" : "× 不正解";
+    feedback.dataset.correct             = String(isCorrect);
+    feedback.dataset.verdict             = answerStatus;
     get("quiz-correct-answer").textContent = `正解：${question.choices[question.answer]}`;
     get("quiz-explanation").textContent  = question.explanation;
     get("quiz-article").href             = question.article;

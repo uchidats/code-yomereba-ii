@@ -46,10 +46,25 @@
       <noscript><p>クイズにはJavaScriptが必要です。ブラウザのJavaScriptを有効にしてご利用ください。</p></noscript>
 
       <section id="quiz-setup" class="quiz-card" aria-labelledby="quiz-setup-heading" hidden>
-        <h2 id="quiz-setup-heading">出題する分野を選んでください</h2>
+        <h2 id="quiz-setup-heading">出題する分野・形式を選んでください</h2>
         <fieldset id="quiz-category-fieldset">
-          <legend class="sr-only">出題カテゴリ</legend>
+          <legend class="quiz-filter-legend">出題カテゴリ</legend>
           <div id="quiz-category-list" class="quiz-category-list"></div>
+        </fieldset>
+        <fieldset id="quiz-kind-fieldset" class="quiz-kind-fieldset">
+          <legend class="quiz-filter-legend">出題形式</legend>
+          <div id="quiz-kind-list" class="quiz-kind-list">
+            <label class="quiz-kind-option">
+              <input type="checkbox" name="quiz-kind" value="knowledge" checked>
+              <span>知識問題</span>
+              <span class="quiz-kind-count" data-kind-badge="knowledge"></span>
+            </label>
+            <label class="quiz-kind-option">
+              <input type="checkbox" name="quiz-kind" value="code" checked>
+              <span>コード読解</span>
+              <span class="quiz-kind-count" data-kind-badge="code"></span>
+            </label>
+          </div>
         </fieldset>
         <div class="quiz-include-solved-wrapper">
           <label class="quiz-include-solved-label">
@@ -59,8 +74,9 @@
         </div>
         <p id="quiz-pool-info" class="quiz-pool-info" aria-live="polite"></p>
         <p id="quiz-category-error" class="quiz-category-error" aria-live="polite" hidden>1つ以上の分野を選択してください</p>
+        <p id="quiz-kind-error" class="quiz-category-error" aria-live="polite" hidden>知識問題またはコード読解を選択してください</p>
         <div id="quiz-all-solved-message" class="quiz-all-solved-message" aria-live="polite" hidden>
-          <p class="quiz-all-solved-text">選択した分野の問題はすべて正解済みです。</p>
+          <p class="quiz-all-solved-text">選択した条件の問題はすべて正解済みです。</p>
           <p class="quiz-all-solved-hint">「正解済みの問題も含める」にチェックすると再挑戦できます。</p>
         </div>
         <button id="quiz-start" class="button" type="button">クイズを開始</button>

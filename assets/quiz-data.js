@@ -1,9 +1,10 @@
 // 問題データ。新しい記事を追加したら、対応するキーワード・概念の問題をここに追加する。
 // ─ id: 重複させない一意の文字列
+// ─ kind: knowledge（知識問題）または code（コード読解問題）
 // ─ category: html / javascript / gas / git-github / codex のいずれか
 // ─ question: 問題文
 // ─ code: コード例（なければ空文字 "" でも可）
-// ─ choices: 4択の文字列配列（正解を含む）
+// ─ choices: 4択の文字列配列（正解を含む）※5つ目の「わからない」はUI側で動的追加
 // ─ answer: 正解の位置（0〜3）。choices の順を変えたら必ず見直す
 // ─ explanation: 1〜3文の解説
 // ─ article: クイズページを基点とした出典記事の相対パス
@@ -16,6 +17,7 @@ window.siteQuizQuestions = [
 
   {
     id: "html-open-tag",
+    kind: "code",
     category: "html",
     question: "このコードで「ここからpの要素が始まる」と読む部分はどれ？",
     code: "<p>コードは読めればいい。</p>",
@@ -26,6 +28,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-close-tag",
+    kind: "knowledge",
     category: "html",
     question: "終了タグの特徴として正しいものはどれ？",
     code: "<h2>見出し</h2>",
@@ -36,6 +39,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-attribute",
+    kind: "knowledge",
     category: "html",
     question: "このコードで「属性」にあたるものはどれ？",
     code: '<a href="../index.html">トップへ</a>',
@@ -46,6 +50,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-void-element",
+    kind: "knowledge",
     category: "html",
     question: "終了タグを持たないHTML要素（空要素）はどれ？",
     code: "",
@@ -56,6 +61,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-nesting",
+    kind: "code",
     category: "html",
     question: "このコードで「入れ子（ネスト）」の構造になっているのはどれ？",
     code: "<div>\n  <p>こんにちは</p>\n</div>",
@@ -66,6 +72,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "href",
+    kind: "code",
     category: "html",
     question: "この href が指定しているものはどれ？",
     code: '<a href="../index.html">トップへ戻る</a>',
@@ -76,6 +83,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "src",
+    kind: "code",
     category: "html",
     question: "この src が指定しているものはどれ？",
     code: '<img src="../assets/koi.png" alt="">',
@@ -86,6 +94,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-alt",
+    kind: "knowledge",
     category: "html",
     question: "imgタグの alt 属性が主に果たす役割はどれ？",
     code: '<img src="../assets/koi.png" alt="鯉のイラスト">',
@@ -96,6 +105,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "relative-path",
+    kind: "code",
     category: "html",
     question: "articles の中のHTMLにあるこの指定で、../ の読み方はどれ？",
     code: '<img src="../assets/koi.png" alt="">',
@@ -106,6 +116,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-current-folder",
+    kind: "knowledge",
     category: "html",
     question: "パス指定で ./ が表す意味はどれ？",
     code: '<img src="./photo.png" alt="">',
@@ -116,6 +127,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "class-id",
+    kind: "knowledge",
     category: "html",
     question: "class と id の読み方として、正しいものはどれ？",
     code: '<section id="start" class="section">\n  <p class="note">注意1</p>\n  <p class="note">注意2</p>\n</section>',
@@ -126,6 +138,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-div",
+    kind: "knowledge",
     category: "html",
     question: "div の標準的な表示の特徴として正しいものはどれ？",
     code: '<div class="card">\n  <p>カードの内容</p>\n</div>',
@@ -136,6 +149,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-span",
+    kind: "code",
     category: "html",
     question: "このコードで span が囲んでいるのはどの部分？",
     code: '<div class="card">\n  <p>これは<span class="important">重要</span>です。</p>\n</div>',
@@ -146,6 +160,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-div-vs-span",
+    kind: "knowledge",
     category: "html",
     question: "div と span の違いとして正しいものはどれ？",
     code: "",
@@ -156,6 +171,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-header",
+    kind: "knowledge",
     category: "html",
     question: "HTMLで <header> が表す内容として正しいものはどれ？",
     code: "",
@@ -166,6 +182,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-nav",
+    kind: "knowledge",
     category: "html",
     question: "<nav> が表す内容として正しいものはどれ？",
     code: "",
@@ -176,6 +193,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-main",
+    kind: "knowledge",
     category: "html",
     question: "<main> が表す内容として正しいものはどれ？",
     code: "",
@@ -186,6 +204,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-section-vs-article",
+    kind: "knowledge",
     category: "html",
     question: "section と article の違いとして正しいものはどれ？",
     code: "",
@@ -196,6 +215,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-p-tag",
+    kind: "knowledge",
     category: "html",
     question: "<p> タグが表すものはどれ？",
     code: "<p>これが段落です。</p>",
@@ -209,6 +229,7 @@ window.siteQuizQuestions = [
 
   {
     id: "const",
+    kind: "knowledge",
     category: "javascript",
     question: "const の意味として、最も近いものはどれ？",
     code: 'const productName = "ノート";',
@@ -219,6 +240,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "let",
+    kind: "code",
     category: "javascript",
     question: "この2行を実行したあと、quantity に入っている値はどれ？",
     code: "let quantity = 2;\nquantity = quantity + 1;",
@@ -229,6 +251,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-const-vs-let",
+    kind: "knowledge",
     category: "javascript",
     question: "const と let の違いとして正しいものはどれ？",
     code: "",
@@ -239,6 +262,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-assignment",
+    kind: "knowledge",
     category: "javascript",
     question: "このコードで = が意味することはどれ？",
     code: 'const city = "東京";',
@@ -249,6 +273,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "function",
+    kind: "code",
     category: "javascript",
     question: "calculateTotal を呼び出した結果、total に入る値はどれ？",
     code: "function calculateTotal(price, quantity) {\n  return price * quantity;\n}\nconst total = calculateTotal(200, 3);",
@@ -259,6 +284,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-return",
+    kind: "knowledge",
     category: "javascript",
     question: "このコードで return が果たす役割はどれ？",
     code: "function double(n) {\n  return n * 2;\n}",
@@ -269,6 +295,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-arguments",
+    kind: "knowledge",
     category: "javascript",
     question: "このコードで「引数（ひきすう）」にあたるものはどれ？",
     code: "const result = calculateTotal(200, 3);",
@@ -279,6 +306,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "if",
+    kind: "code",
     category: "javascript",
     question: "GASでこの処理を実行すると、ログに表示される文字はどれ？",
     code: 'const score = 80;\nif (score >= 80) {\n  Logger.log("合格");\n} else {\n  Logger.log("復習しましょう");\n}',
@@ -289,6 +317,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-else",
+    kind: "code",
     category: "javascript",
     question: "この処理でログに表示されるのはどれ？",
     code: 'const score = 60;\nif (score >= 80) {\n  Logger.log("合格");\n} else {\n  Logger.log("復習しましょう");\n}',
@@ -299,6 +328,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-triple-equals",
+    kind: "knowledge",
     category: "javascript",
     question: "=== と == の違いとして正しいものはどれ？",
     code: "",
@@ -309,6 +339,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "json-conversion",
+    kind: "code",
     category: "javascript",
     question: "JSON.parse と JSON.stringify の処理の組み合わせはどれ？",
     code: 'const data = JSON.parse(\'{"weather":"sunny"}\');\nconst text = JSON.stringify(data);',
@@ -319,6 +350,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-json-object",
+    kind: "code",
     category: "javascript",
     question: "このJSONで「キー」と「値」の組み合わせとして正しいものはどれ？",
     code: '{"name": "Masa", "score": 90}',
@@ -329,6 +361,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-array",
+    kind: "knowledge",
     category: "javascript",
     question: "このコードで「配列（はいれつ）」を表しているのはどれ？",
     code: 'const fruits = ["りんご", "みかん", "ぶどう"];',
@@ -342,6 +375,7 @@ window.siteQuizQuestions = [
 
   {
     id: "gas-what-is",
+    kind: "knowledge",
     category: "gas",
     question: "GAS（Google Apps Script）の説明として正しいものはどれ？",
     code: "",
@@ -352,6 +386,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "gas-logger",
+    kind: "code",
     category: "gas",
     question: "GASでこのコードを実行したとき、ログに表示される内容はどれ？",
     code: 'const name = "Masa";\nLogger.log(name);',
@@ -362,6 +397,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "gas-spreadsheet",
+    kind: "knowledge",
     category: "gas",
     question: "GASでスプレッドシートを操作するときの入口として使うものはどれ？",
     code: "",
@@ -372,6 +408,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "trigger",
+    kind: "knowledge",
     category: "gas",
     question: "GASのトリガーの説明として正しいものはどれ？",
     code: "",
@@ -385,6 +422,7 @@ window.siteQuizQuestions = [
 
   {
     id: "git-what-is",
+    kind: "knowledge",
     category: "git-github",
     question: "Git の説明として正しいものはどれ？",
     code: "",
@@ -395,6 +433,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "github-what-is",
+    kind: "knowledge",
     category: "git-github",
     question: "GitHubの説明として正しいものはどれ？",
     code: "",
@@ -405,6 +444,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "git-commit",
+    kind: "knowledge",
     category: "git-github",
     question: "Gitの「commit（コミット）」の説明として正しいものはどれ？",
     code: "",
@@ -415,6 +455,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "git-push",
+    kind: "knowledge",
     category: "git-github",
     question: "Git の「push（プッシュ）」の説明として正しいものはどれ？",
     code: "",
@@ -425,6 +466,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "git-pull",
+    kind: "knowledge",
     category: "git-github",
     question: "Git の「pull（プル）」の説明として正しいものはどれ？",
     code: "",
@@ -435,6 +477,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "git-staging",
+    kind: "knowledge",
     category: "git-github",
     question: "Gitの「ステージング」の説明として正しいものはどれ？",
     code: "",
@@ -445,6 +488,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "git-repository",
+    kind: "knowledge",
     category: "git-github",
     question: "「リポジトリ（repository）」の説明として正しいものはどれ？",
     code: "",
@@ -458,6 +502,7 @@ window.siteQuizQuestions = [
 
   {
     id: "codex-what-is",
+    kind: "knowledge",
     category: "codex",
     question: "Codex（コーデックス）の説明として正しいものはどれ？",
     code: "",
@@ -468,6 +513,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "antigravity-what-is",
+    kind: "knowledge",
     category: "codex",
     question: "Antigravity（アンチグラビティ）の説明として正しいものはどれ？",
     code: "",
@@ -478,6 +524,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "api-what-is",
+    kind: "knowledge",
     category: "codex",
     question: "API（エーピーアイ）の説明として正しいものはどれ？",
     code: "",
@@ -491,6 +538,7 @@ window.siteQuizQuestions = [
 
   {
     id: "html-attribute-meaning",
+    kind: "knowledge",
     category: "html",
     question: "このコードで「属性」にあたるものはどれ？",
     code: '<a href="https://example.com" class="link">リンク</a>',
@@ -501,6 +549,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-attribute-name-value",
+    kind: "knowledge",
     category: "html",
     question: "class=\"card\" の「属性名」と「属性値」の組み合わせとして正しいものはどれ？",
     code: '<div class="card">',
@@ -511,6 +560,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-multiple-attributes",
+    kind: "code",
     category: "html",
     question: "このコードに付いている属性の数はいくつ？",
     code: '<img class="site-logo" src="../assets/koi.png" alt="">',
@@ -521,6 +571,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "html-alt-attribute",
+    kind: "knowledge",
     category: "html",
     question: "imgタグの alt 属性の役割として正しいものはどれ？",
     code: '<img src="../assets/koi.png" alt="鯉のロゴ">',
@@ -534,6 +585,7 @@ window.siteQuizQuestions = [
 
   {
     id: "css-selector-dot",
+    kind: "knowledge",
     category: "html",
     question: "CSSで .card { padding: 16px; } と書かれているとき、先頭の . が表しているものはどれ？",
     code: ".card {\n  padding: 16px;\n}",
@@ -549,6 +601,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "css-selector-sharp",
+    kind: "code",
     category: "html",
     question: "CSSで #start { margin-top: 20px; } と書かれているとき、この指定が適用される対象はどれ？",
     code: "#start {\n  margin-top: 20px;\n}",
@@ -564,6 +617,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "css-selector-element",
+    kind: "knowledge",
     category: "html",
     question: "CSSでタグ名そのまま p { line-height: 1.8; } と書いた場合、対象になるものはどれ？",
     code: "p {\n  line-height: 1.8;\n}",
@@ -579,6 +633,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "css-selector-html-pairing",
+    kind: "code",
     category: "html",
     question: "HTMLで <div class=\"site-box\"> と書かれた要素にスタイルを当てる場合、CSS側のセレクタとして正しいものはどれ？",
     code: '<div class="site-box">内容</div>',
@@ -597,6 +652,7 @@ window.siteQuizQuestions = [
 
   {
     id: "js-dot-meaning",
+    kind: "code",
     category: "javascript",
     question: "GASやJavaScriptのコードで SpreadsheetApp.getActiveSpreadsheet() とあるとき、.（ドット）の役割として最も適切なものはどれ？",
     code: "SpreadsheetApp.getActiveSpreadsheet()",
@@ -612,6 +668,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-parentheses-execution",
+    kind: "code",
     category: "javascript",
     question: "コード内の機能名の後ろにある ()（かっこ）が表している意味として正しいものはどれ？",
     code: "SpreadsheetApp.getActiveSpreadsheet()",
@@ -627,6 +684,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-arguments-meaning",
+    kind: "code",
     category: "javascript",
     question: "GmailApp.search(\"label:todo\") のように、() の中に文字や値が入っている場合、その中身は何と呼ばれる？",
     code: 'GmailApp.search("label:todo")',
@@ -642,6 +700,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-dot-chaining",
+    kind: "code",
     category: "javascript",
     question: "次のコードのように .（ドット）が連続してつながっている場合、どのように読むのが基本？",
     code: "SpreadsheetApp.getActiveSpreadsheet().getActiveSheet()",
@@ -657,6 +716,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "gas-services-gmail",
+    kind: "knowledge",
     category: "gas",
     question: "GASで Gmail のメール検索や送信を行うときに使うサービス（入口）はどれ？",
     code: 'const threads = GmailApp.search("label:todo");',
@@ -667,6 +727,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "gas-services-calendar",
+    kind: "knowledge",
     category: "gas",
     question: "GASのコードで Googleカレンダー に予定を作成・取得するときに使うサービスはどれ？",
     code: 'CalendarApp.createEvent("会議", start, end);',
@@ -677,6 +738,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "gas-services-drive",
+    kind: "knowledge",
     category: "gas",
     question: "GASで Google Drive 内のファイルやフォルダを操作するときに使うサービスはどれ？",
     code: "const file = DriveApp.getFileById(fileId);",
@@ -687,6 +749,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "gas-services-pattern",
+    kind: "code",
     category: "gas",
     question: "GASのコードで「○○App.機能()」という形を見かけたとき、どのように読むと意味を捉えやすい？",
     code: 'GmailApp.sendEmail("test@example.com", "件名", "本文");',
@@ -702,6 +765,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-return-role",
+    kind: "code",
     category: "javascript",
     question: "function（関数）の中で使われる return の役割として最も適切なものはどれ？",
     code: "function add(a, b) {\n  return a + b;\n}",
@@ -717,6 +781,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-return-termination",
+    kind: "code",
     category: "javascript",
     question: "functionの中で return が実行されたとき、その後の処理はどうなる？",
     code: "function checkAge(age) {\n  if (age < 20) {\n    return \"未成年\";\n  }\n  return \"成人\";\n}",
@@ -732,6 +797,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-return-variable-receive",
+    kind: "code",
     category: "javascript",
     question: "const result = add(2, 3); というコードが表している動作はどれ？",
     code: "function add(a, b) {\n  return a + b;\n}\nconst result = add(2, 3);",
@@ -747,6 +813,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-return-vs-console",
+    kind: "knowledge",
     category: "javascript",
     question: "return と console.log の違いとして正しいものはどれ？",
     code: "console.log(value);\nreturn value;",
@@ -762,6 +829,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-array-zero-index",
+    kind: "code",
     category: "javascript",
     question: "JavaScriptの配列 const fruits = [\"apple\", \"banana\", \"orange\"]; から先頭の \"apple\" を取り出す書き方はどれ？",
     code: 'const fruits = ["apple", "banana", "orange"];',
@@ -777,6 +845,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-array-length",
+    kind: "knowledge",
     category: "javascript",
     question: "配列の中にある要素の個数を調べるプロパティはどれ？",
     code: 'const count = fruits.length;',
@@ -792,6 +861,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-array-push",
+    kind: "knowledge",
     category: "javascript",
     question: "配列の末尾に新しい要素を追加する命令（メソッド）はどれ？",
     code: 'fruits.push("grape");',
@@ -807,6 +877,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-array-2d-gas",
+    kind: "knowledge",
     category: "javascript",
     question: "GASで sheet.getDataRange().getValues() を実行したとき、取得できるデータの形式（構造）はどれ？",
     code: "const values = sheet.getDataRange().getValues();",
@@ -822,6 +893,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-array-2d-access",
+    kind: "code",
     category: "javascript",
     question: "二次元配列 const values = [[\"名前\", \"点数\"], [\"Masa\", 90]]; から \"Masa\" を取り出す指定はどれ？",
     code: 'const values = [\n  ["名前", "点数"],\n  ["Masa", 90]\n];',
@@ -837,6 +909,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-object-concept",
+    kind: "knowledge",
     category: "javascript",
     question: "JavaScriptのオブジェクト（object）の役割として最も適切なものはどれ？",
     code: 'const user = {\n  name: "Masa",\n  age: 31,\n  city: "Tokyo"\n};',
@@ -852,6 +925,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-object-array-diff",
+    kind: "knowledge",
     category: "javascript",
     question: "「配列」と「オブジェクト」の違いの覚え方として最も適切なものはどれ？",
     code: "",
@@ -867,6 +941,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-object-dot-access",
+    kind: "code",
     category: "javascript",
     question: "オブジェクト const user = { name: \"Masa\", age: 31 }; から \"Masa\" を取り出す基本的な書き方はどれ？",
     code: 'const user = {\n  name: "Masa",\n  age: 31\n};',
@@ -882,6 +957,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-object-vs-block",
+    kind: "knowledge",
     category: "javascript",
     question: "JavaScriptで波かっこ { } を見かけたとき、オブジェクトであると判断できる特徴はどれ？",
     code: "",
@@ -897,6 +973,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-object-nested",
+    kind: "code",
     category: "javascript",
     question: "次のコードで users[0].name を実行したとき、取り出される値はどれ？",
     code: 'const users = [\n  { name: "Masa", age: 31 },\n  { name: "Ken", age: 28 }\n];\nconst result = users[0].name;',
@@ -912,6 +989,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-object-vs-json",
+    kind: "knowledge",
     category: "javascript",
     question: "JavaScriptの「オブジェクト」と「JSON」の関係について正しい説明はどれ？",
     code: "",
@@ -930,6 +1008,7 @@ window.siteQuizQuestions = [
 
   {
     id: "js-loop-concept",
+    kind: "knowledge",
     category: "javascript",
     question: "プログラミングで「for」や「forEach」を使う主な目的・役割はどれ？",
     code: "",
@@ -945,6 +1024,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-foreach-item-arg",
+    kind: "code",
     category: "javascript",
     question: "次の fruits.forEach() のコードで、fruit という変数には何が入って実行される？",
     code: 'const fruits = ["apple", "banana", "orange"];\nfruits.forEach(fruit => {\n  console.log(fruit);\n});',
@@ -960,6 +1040,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-arrow-meaning",
+    kind: "knowledge",
     category: "javascript",
     question: "forEach のコードに出てくる =>（イコールと大なり）という記号の役割として最も適切なものはどれ？",
     code: 'fruits.forEach(fruit => {\n  console.log(fruit);\n});',
@@ -975,6 +1056,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-gas-getvalues-foreach",
+    kind: "code",
     category: "javascript",
     question: "GASでスプレッドシートの行データを rows.forEach(row => { ... }) で処理するとき、row[0] は何を表している？",
     code: 'const rows = sheet.getDataRange().getValues();\nrows.forEach(row => {\n  console.log(row[0]);\n});',
@@ -990,6 +1072,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-for-ipp",
+    kind: "code",
     category: "javascript",
     question: "for文で見かける i++ という書き方の意味として正しいものはどれ？",
     code: 'for (let i = 0; i < 3; i++) {\n  console.log(i);\n}',
@@ -1005,6 +1088,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-for-array-access",
+    kind: "code",
     category: "javascript",
     question: "次のfor文の中で fruits[i] と書かれているとき、ループが進むにつれて取り出されるものはどれ？",
     code: 'const fruits = ["apple", "banana", "orange"];\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(fruits[i]);\n}',
@@ -1020,6 +1104,7 @@ window.siteQuizQuestions = [
   },
   {
     id: "js-for-vs-foreach",
+    kind: "knowledge",
     category: "javascript",
     question: "「for」と「forEach」の使い分け・特徴の違いとして最も適切なものはどれ？",
     code: "",
@@ -1032,6 +1117,167 @@ window.siteQuizQuestions = [
     answer: 1,
     explanation: "配列の中身を素直に順番に処理したいときは forEach がシンプルで読みやすいです。一方、昔ながらの for文は「0から5回繰り返す」「途中で飛ばす」など回数や添字を細かく制御したい場合にも使われます。",
     article: "../articles/for-foreach.html"
+  },
+  // ── 新規追加：コード読解問題 ─────────────────────────
+
+  {
+    id: "js-code-let-reassign",
+    kind: "code",
+    category: "javascript",
+    question: "次のコードを実行したあと、total に入っている値はどれ？",
+    code: "let total = 100;\nconst tax = 10;\ntotal = total + tax;",
+    choices: [
+      "10",
+      "100",
+      "110",
+      "エラーになる"
+    ],
+    answer: 2,
+    explanation: "1行目で let total = 100; と初期化され、2行目で const tax = 10; が定義されています。3行目で total + tax（100 + 10 = 110）が計算され、let で宣言された total に再代入されるため、最終的な値は 110 になります。",
+    article: "../articles/variable.html"
+  },
+  {
+    id: "js-code-if-condition",
+    kind: "code",
+    category: "javascript",
+    question: "次の checkNumber(15) を実行したとき、返される値（戻り値）はどれ？",
+    code: "function checkNumber(num) {\n  if (num >= 20) {\n    return \"A\";\n  } else if (num >= 10) {\n    return \"B\";\n  } else {\n    return \"C\";\n  }\n}\nconst result = checkNumber(15);",
+    choices: [
+      "\"A\"",
+      "\"B\"",
+      "\"C\"",
+      "15"
+    ],
+    answer: 1,
+    explanation: "引数 num に 15 が渡されます。最初の if (num >= 20) は 15 >= 20 で不成立ですが、次の else if (num >= 10) は 15 >= 10 で条件を満たすため、return \"B\"; が実行されて処理が終了します。",
+    article: "../articles/if.html"
+  },
+  {
+    id: "js-code-return-early",
+    kind: "code",
+    category: "javascript",
+    question: "次の calculateDiscount(-50) を実行したとき、返される値はどれ？",
+    code: "function calculateDiscount(price) {\n  if (price <= 0) {\n    return 0;\n  }\n  return price * 0.9;\n}\nconst finalPrice = calculateDiscount(-50);",
+    choices: [
+      "0",
+      "-45",
+      "-50",
+      "undefined"
+    ],
+    answer: 0,
+    explanation: "price に -50 が渡されたとき、if (price <= 0) の条件（-50 <= 0）が成立するため、直後の return 0; が実行されます。関数は return が実行された瞬間に終了するため、後ろの return price * 0.9; は実行されません。",
+    article: "../articles/return.html"
+  },
+  {
+    id: "js-code-array-index-calc",
+    kind: "code",
+    category: "javascript",
+    question: "次のコードを実行したあと、message に入る文字列はどれ？",
+    code: "const colors = [\"赤\", \"青\", \"黄\", \"緑\"];\nconst selected = colors[2];\nconst message = selected + \"色\";",
+    choices: [
+      "\"赤色\"",
+      "\"青色\"",
+      "\"黄色\"",
+      "\"緑色\""
+    ],
+    answer: 2,
+    explanation: "配列のインデックスは 0 から数えます。colors[0] は「赤」、colors[1] は「青」、colors[2] は「黄」です。したがって selected には「黄」が入り、+ \"色\" で結合されて「黄色」になります。",
+    article: "../articles/array.html"
+  },
+  {
+    id: "js-code-array-last-item",
+    kind: "code",
+    category: "javascript",
+    question: "次のコードを実行したとき、last に入る値はどれ？",
+    code: "const list = [10, 20, 30, 40];\nconst lastIndex = list.length - 1;\nconst last = list[lastIndex];",
+    choices: [
+      "3",
+      "4",
+      "30",
+      "40"
+    ],
+    answer: 3,
+    explanation: "list.length は要素数の 4 です。lastIndex は 4 - 1 で 3 となります。配列 list のインデックス 3（0番目:10, 1番目:20, 2番目:30, 3番目:40）を取り出しているため、末尾の要素である 40 が入ります。",
+    article: "../articles/array.html"
+  },
+  {
+    id: "js-code-object-property",
+    kind: "code",
+    category: "javascript",
+    question: "次のコードを実行したとき、text に入る文字列はどれ？",
+    code: "const item = {\n  name: \"コーヒー\",\n  price: 350,\n  isHot: true\n};\nconst text = item.name + \"は\" + item.price + \"円\";",
+    choices: [
+      "\"コーヒーは350円\"",
+      "\"item.nameはitem.price円\"",
+      "\"コーヒーはtrue円\"",
+      "\"undefinedは350円\""
+    ],
+    answer: 0,
+    explanation: "オブジェクトのプロパティは「オブジェクト名.プロパティ名」で取り出せます。item.name で「コーヒー」、item.price で 350 が取得できるため、文字列を連結した結果は「コーヒーは350円」になります。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-code-object-with-array",
+    kind: "code",
+    category: "javascript",
+    question: "次のコードを実行したとき、secondSubject に入る値はどれ？",
+    code: "const student = {\n  name: \"田中\",\n  subjects: [\"国語\", \"数学\", \"英語\"]\n};\nconst secondSubject = student.subjects[1];",
+    choices: [
+      "\"田中\"",
+      "\"国語\"",
+      "\"数学\"",
+      "\"英語\""
+    ],
+    answer: 2,
+    explanation: "student.subjects でプロパティの配列 [\"国語\", \"数学\", \"英語\"] を取り出し、その [1]（0から数えて2番目の要素）を取り出しています。[0] が国語、[1] が数学なので、値は「数学」になります。",
+    article: "../articles/object.html"
+  },
+  {
+    id: "js-code-dot-parentheses-chain",
+    kind: "code",
+    category: "gas",
+    question: "GASの次のコードが実際に行っている処理の説明として最も適切なものはどれ？",
+    code: "const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(\"売上\");\nconst value = sheet.getRange(\"A1\").getValue();",
+    choices: [
+      "「売上」シートのA1セルにある値を1つ取得している",
+      "スプレッドシート全体を「売上」という名前に変更している",
+      "A1セルに「売上」という文字を書き込んでいる",
+      "全シートのA1セルの合計値を計算している"
+    ],
+    answer: 0,
+    explanation: "SpreadsheetApp.getActiveSpreadsheet().getSheetByName(\"売上\") で「売上」という名前のシートを取得し、そのシートに対して .getRange(\"A1\").getValue() を呼び出して、A1セルの値を1つ読み取っています。",
+    article: "../articles/dot-parentheses.html"
+  },
+  {
+    id: "gas-code-services-action",
+    kind: "code",
+    category: "gas",
+    question: "GASの次のコードを読んだとき、このプログラムが行う動作として正しいものはどれ？",
+    code: "function notifyByEmail() {\n  const sheet = SpreadsheetApp.getActiveSheet();\n  const title = sheet.getRange(\"B1\").getValue();\n  GmailApp.sendEmail(\"admin@example.com\", \"更新通知\", title);\n}",
+    choices: [
+      "B1セルの内容を本文にして、指定の宛先へメールを送信する",
+      "Gmailで受信したメールをスプレッドシートのB1セルに書き込む",
+      "スプレッドシートの名前を「更新通知」に変更する",
+      "カレンダーに「更新通知」というタイトルの予定を登録する"
+    ],
+    answer: 0,
+    explanation: "sheet.getRange(\"B1\").getValue() でシートのB1セルの値を取得し、それを title 変数に入れています。そして GmailApp.sendEmail(宛先, 件名, 本文) の第3引数に渡しているため、B1セルの値を本文としてメール送信する動作になります。",
+    article: "../articles/gas-services.html"
+  },
+  {
+    id: "js-code-foreach-sum",
+    kind: "code",
+    category: "javascript",
+    question: "次のコードを実行したあと、sum に入っている値はどれ？",
+    code: "const numbers = [10, 20, 30];\nlet sum = 0;\nnumbers.forEach(num => {\n  sum = sum + num;\n});",
+    choices: [
+      "0",
+      "30",
+      "60",
+      "[10, 20, 30]"
+    ],
+    answer: 2,
+    explanation: "forEach は配列の要素を先頭から1つずつ num に取り出して処理を繰り返します。sum は初期値 0 から、0 + 10 = 10、10 + 20 = 30、30 + 30 = 60 と順番に加算されていくため、ループ終了後の sum は 60 になります。",
+    article: "../articles/for-foreach.html"
   }
 ];
-
