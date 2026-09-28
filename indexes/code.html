@@ -62,6 +62,10 @@
 <li><a href="#javascript-10"><code>undefined</code></a></li>
 <li><a href="#javascript-11"><code>return value;</code></a></li>
 <li><a href="#javascript-12"><code>const result = functionName()</code></a></li>
+<li><a href="#javascript-13"><code>array[0]</code></a></li>
+<li><a href="#javascript-14"><code>.length</code></a></li>
+<li><a href="#javascript-15"><code>.push()</code></a></li>
+<li><a href="#javascript-16"><code>values[0][0]</code></a></li>
 </ul>
 <dl class="index-entries">
 <div id="javascript-1"><dt><code>const</code></dt><dd><p>再代入しない変数の宣言。「この名前で値を扱い、別の値は入れ直さない」と読みます。配列やオブジェクトの中身まで変更禁止になるわけではありません。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
@@ -76,6 +80,10 @@
 <div id="javascript-10"><dt><code>undefined</code></dt><dd><p>値がまだ設定されていないことなどを表す値。存在しない項目を読んだときや、値を返さない関数の結果にも現れます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="javascript-11"><dt><code>return value;</code></dt><dd><p>functionの中で計算した値やデータを外へ返す書き方。「valueを結果として外に渡し、この関数を終了する」と読みます。</p><p class="index-related">関連記事：<a href="../articles/return.html">returnとは？</a></p></dd></div>
 <div id="javascript-12"><dt><code>const result = functionName()</code></dt><dd><p>関数を実行した戻り値を変数で受け取る書き方。「関数を動かして、返ってきた結果にresultという名前を付けて保存する」と読みます。</p><p class="index-related">関連記事：<a href="../articles/return.html">returnとは？</a>、<a href="../articles/variable.html">変数とは？</a></p></dd></div>
+<div id="javascript-13"><dt><code>array[0]</code></dt><dd><p>配列の特定の位置にある値を取り出す指定。JavaScriptの番号は0から始まるため、<code>[0]</code> は先頭の要素を取り出します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-14"><dt><code>.length</code></dt><dd><p>配列の中にある要素の個数を取得するプロパティ。「この配列に値が何個入っているか」と読みます。<code>()</code> は付きません。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-15"><dt><code>.push()</code></dt><dd><p>配列の末尾に新しい要素を追加する命令。かっこ内に追加したい値を渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="javascript-16"><dt><code>values[0][0]</code></dt><dd><p>二次元配列から特定の位置の値を取り出す指定。1つ目の角かっこで行、2つ目の角かっこで列の番号を指定します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="symbols">
@@ -112,7 +120,7 @@
 <div id="symbols-8"><dt><code>!</code></dt><dd><p>真偽を反転する記号。「〜ではない」と読み、例えば!trueはfalseになります。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
 <div id="symbols-9"><dt><code>=&gt;</code></dt><dd><p>アロー関数の目印。「左側で情報を受け取り、右側で処理する関数」と読みます。大小を比べる記号ではありません。</p><p class="index-related">関連記事：<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="symbols-10"><dt><code>()</code></dt><dd><p>関数の引数や条件、計算のまとまりを囲む丸かっこ。名前の直後なら「関数を呼ぶ」、ifの直後なら「条件を調べる」と周囲から読み分けます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#parentheses">. と () は何？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
-<div id="symbols-11"><dt><code>[]</code></dt><dd><p>配列や要素の参照に使う角かっこ。「値の一覧」や「一覧の何番目かを読む」と読みます。JavaScriptの配列の番号は0から始まります。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="symbols-11"><dt><code>[]</code></dt><dd><p>配列や要素の参照に使う角かっこ。「値の一覧」や「一覧の何番目かを読む」と読みます。JavaScriptの配列の番号は0から始まります。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-12"><dt><code>{}</code></dt><dd><p>処理やデータをまとめる波かっこ。ifや関数の後ろなら処理の範囲、JSONなら名前と値をまとめたオブジェクトと読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="symbols-13"><dt><code>.</code></dt><dd><p>中の項目や機能を参照する記号。GmailAppの後ろなら「GmailAppが持つ機能」と読みます。CSSでは.class名のようにクラスの指定にも使います。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#dot">. と () は何？</a>、<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/class-id.html#css">classとidの違い（CSSの.）</a></p></dd></div>
 <div id="symbols-14"><dt><code>:</code></dt><dd><p>名前と値を対応させる区切り。JSONの&quot;name&quot;: &quot;Masa&quot;なら「nameの値はMasa」、CSSのcolor: blueなら「文字色は青」と読みます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
@@ -146,6 +154,7 @@
 <li><a href="#gas-7"><code>GmailApp.search()</code></a></li>
 <li><a href="#gas-8"><code>CalendarApp.getDefaultCalendar()</code></a></li>
 <li><a href="#gas-9"><code>DriveApp.getFileById()</code></a></li>
+<li><a href="#gas-10"><code>getValues()</code></a></li>
 </ul>
 <dl class="index-entries">
 <div id="gas-1"><dt><code>GmailApp</code></dt><dd><p>GASからGmailを操作する入口。「この後ろでメールに関する操作をしている」と読みます。</p><p class="index-related">関連記事：<a href="../articles/gas.html">Google Apps Script（GAS）とは？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
@@ -157,6 +166,7 @@
 <div id="gas-7"><dt><code>GmailApp.search()</code></dt><dd><p>Gmailのメールを検索する命令。かっこ内に検索キーワードや検索条件（引数）を渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html">. と () は何？</a>、<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
 <div id="gas-8"><dt><code>CalendarApp.getDefaultCalendar()</code></dt><dd><p>自分の標準（デフォルト）のカレンダーを取得する命令。CalendarApp がカレンダーの入口で、getDefaultCalendar が「標準カレンダーを取得する」機能です。</p><p class="index-related">関連記事：<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
 <div id="gas-9"><dt><code>DriveApp.getFileById()</code></dt><dd><p>Google Drive内のファイルをIDで指定して取得する命令。かっこ内にファイルIDを渡して実行します。</p><p class="index-related">関連記事：<a href="../articles/gas-services.html">SpreadsheetApp・GmailApp・CalendarAppとは？</a></p></dd></div>
+<div id="gas-10"><dt><code>getValues()</code></dt><dd><p>指定した範囲のセルの値をまとめて二次元配列で取得する命令。スプレッドシートの行と列のデータを一度に読み出します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="html-css">

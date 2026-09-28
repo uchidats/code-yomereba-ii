@@ -335,7 +335,7 @@ window.siteQuizQuestions = [
     choices: ['fruits = "りんご"', '["りんご", "みかん", "ぶどう"]', "const fruits", "= の記号"],
     answer: 1,
     explanation: "[ ] で囲まれた複数の値が配列です。値を順番に並べた一覧で、ひとまとまりとして扱います。",
-    article: "../articles/json.html"
+    article: "../articles/array.html"
   },
 
   // ── GAS編 ──────────────────────────────────────────────
@@ -759,6 +759,81 @@ window.siteQuizQuestions = [
     answer: 1,
     explanation: "console.log（GASではLogger.log）は確認用の表示を行うだけで、他のプログラムに値を渡せません。次の処理に結果を渡したいときは return を使います。",
     article: "../articles/return.html"
+  },
+  {
+    id: "js-array-zero-index",
+    category: "javascript",
+    question: "JavaScriptの配列 const fruits = [\"apple\", \"banana\", \"orange\"]; から先頭の \"apple\" を取り出す書き方はどれ？",
+    code: 'const fruits = ["apple", "banana", "orange"];',
+    choices: [
+      "fruits[1]",
+      "fruits[0]",
+      "fruits.first",
+      "fruits(0)"
+    ],
+    answer: 1,
+    explanation: "JavaScriptの配列の番号（インデックス）は 0 から始まります。そのため先頭（1番目）の要素は fruits[0] で取り出します。",
+    article: "../articles/array.html"
+  },
+  {
+    id: "js-array-length",
+    category: "javascript",
+    question: "配列の中にある要素の個数を調べるプロパティはどれ？",
+    code: 'const count = fruits.length;',
+    choices: [
+      "fruits.size()",
+      "fruits.count",
+      "fruits.length",
+      "fruits.total()"
+    ],
+    answer: 2,
+    explanation: "配列の個数を調べるには .length を使います。.length はプロパティなので、末尾に () は付きません。",
+    article: "../articles/array.html"
+  },
+  {
+    id: "js-array-push",
+    category: "javascript",
+    question: "配列の末尾に新しい要素を追加する命令（メソッド）はどれ？",
+    code: 'fruits.push("grape");',
+    choices: [
+      'fruits.add("grape")',
+      'fruits.insert("grape")',
+      'fruits.append("grape")',
+      'fruits.push("grape")'
+    ],
+    answer: 3,
+    explanation: "配列の末尾に新しい要素を追加するときは .push() を使います。かっこ内に追加したい値を渡して実行します。",
+    article: "../articles/array.html"
+  },
+  {
+    id: "js-array-2d-gas",
+    category: "javascript",
+    question: "GASで sheet.getDataRange().getValues() を実行したとき、取得できるデータの形式（構造）はどれ？",
+    code: "const values = sheet.getDataRange().getValues();",
+    choices: [
+      "1つの文字列",
+      "二次元配列（配列の中に配列が入った構造）",
+      "数値の合計",
+      "Googleドライブのファイル"
+    ],
+    answer: 1,
+    explanation: "スプレッドシートの複数セルを一度に読み出す getValues() は、行と列を表す「二次元配列」としてデータを返します。",
+    article: "../articles/array.html"
+  },
+  {
+    id: "js-array-2d-access",
+    category: "javascript",
+    question: "二次元配列 const values = [[\"名前\", \"点数\"], [\"Masa\", 90]]; から \"Masa\" を取り出す指定はどれ？",
+    code: 'const values = [\n  ["名前", "点数"],\n  ["Masa", 90]\n];',
+    choices: [
+      "values[0][0]",
+      "values[1][0]",
+      "values[0][1]",
+      "values[1][1]"
+    ],
+    answer: 1,
+    explanation: "二次元配列は [行番号][列番号] で指定します。インデックスは0から始まるため、2行目（インデックス1）の1列目（インデックス0）は values[1][0] と書きます。",
+    article: "../articles/array.html"
   }
 ];
 

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDJ7PB25W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKDJ7PB25W');
+  </script>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#163b60">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- published: 2026-09-28T15:45:00+09:00 -->
+  <title>配列 [] とは？ 複数の値をまとめて扱う｜コードは読めればいい</title>
+  <meta name="description" content="JavaScriptやGASでよく使われる配列（角かっこ []）を初心者向けに解説。0から始まる番号（インデックス）、.length、.push()、GASのgetValues()による二次元配列の読み方まで分かります。">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/article-rating.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="container">
+      <div class="site-brand">
+        <img class="site-logo" src="../assets/koi.png" alt="" width="1148" height="1371">
+        <div class="site-brand-text">
+          <a class="site-title" href="../index.html">コードは読めればいい。たぶん。</a>
+          <p class="tagline"><span class="tagline-extra">あとはAIに。</span>非エンジニアのためのAI開発・GAS・Codex入門</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article">
+    <article class="container narrow">
+      <p class="breadcrumb"><a href="../index.html">トップ</a> › <a href="../categories/basics.html">基本用語</a> › 配列 [] とは？</p>
+
+      <h1>配列 [] とは？ 複数の値をまとめて扱う</h1>
+      <p class="article-lead">JavaScriptやGASのコードを読んでいると、角かっこ <code>[ ]</code> で囲まれたデータがよく登場します。これは<strong>配列（はいれつ / array）</strong>と呼ばれ、たくさんのデータを1つのまとまりとして扱うための仕組みです。</p>
+
+      <h2>まず結論：配列は「複数の値をひとまとめにする箱」</h2>
+      <p>初心者の方は、まずこれだけ覚えておけば十分です。</p>
+      <div class="cards index-cards">
+        <div class="card">
+          <h3>配列（array）の役割</h3>
+          <p>複数のデータ（文字列や数値など）を、順番に並べて1つの変数にまとめておく箱。</p>
+        </div>
+      </div>
+      <p>例えば、果物の名前をまとめたいときは次のように書きます。</p>
+      <pre><code>const fruits = ["apple", "banana", "orange"];</code></pre>
+      <p><code>"apple"</code>、<code>"banana"</code>、<code>"orange"</code> という3つの文字列を、<code>fruits</code> という1つの<a href="variable.html">変数</a>にまとめて保管しています。別々に変数を3つ作らなくても、1つの箱で管理できるのが配列の便利なところです。</p>
+
+      <aside class="term-note" aria-label="英語から覚える：array（配列）">
+        <strong>英語から覚える：array（整列・配列）</strong>
+        <p>英語の <strong>array</strong> には「整然と並べる」「配置する」という意味があります。プログラミングでは、データが一列に順番通り並んでいる構造を指します。また、配列の中に入っている1つひとつのデータのことを<strong>「要素（ようそ / element）」</strong>と呼びます。</p>
+      </aside>
+
+      <h2>[ ] を見たら配列を疑う</h2>
+      <p>JavaScriptのコードで、次のような角かっこを見かけたら、</p>
+      <pre><code>[...]</code></pre>
+      <p>まず<strong>「複数の値を並べた配列かもしれない」</strong>と考えましょう。</p>
+      <p>ただし、角かっこ <code>[ ]</code> は配列を作るだけでなく、後述するように <code>fruits[0]</code> のように「何番目の値を取り出すか」を指定するときにも使われます。この2つの使い方を押さえておくのがコードを読むポイントです。</p>
+
+      <h2>配列の中身はカンマで区切る</h2>
+      <p>配列の基本的な書き方はとてもシンプルです。</p>
+      <pre><code>const numbers = [10, 20, 30];</code></pre>
+      <ul>
+        <li><code>[</code>（角かっこ開き）で始まる</li>
+        <li>値と値の間を <code>,</code>（カンマ）で区切る</li>
+        <li><code>]</code>（角かっこ閉じ）で終わる</li>
+      </ul>
+      <p>本棚に本を左から順番に並べていくようなイメージです。</p>
+
+      <h2>番号は0から始まる（超重要）</h2>
+      <p>配列を理解するうえで、最も重要でつまずきやすいのが<strong>「番号は0から数え始める」</strong>というプログラミングのルールです。</p>
+      <pre><code>const fruits = ["apple", "banana", "orange"];
+
+fruits[0]  // "apple"
+fruits[1]  // "banana"
+fruits[2]  // "orange"</code></pre>
+      <p>人間の感覚では「1番目」と言いたくなりますが、コードの世界では<strong>「0番目」</strong>からスタートします。この番号のことを<strong>「インデックス（添字 / index）」</strong>と呼びます。</p>
+      <ul>
+        <li><strong>最初の要素は <code>[0]</code></strong></li>
+        <li>2番目の要素は <code>[1]</code></li>
+        <li>3番目の要素は <code>[2]</code></li>
+      </ul>
+      <p>「最初の値を取り出したいなら <code>[0]</code>」と覚えておきましょう。</p>
+
+      <h2>配列の値を取り出す</h2>
+      <p>配列の中から特定の値を取り出して、別の変数に保存することができます。</p>
+      <pre><code>const firstFruit = fruits[0];</code></pre>
+      <p>このコードは、</p>
+      <ol>
+        <li><code>fruits</code> 配列の0番目（最初）の要素である <code>"apple"</code> を取り出す</li>
+        <li>それを <code>firstFruit</code> という新しい変数に入れる</li>
+      </ol>
+      <p>と読みます。<a href="variable.html">変数</a>の代入と同じルールです。</p>
+
+      <h2>配列の個数を知る：.length</h2>
+      <p>配列にデータが何個入っているかを知りたいときは、<code>.length</code>（レングス）を使います。</p>
+      <pre><code>const fruits = ["apple", "banana", "orange"];
+const count = fruits.length;  // 3</code></pre>
+      <p><a href="dot-parentheses.html">「. と () は何？」</a>で学んだドットが使われています。「fruits の中の length（長さ・個数）」を取り出していると読めます。</p>
+      <p>なお、<code>length</code> は機能（関数）ではなく、配列が持っている情報（プロパティ）なので、末尾に <code>()</code> は付きません。</p>
+
+      <h2>配列に追加する：.push()</h2>
+      <p>あとから配列の末尾に新しいデータを追加したいときは、<code>.push()</code> をよく見かけます。</p>
+      <pre><code>fruits.push("grape");</code></pre>
+      <p>この命令を実行すると、<code>fruits</code> 配列の最後に <code>"grape"</code> が追加され、配列の中身は <code>["apple", "banana", "orange", "grape"]</code> になります。</p>
+      <p>すべての操作を暗記する必要はありません。コードの中で <code>.push(...)</code> を見かけたら、「あ、配列に何か追加しているんだな」と読めれば十分です。</p>
+
+      <h2>GASで配列がよく出る理由</h2>
+      <p><a href="gas.html">GAS（Google Apps Script）</a>のコードでは、配列が驚くほど頻繁に出てきます。その最大の理由は、<strong>Googleスプレッドシートのセルの値をまとめて読み書きするから</strong>です。</p>
+      <pre><code>const values = sheet.getDataRange().getValues();</code></pre>
+      <p><a href="gas-services.html">SpreadsheetApp</a>でよく使われる <code>getValues()</code> という機能は、指定した範囲のセルに入っている値を<strong>すべてまとめて配列にして返してくれます</strong>。</p>
+      <p>そして、スプレッドシートは「行」と「列」が並ぶ表なので、GASでは<strong>「二次元配列（にじげんはいれつ）」</strong>という特別な形でデータが返ってきます。</p>
+
+      <h2>二次元配列をやさしく説明</h2>
+      <p>「二次元配列」と聞くと難しそうですが、要するに<strong>「配列の中に、さらに配列が入っている」</strong>だけです。</p>
+      <pre><code>const values = [
+  ["名前", "年齢"],
+  ["Masa", 31],
+  ["Ken", 28]
+];</code></pre>
+      <p>外側の <code>[ ]</code> の中に、各行を表す内側の <code>[ ]</code> がカンマ区切りで入っています。スプレッドシートの見た目そのままですね。</p>
+      <p>二次元配列から値を取り出すときは、角かっこを2つ並べて「何行目・何列目」と指定します（もちろん0から数えます）。</p>
+      <pre><code>values[1][0];  // "Masa" （1行目の0列目）
+values[1][1];  // 31     （1行目の1列目）</code></pre>
+      <p>1つ目の <code>[1]</code> で「2番目の行（Masaの行）」を選び、2つ目の <code>[0]</code> で「その行の先頭（名前）」を取り出しています。</p>
+      <p>GASのコードを読んでいて <code>values[i][0]</code> のような書き方を見かけたら、「スプレッドシートの行と列からデータを取り出しているんだな」と理解できれば十分です。</p>
+
+      <h2>returnとのつながり</h2>
+      <p>前の記事<a href="return.html">「returnとは？」</a>で学んだように、function は計算結果を外に返すことができます。配列も立派なデータなので、もちろん return できます。</p>
+      <pre><code>function getMembers() {
+  return ["Masa", "Ken", "Yuki"];
+}</code></pre>
+      <p>「複数の名前を配列にまとめて、関数の戻り値として外へ返している」と読めます。関数から複数のデータをまとめて受け取りたいとき、配列はとてもよく使われます。</p>
+
+      <h2>配列の中身は同じ種類でなくてもよい</h2>
+      <p>JavaScriptの配列には、文字列・数字・真偽値など、異なる種類のデータを混ぜて入れることも技術的には可能です。</p>
+      <pre><code>const data = ["Masa", 31, true];</code></pre>
+      <p>ただし実際の読みやすいコードでは、「果物の名前の一覧」「社員の年齢の一覧」のように、同じ種類のデータを並べて使うのが一般的です。</p>
+
+      <h2>コードを読むときの4つのステップ</h2>
+      <p>コードの中に <code>[ ]</code> を見かけたら、次の順番で目を動かしてみましょう。</p>
+      <pre><code>const user = ["Masa", 31];
+const name = user[0];</code></pre>
+      <ol>
+        <li><strong>配列を作っているのか？</strong>：<code>["Masa", 31]</code> のように値を並べているなら、新しい配列の作成</li>
+        <li><strong>値を取り出しているのか？</strong>：<code>user[0]</code> のように変数名の直後に付いているなら、要素の取り出し</li>
+        <li><strong>番号（インデックス）を確認する</strong>：<code>[0]</code> は最初の要素、<code>[1]</code> は2番目</li>
+        <li><strong>後ろに続く機能を見る</strong>：<code>.length</code>（要素数）や <code>.push()</code>（追加）が付いていないか確認する</li>
+      </ol>
+
+      <div class="key-point">
+        <strong>今日覚えること</strong>
+        <ul>
+          <li><strong>配列</strong>は、複数の値をひとまとめにして扱う箱（<code>[ ]</code> で表す）</li>
+          <li>中身の要素は <strong>0番から始まる</strong>（最初の要素は <code>[0]</code>）</li>
+          <li><code>array[0]</code> で特定の位置の値を取り出せる</li>
+          <li><code>.length</code> で配列の中にある要素の個数が分かる</li>
+          <li>GASの <code>getValues()</code> はスプレッドシートを表す<strong>二次元配列</strong>を返す</li>
+          <li>function から配列をまるごと <strong>return</strong> して受け渡すこともできる</li>
+        </ul>
+      </div>
+
+      <div class="article-rating" data-article-id="array">
+        <div class="article-rating-group" role="group" aria-label="記事の評価">
+          <button type="button" class="rating-btn rating-btn-good" aria-label="高く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="rating-count"></span>
+          </button>
+          <button type="button" class="rating-btn rating-btn-bad" aria-label="低く評価する">
+            <svg class="rating-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="rating-feedback-msg" hidden>フィードバックありがとうございます</span>
+      </div>
+
+      <div class="article-navigation" role="navigation" aria-label="前後の記事">
+        <p>前の記事：<a href="return.html" rel="prev">returnとは？ functionの結果を返す</a></p>
+        <p>次の記事：<a href="api.html" rel="next">APIとは？ アプリ同士をつなぐ窓口</a></p>
+      </div>
+
+      <div class="return-navigation">
+        <div class="return-links">
+          <p class="back"><a href="../index.html">← トップページへ戻る</a></p>
+          <p><a href="../categories/basics.html">← 基本用語の記事一覧へ</a></p>
+        </div>
+        <img class="return-koi" src="../assets/koi.png" alt="" width="1148" height="1371">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© コードは読めればいい。たぶん。All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="../assets/article-rating.js" defer></script>
+</body>
+</html>

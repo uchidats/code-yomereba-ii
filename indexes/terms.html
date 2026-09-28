@@ -152,6 +152,10 @@
 <li><a href="#data-11">関数呼び出し（かんすうよびだし）</a></li>
 <li><a href="#data-12">ドット（.）</a></li>
 <li><a href="#data-13">return（リターン）</a></li>
+<li><a href="#data-14">index / インデックス（添字）</a></li>
+<li><a href="#data-15">要素（ようそ / element）</a></li>
+<li><a href="#data-16">二次元配列（にじげんはいれつ）</a></li>
+<li><a href="#data-17">length（要素数・長さ）</a></li>
 </ul>
 <dl class="index-entries">
 <div id="data-1"><dt>API（エーピーアイ）</dt><dd><p>Application Programming Interfaceの略。プログラム同士が、決められた方法で機能やデータをやり取りする窓口です。</p><p class="index-related">関連記事：<a href="../articles/api.html">APIとは？</a>、<a href="../articles/ai-api-comparison.html#conditions">4つのAIによるAPI説明の比較</a></p></dd></div>
@@ -160,13 +164,17 @@
 <div id="data-4"><dt>オブジェクト</dt><dd><p>名前（キー）と値を組み合わせたデータのまとまり。人の名前・年齢など、関連する情報をまとめて読むときに出てきます。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="data-5"><dt>キー / 値（あたい）</dt><dd><p>キーは項目名、値はその中身。JSONの「&quot;name&quot;: &quot;Masa&quot;」なら、nameがキー、Masaが値です。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="data-6"><dt>条件分岐（じょうけんぶんき）</dt><dd><p>条件に合うかどうかで、実行する処理が分かれること。ifやelseを見かけたら、その分かれ道を確認します。</p><p class="index-related">関連記事：<a href="../articles/if.html">if文とは？</a></p></dd></div>
-<div id="data-7"><dt>配列（はいれつ）</dt><dd><p>値を順番に並べた一覧。角かっこで囲まれた複数の値を、ひとまとまりとして扱います。</p><p class="index-related">関連記事：<a href="../articles/json.html">JSONとは？</a></p></dd></div>
+<div id="data-7"><dt>array / 配列（はいれつ）</dt><dd><p>複数の値を順番に並べて1つにまとめて扱う箱。角かっこ <code>[ ]</code> で囲み、カンマで区切って表します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a>、<a href="../articles/json.html">JSONとは？</a></p></dd></div>
 <div id="data-8"><dt>argument / 引数（ひきすう）</dt><dd><p>関数や機能へ渡す材料・情報。呼び出しの丸かっこの中を見て「この情報を渡している」と読みます。英語の argument は引数を意味します。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#arguments">. と () は何？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="data-9"><dt>変数（へんすう）</dt><dd><p>値に名前を付けて扱うもの。その名前にどんな値が入るかを追うと、コードの流れが読みやすくなります。</p><p class="index-related">関連記事：<a href="../articles/variable.html">変数とは？</a></p></dd></div>
 <div id="data-10"><dt>戻り値（もどりち）</dt><dd><p>関数から呼び出し元へ返される結果。returnの後ろを見ると、何を返しているか確認できます。</p><p class="index-related">関連記事：<a href="../articles/return.html">returnとは？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="data-11"><dt>関数呼び出し（かんすうよびだし）</dt><dd><p>関数の名前の後ろに <code>()</code> を付けて、その処理を実行すること。<code>()</code> は機能を動かすスイッチの役割を果たします。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#parentheses">. と () は何？</a>、<a href="../articles/function.html">functionとは？</a></p></dd></div>
 <div id="data-12"><dt>ドット（.）</dt><dd><p>オブジェクトの中にある機能やデータを取り出す記号。「左のものの中にある右のもの」と読みます。</p><p class="index-related">関連記事：<a href="../articles/dot-parentheses.html#dot">. と () は何？</a></p></dd></div>
 <div id="data-13"><dt>return（リターン）</dt><dd><p>functionの中で作った結果を外に渡す命令。英語で「返す・戻す」の意味。returnが実行されるとその関数は終了します。</p><p class="index-related">関連記事：<a href="../articles/return.html">returnとは？</a></p></dd></div>
+<div id="data-14"><dt>index / インデックス（添字）</dt><dd><p>配列の中の要素の位置を表す番号。JavaScriptでは0から始まり、先頭の要素は <code>[0]</code> と指定します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="data-15"><dt>要素（ようそ / element）</dt><dd><p>配列の中に入っている1つひとつのデータのこと。英語で element（エレメント）といいます。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="data-16"><dt>二次元配列（にじげんはいれつ）</dt><dd><p>配列の中にさらに配列が入っている入れ子構造。スプレッドシートの行と列のように、表形式のデータを扱うときによく登場します。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
+<div id="data-17"><dt>length（要素数・長さ）</dt><dd><p>配列にいくつの要素が入っているかを表すプロパティ。<code>array.length</code> で個数を取得できます。</p><p class="index-related">関連記事：<a href="../articles/array.html">配列とは？</a></p></dd></div>
 </dl>
 </section>
 <section aria-labelledby="gas">
